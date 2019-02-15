@@ -1762,11 +1762,12 @@ $(document).ready(function () {
 
 
 <!-- rnb-text-begin -->
-<div id="jing-qian-jq2282" class="section level3">
-<h3>Jing Qian (jq2282)</h3>
+<div id="jing-qian-jq2282" class="section level5">
+<h5>Jing Qian (jq2282)</h5>
+<p><br></p>
 </div>
-<div id="a.-compute-the-analysis-of-variance-table-for-the-data." class="section level3">
-<h3>1.a. Compute the analysis of variance table for the data.</h3>
+<div id="a.-compute-the-analysis-of-variance-table-for-the-data." class="section level5">
+<h5>1.a. Compute the analysis of variance table for the data.</h5>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobG0oZGF0YVssMl1+ZmFjdG9yKGRhdGFbLDFdKSkpXG5cbmBgYCJ9 -->
@@ -1785,29 +1786,15 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YVssMl1cblxuYGBgIn0= -->
-<pre class="r"><code>data[,2]
-</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiIFsxXSAzLjUyIDMuMzYgMy41NyA0LjE5IDMuODggMy43NiAzLjk0IDMuNDcgMy43MyAzLjM4IDMuODcgMy42OSAzLjUxIDMuNTUgMy42NCAzLjU0IDMuNTJcblsxOF0gMy42MSAzLjc2IDMuNjUgMy41MSAzLjc0IDMuODMgMy44NyA0LjA4IDQuMzEgMy45OCAzLjg2IDMuNzFcbiJ9 -->
-<pre><code> [1] 3.52 3.36 3.57 4.19 3.88 3.76 3.94 3.47 3.73 3.38 3.87 3.69 3.51 3.55 3.64 3.54 3.52
-[18] 3.61 3.76 3.65 3.51 3.74 3.83 3.87 4.08 4.31 3.98 3.86 3.71</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>From the ANOVA table, we could find that p-value = 0.01185, which is smaller than <span class="math inline">\(\gamma = 0.05\)</span>. So we could reject <span class="math inline">\(H_0\)</span>.</p>
+<p>From the ANOVA table, we could find that p-value = 0.01185, which is smaller than <span class="math inline">\(\gamma = 0.05\)</span>. So we could reject <span class="math inline">\(H_0\)</span>, which means at least two diet means are significantly different.</p>
+<p><br></p>
 </div>
-<div id="b.-compute-a-95-confidence-interval-for-mu_1---mu_2." class="section level3">
-<h3>1.b. Compute a 95% confidence interval for <span class="math inline">\(\mu_1 - \mu_2\)</span>.</h3>
+<div id="b.-compute-a-95-confidence-interval-for-mu_1---mu_2." class="section level5">
+<h5>1.b. Compute a 95% confidence interval for <span class="math inline">\(\mu_1 - \mu_2\)</span>.</h5>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2RhdGFbLDJdW2RhdGFbLDFdPT0xXVxuI3Bsb3QoZGF0YVssMV0sZGF0YVssMl0pXG50LnRlc3QoZGF0YVssMl1bZGF0YVssMV09PTFdLCBkYXRhWywyXVtkYXRhWywxXT09Ml0pXG5cbmBgYCJ9 -->
-<pre class="r"><code>#data[,2][data[,1]==1]
-#plot(data[,1],data[,2])
-t.test(data[,2][data[,1]==1], data[,2][data[,1]==2])
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudC50ZXN0KGRhdGFbLDJdW2RhdGFbLDFdPT0xXSwgZGF0YVssMl1bZGF0YVssMV09PTJdKVxuYGBgIn0= -->
+<pre class="r"><code>t.test(data[,2][data[,1]==1], data[,2][data[,1]==2])</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG5cdFdlbGNoIFR3byBTYW1wbGUgdC10ZXN0XG5cbmRhdGE6ICBkYXRhWywgMl1bZGF0YVssIDFdID09IDFdIGFuZCBkYXRhWywgMl1bZGF0YVssIDFdID09IDJdXG50ID0gMS4xNjI1LCBkZiA9IDkuMTI0LCBwLXZhbHVlID0gMC4yNzQ1XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIGRpZmZlcmVuY2UgaW4gbWVhbnMgaXMgbm90IGVxdWFsIHRvIDBcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAtMC4xMzI1NDEyICAwLjQxMzk2OThcbnNhbXBsZSBlc3RpbWF0ZXM6XG5tZWFuIG9mIHggbWVhbiBvZiB5IFxuIDMuNzQ1NzE0ICAzLjYwNTAwMCBcbiJ9 -->
 <pre><code>
@@ -1824,16 +1811,116 @@ mean of x mean of y
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>The 95% confidence interval for <span class="math inline">\(\mu_1 - \mu_2\)</span> could be done by running t-test of sample 1 and sample 2. From above, we could find the 95% confidence interval for <span class="math inline">\(\mu_1 - \mu_2\)</span> is [-0.13, 0.41].</p>
+<p>The 95% confidence interval for <span class="math inline">\(\mu_1 - \mu_2\)</span> could be estimated by running t-test of sample 1 and sample 2. From above, we could find the 95% confidence interval for <span class="math inline">\(\mu_1 - \mu_2\)</span> is [-0.1325412, 0.4139698].</p>
+<p><br></p>
 </div>
-<div id="c.-compute-a-95-confidence-interval-for-l-fracmu_1mu_22-fracmu_3mu_42." class="section level3">
-<h3>1.c. Compute a 95% confidence interval for <span class="math inline">\(L = \frac{\mu_1+\mu_2}{2}-\frac{\mu_3+\mu_4}{2}\)</span>.</h3>
+<div id="c.-compute-a-95-confidence-interval-for-l-fracmu_1mu_22-fracmu_3mu_42." class="section level5">
+<h5>1.c. Compute a 95% confidence interval for <span class="math inline">\(L = \frac{\mu_1+\mu_2}{2}-\frac{\mu_3+\mu_4}{2}\)</span>.</h5>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuTGhhdCA9IChtZWFuKGRhdGFbLDJdW2RhdGFbLDFdPT0xXSkrbWVhbihkYXRhWywyXVtkYXRhWywxXT09Ml0pLW1lYW4oZGF0YVssMl1bZGF0YVssMV09PTNdKS1tZWFuKGRhdGFbLDJdW2RhdGFbLDFdPT00XSkpKjAuNVxubjEgPSBzdW0oZGF0YVssMV09PTEpXG5uMiA9IHN1bShkYXRhWywxXT09Milcbm4zID0gc3VtKGRhdGFbLDFdPT0zKVxubjQgPSBzdW0oZGF0YVssMV09PTQpXG5uID0gbjErbjIrbjMrbjRcbkxzZSA9IDAuNSpzcXJ0KDAuMDM5MDk2KigxL24xKzEvbjIrMS9uMysxL240KSlcbnRMID0gcXQoMS0wLjA1LzIsIG4tNClcbmMoTGhhdCAtIHRMKkxzZSwgTGhhdCArIHRMKkxzZSlcbmBgYCJ9 -->
+<pre class="r"><code>Lhat = (mean(data[,2][data[,1]==1])+mean(data[,2][data[,1]==2])-mean(data[,2][data[,1]==3])-mean(data[,2][data[,1]==4]))*0.5
+n1 = sum(data[,1]==1)
+n2 = sum(data[,1]==2)
+n3 = sum(data[,1]==3)
+n4 = sum(data[,1]==4)
+n = n1+n2+n3+n4
+Lse = 0.5*sqrt(0.039096*(1/n1+1/n2+1/n3+1/n4))
+tL = qt(1-0.05/2, n-4)
+c(Lhat - tL*Lse, Lhat + tL*Lse)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIC0wLjIzNzM2NTAgIDAuMDY3MjQ1OVxuIn0= -->
+<pre><code>[1] -0.2373650  0.0672459</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>For <span class="math inline">\(L = \frac{\mu_1+\mu_2}{2}-\frac{\mu_3+\mu_4}{2}\)</span>, <span class="math inline">\(c_1 = c_2 = 0.5,\ c_3 = c_4 = -0.5\)</span>. Then <span class="math inline">\(\hat{L} = \sum\limits_{i=1}^4 c_i \overline{Y_{i\cdot}} = -0.08505952\)</span>, <span class="math inline">\(\text{SE}(\hat{L}) = \sqrt{\sigma^2 \sum\limits_{i=1}^4 \frac{c_i^2}{n_i}} = 0.5\sqrt{\text{MSE}\ (\frac{1}{n_1}+\frac{1}{n_2}+\frac{1}{n_3}+\frac{1}{n_4})} = 0.3982396\)</span>. So a 95% confidence interval for <span class="math inline">\(L\)</span> is <span class="math inline">\(\hat{L} \pm t_{\frac{\gamma}{2}}(d)\ \text{SE}(\hat{L}) = [-0.237365, 0.0672459]\)</span></p>
+<p><br></p>
 </div>
-<div id="d.-test-h_0-l-0-against-h_a-l-neq-0-using-gamma-0.05." class="section level3">
-<h3>1.d. Test <span class="math inline">\(H_0: L = 0\)</span> against <span class="math inline">\(H_a: L \neq 0\)</span> using <span class="math inline">\(\gamma = 0.05\)</span>.</h3>
+<div id="d.-test-h_0-l-0-against-h_a-l-neq-0-using-gamma-0.05." class="section level5">
+<h5>1.d. Test <span class="math inline">\(H_0: L = 0\)</span> against <span class="math inline">\(H_a: L \neq 0\)</span> using <span class="math inline">\(\gamma = 0.05\)</span>.</h5>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWJzKExoYXQpID4gdEwqTHNlXG5gYGAifQ== -->
+<pre class="r"><code>abs(Lhat) &gt; tL*Lse</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIEZBTFNFXG4ifQ== -->
+<pre><code>[1] FALSE</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>From above, we could see that <span class="math inline">\(|\text{SE}(\hat{L})| &lt; t_{\frac{\gamma}{2}}(d)\ \text{SE}(\hat{L})\)</span>, so we could not reject <span class="math inline">\(H_0: L = 0\)</span>.</p>
+<p><br></p>
 </div>
-<div id="a.-complete-the-table." class="section level3">
-<h3>3.a. Complete the table.</h3>
+<div id="a.-obtain-estimates-of-mu-alpha_1-alpha_2-alpha_3-and-alpha_4." class="section level5">
+<h5>2.a. Obtain estimates of <span class="math inline">\(\mu,\ \alpha_1,\ \alpha_2,\ \alpha_3\)</span> and <span class="math inline">\(\alpha_4\)</span>.</h5>
+<p>We could get the estimation by doing regression using <span class="math display">\[\begin{equation}
+D_i=
+\begin{cases}
+1,&amp; \text{if diet is }i\\
+-1,&amp; \text{if diet is 4}\\
+0,&amp; \text{otherwise} 
+\end{cases}
+\end{equation}\]</span> where <span class="math inline">\(i=1,2,3\)</span> with <span class="math inline">\(Y_{i,j} = \mu^* + \alpha_i D_i + \epsilon_{ij}\)</span>.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYSA9IGZhY3RvcihkYXRhWywxXSlcbm1vZGVsMiA9IGxtKGRhdGFbLDJdfmEsIGNvbnRyYXN0cyA9IGxpc3QoYT1cImNvbnRyLnN1bVwiKSlcbnN1bW1hcnkobW9kZWwyKVxuYGBgIn0= -->
+<pre class="r"><code>a = factor(data[,1])
+model2 = lm(data[,2]~a, contrasts = list(a=&quot;contr.sum&quot;))
+summary(model2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IGRhdGFbLCAyXSB+IGEsIGNvbnRyYXN0cyA9IGxpc3QoYSA9IFwiY29udHIuc3VtXCIpKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tMC4zODU3IC0wLjA5NTAgLTAuMDUyNSAgMC4xMjUwICAwLjQ0NDMgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgdCB2YWx1ZSBQcig+fHR8KSAgICBcbihJbnRlcmNlcHQpICAzLjcxNzg5ICAgIDAuMDM2OTggMTAwLjU0OSAgIDwyZS0xNiAqKipcbmExICAgICAgICAgICAwLjAyNzgzICAgIDAuMDY0NTAgICAwLjQzMSAgIDAuNjY5OCAgICBcbmEyICAgICAgICAgIC0wLjExMjg5ICAgIDAuMDYxNzMgIC0xLjgyOSAgIDAuMDc5NCAuICBcbmEzICAgICAgICAgIC0wLjExOTU1ICAgIDAuMDY4MDEgIC0xLjc1OCAgIDAuMDkxMCAuICBcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5SZXNpZHVhbCBzdGFuZGFyZCBlcnJvcjogMC4xOTc3IG9uIDI1IGRlZ3JlZXMgb2YgZnJlZWRvbVxuTXVsdGlwbGUgUi1zcXVhcmVkOiAgMC4zNTAxLFx0QWRqdXN0ZWQgUi1zcXVhcmVkOiAgMC4yNzIxIFxuRi1zdGF0aXN0aWM6IDQuNDg5IG9uIDMgYW5kIDI1IERGLCAgcC12YWx1ZTogMC4wMTE4NVxuIn0= -->
+<pre><code>
+Call:
+lm(formula = data[, 2] ~ a, contrasts = list(a = &quot;contr.sum&quot;))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-0.3857 -0.0950 -0.0525  0.1250  0.4443 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  3.71789    0.03698 100.549   &lt;2e-16 ***
+a1           0.02783    0.06450   0.431   0.6698    
+a2          -0.11289    0.06173  -1.829   0.0794 .  
+a3          -0.11955    0.06801  -1.758   0.0910 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.1977 on 25 degrees of freedom
+Multiple R-squared:  0.3501,    Adjusted R-squared:  0.2721 
+F-statistic: 4.489 on 3 and 25 DF,  p-value: 0.01185</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>So <span class="math inline">\(\hat{\mu} = 3.71789,\ \hat{\alpha_1} = 0.02783,\ \hat{\alpha_2} = -0.11289,\ \hat{\alpha_3} = -0.11955,\ \hat{\alpha_4} = -\hat{\alpha_1} - \hat{\alpha_2}- \hat{\alpha_3} = 0.20461\)</span>.</p>
+<p><br></p>
+</div>
+<div id="b.-test-h_0-alpha_1alpha_2alpha_30-against-h_a-not-h_0-at-gamma0.05.-compare-your-answer-with-1.a." class="section level5">
+<h5>2.b. Test <span class="math inline">\(H_0: \alpha_1=\alpha_2=\alpha_3=0\)</span> against <span class="math inline">\(H_a\)</span>: Not <span class="math inline">\(H_0\)</span> at <span class="math inline">\(\gamma=0.05\)</span>. Compare your answer with 1.a.</h5>
+<p>Following we show the ANOVA table for regression model in 2.a. We could see that the p-value is 0.01185, which is less than 0.05. So <span class="math inline">\(H_0: \alpha_1=\alpha_2=\alpha_3=0\)</span> is rejected.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobW9kZWwyKVxuYGBgIn0= -->
+<pre class="r"><code>anova(model2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgVmFyaWFuY2UgVGFibGVcblxuUmVzcG9uc2U6IGRhdGFbLCAyXVxuICAgICAgICAgIERmICBTdW0gU3EgIE1lYW4gU3EgRiB2YWx1ZSAgUHIoPkYpICBcbmEgICAgICAgICAgMyAwLjUyNjUyIDAuMTc1NTA2ICA0LjQ4OTEgMC4wMTE4NSAqXG5SZXNpZHVhbHMgMjUgMC45Nzc0MCAwLjAzOTA5NiAgICAgICAgICAgICAgICAgIFxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG4ifQ== -->
+<pre><code>Analysis of Variance Table
+
+Response: data[, 2]
+          Df  Sum Sq  Mean Sq F value  Pr(&gt;F)  
+a          3 0.52652 0.175506  4.4891 0.01185 *
+Residuals 25 0.97740 0.039096                  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Comparing the ANOVA table with the one in Problem 1, we could see that the two tables are the same, which shows that the two null hypotheses are equivalent: <span class="math inline">\(H_0: \mu_1=\mu_2=\mu_3=\mu_4\)</span> and <span class="math inline">\(H_0: \alpha_1=\alpha_2=\alpha_3=0\)</span>.</p>
+<p><br></p>
+</div>
+<div id="a.-complete-the-table." class="section level5">
+<h5>3.a. Complete the table.</h5>
 <table>
 <thead>
 <tr class="header">
@@ -1868,15 +1955,15 @@ mean of x mean of y
 </tr>
 </tbody>
 </table>
+<p><br></p>
 </div>
-<div id="b.-test-the-null-hypothesis-is-that-all-the-chicken-feeds-have-the-same-effect-on-the-length-of-the-major-axis-against-the-alternative-is-that-the-feed-has-some-causal-effect.-use-alpha-0.05." class="section level3">
-<h3>3.b. Test the null hypothesis is that all the chicken feeds have the same effect on the length of the major axis against the alternative is that the feed has some causal effect. Use <span class="math inline">\(\alpha\)</span> = 0.05.</h3>
+<div id="b.-test-the-null-hypothesis-is-that-all-the-chicken-feeds-have-the-same-effect-on-the-length-of-the-major-axis-against-the-alternative-is-that-the-feed-has-some-causal-effect.-use-alpha-0.05." class="section level5">
+<h5>3.b. Test the null hypothesis is that all the chicken feeds have the same effect on the length of the major axis against the alternative is that the feed has some causal effect. Use <span class="math inline">\(\alpha\)</span> = 0.05.</h5>
 <p><span class="math inline">\(F_{\gamma}(k-1, n-k) = F_{0.05}(2, 7) = 4.74\)</span>. From the table above, <span class="math inline">\(F &gt; F_{\gamma}(k-1, n-k)\)</span>. So <span class="math inline">\(H_0\)</span> hypothesis could be rejected. The chicken feeds do have some causal effect on the length of the major axis.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWYoLjk1LCBkZjE9MiwgZGYyPTcpXG5cbmBgYCJ9 -->
-<pre class="r"><code>qf(.95, df1=2, df2=7)
-</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucWYoLjk1LCBkZjE9MiwgZGYyPTcpXG5gYGAifQ== -->
+<pre class="r"><code>qf(.95, df1=2, df2=7)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiWzFdIDQuNzM3NDE0XG4ifQ== -->
 <pre><code>[1] 4.737414</code></pre>
@@ -1886,7 +1973,7 @@ mean of x mean of y
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSFcyLUFEQSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQojIyMgSmluZyBRaWFuIChqcTIyODIpCgojIyMgMS5hLiBDb21wdXRlIHRoZSBhbmFseXNpcyBvZiB2YXJpYW5jZSB0YWJsZSBmb3IgdGhlIGRhdGEuCmBgYHtyfQpsaWJyYXJ5KGdkYXRhKQpkYXRhID0gcmVhZC54bHMoIn4vRGVza3RvcC80MjkxLUFkdmFuY2VkREEvSFcvSFcyL0hXMihEaWV0cykueGxzeCIsIGhlYWRlcj1UUlVFKQphbm92YShsbShkYXRhWywyXX5mYWN0b3IoZGF0YVssMV0pKSkKYGBgCgpgYGB7cn0KZGF0YVssMl0KYGBgCgpGcm9tIHRoZSBBTk9WQSB0YWJsZSwgd2UgY291bGQgZmluZCB0aGF0IHAtdmFsdWUgPSAwLjAxMTg1LCB3aGljaCBpcyBzbWFsbGVyIHRoYW4gJFxnYW1tYSA9IDAuMDUkLgpTbyB3ZSBjb3VsZCByZWplY3QgJEhfMCQuCgojIyMgMS5iLiBDb21wdXRlIGEgOTVcJSBjb25maWRlbmNlIGludGVydmFsIGZvciAkXG11XzEgLSBcbXVfMiQuCmBgYHtyfQp0LnRlc3QoZGF0YVssMl1bZGF0YVssMV09PTFdLCBkYXRhWywyXVtkYXRhWywxXT09Ml0pCmBgYAoKVGhlIDk1XCUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgJFxtdV8xIC0gXG11XzIkIGNvdWxkIGJlIGRvbmUgYnkgcnVubmluZyB0LXRlc3Qgb2Ygc2FtcGxlIDEgYW5kIHNhbXBsZSAyLiBGcm9tIGFib3ZlLCB3ZSBjb3VsZCBmaW5kIHRoZSA5NVwlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yICRcbXVfMSAtIFxtdV8yJCBpcyBbLTAuMTMsIDAuNDFdLgoKIyMjIDEuYy4gQ29tcHV0ZSBhIDk1XCUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgJEwgPSBcZnJhY3tcbXVfMStcbXVfMn17Mn0tXGZyYWN7XG11XzMrXG11XzR9ezJ9JC4KCgoKCiMjIyAxLmQuIFRlc3QgJEhfMDogTCA9IDAkIGFnYWluc3QgJEhfYTogTCBcbmVxIDAkIHVzaW5nICRcZ2FtbWEgPSAwLjA1JC4KCgojIyMgMy5hLiBDb21wbGV0ZSB0aGUgdGFibGUuCnwgU291cmNlIHwgZGYgfCBTUyB8IE1TIHwgRiB8CnwtLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tfC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS18CnwgZmVlZCB8IDIgfCAyMy40MyB8IDExLjcyIHwgMTcuNTAgfAp8IGVycm9yIHwgNyB8IDQuNjcgfCAwLjY3IHwKfCB0b3RhbCB8IDkgfCAyOC4xMCB8IAoKIyMjIDMuYi4gVGVzdCB0aGUgbnVsbCBoeXBvdGhlc2lzIGlzIHRoYXQgYWxsIHRoZSBjaGlja2VuIGZlZWRzIGhhdmUgdGhlIHNhbWUgZWZmZWN0IG9uIHRoZSBsZW5ndGggb2YgdGhlIG1ham9yIGF4aXMgYWdhaW5zdCB0aGUgYWx0ZXJuYXRpdmUgaXMgdGhhdCB0aGUgZmVlZCBoYXMgc29tZSBjYXVzYWwgZWZmZWN0LiBVc2UgJFxhbHBoYSQgPSAwLjA1LgokRl97XGdhbW1hfShrLTEsIG4taykgPSBGX3swLjA1fSgyLCA3KSA9IDQuNzQkLgpGcm9tIHRoZSB0YWJsZSBhYm92ZSwgJEYgPiBGX3tcZ2FtbWF9KGstMSwgbi1rKSQuIApTbyAkSF8wJCBoeXBvdGhlc2lzIGNvdWxkIGJlIHJlamVjdGVkLgpUaGUgY2hpY2tlbiBmZWVkcyBkbyBoYXZlIHNvbWUgY2F1c2FsIGVmZmVjdCBvbiB0aGUgbGVuZ3RoIG9mIHRoZSBtYWpvciBheGlzLgpgYGB7cn0KcWYoLjk1LCBkZjE9MiwgZGYyPTcpCmBgYAoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSFcyLUFEQSIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQojIyMjIyBKaW5nIFFpYW4gKGpxMjI4MikKCjxicj4KCiMjIyMjIDEuYS4gQ29tcHV0ZSB0aGUgYW5hbHlzaXMgb2YgdmFyaWFuY2UgdGFibGUgZm9yIHRoZSBkYXRhLgpgYGB7cn0KbGlicmFyeShnZGF0YSkKZGF0YSA9IHJlYWQueGxzKCJ+L0Rlc2t0b3AvNDI5MS1BZHZhbmNlZERBL0hXL0hXMi9IVzIoRGlldHMpLnhsc3giLCBoZWFkZXI9VFJVRSkKYW5vdmEobG0oZGF0YVssMl1+ZmFjdG9yKGRhdGFbLDFdKSkpCmBgYAoKRnJvbSB0aGUgQU5PVkEgdGFibGUsIHdlIGNvdWxkIGZpbmQgdGhhdCBwLXZhbHVlID0gMC4wMTE4NSwgd2hpY2ggaXMgc21hbGxlciB0aGFuICRcZ2FtbWEgPSAwLjA1JC4KU28gd2UgY291bGQgcmVqZWN0ICRIXzAkLCB3aGljaCBtZWFucyBhdCBsZWFzdCB0d28gZGlldCBtZWFucyBhcmUgc2lnbmlmaWNhbnRseSBkaWZmZXJlbnQuCgo8YnI+CgojIyMjIyAxLmIuIENvbXB1dGUgYSA5NVwlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yICRcbXVfMSAtIFxtdV8yJC4KYGBge3J9CnQudGVzdChkYXRhWywyXVtkYXRhWywxXT09MV0sIGRhdGFbLDJdW2RhdGFbLDFdPT0yXSkKYGBgCgpUaGUgOTVcJSBjb25maWRlbmNlIGludGVydmFsIGZvciAkXG11XzEgLSBcbXVfMiQgY291bGQgYmUgZXN0aW1hdGVkIGJ5IHJ1bm5pbmcgdC10ZXN0IG9mIHNhbXBsZSAxIGFuZCBzYW1wbGUgMi4gRnJvbSBhYm92ZSwgd2UgY291bGQgZmluZCB0aGUgOTVcJSBjb25maWRlbmNlIGludGVydmFsIGZvciAkXG11XzEgLSBcbXVfMiQgaXMgWy0wLjEzMjU0MTIsICAwLjQxMzk2OThdLgoKPGJyPgoKIyMjIyMgMS5jLiBDb21wdXRlIGEgOTVcJSBjb25maWRlbmNlIGludGVydmFsIGZvciAkTCA9IFxmcmFje1xtdV8xK1xtdV8yfXsyfS1cZnJhY3tcbXVfMytcbXVfNH17Mn0kLgpgYGB7cn0KTGhhdCA9IChtZWFuKGRhdGFbLDJdW2RhdGFbLDFdPT0xXSkrbWVhbihkYXRhWywyXVtkYXRhWywxXT09Ml0pLW1lYW4oZGF0YVssMl1bZGF0YVssMV09PTNdKS1tZWFuKGRhdGFbLDJdW2RhdGFbLDFdPT00XSkpKjAuNQpuMSA9IHN1bShkYXRhWywxXT09MSkKbjIgPSBzdW0oZGF0YVssMV09PTIpCm4zID0gc3VtKGRhdGFbLDFdPT0zKQpuNCA9IHN1bShkYXRhWywxXT09NCkKbiA9IG4xK24yK24zK240CkxzZSA9IDAuNSpzcXJ0KDAuMDM5MDk2KigxL24xKzEvbjIrMS9uMysxL240KSkKdEwgPSBxdCgxLTAuMDUvMiwgbi00KQpjKExoYXQgLSB0TCpMc2UsIExoYXQgKyB0TCpMc2UpCmBgYAoKRm9yICRMID0gXGZyYWN7XG11XzErXG11XzJ9ezJ9LVxmcmFje1xtdV8zK1xtdV80fXsyfSQsICRjXzEgPSBjXzIgPSAwLjUsXCBjXzMgPSBjXzQgPSAtMC41JC4KVGhlbiAkXGhhdHtMfSA9IFxzdW1cbGltaXRzX3tpPTF9XjQgY19pIFxvdmVybGluZXtZX3tpXGNkb3R9fSA9IC0wLjA4NTA1OTUyJCwKJFx0ZXh0e1NFfShcaGF0e0x9KSA9IFxzcXJ0e1xzaWdtYV4yIFxzdW1cbGltaXRzX3tpPTF9XjQgXGZyYWN7Y19pXjJ9e25faX19ID0gMC41XHNxcnR7XHRleHR7TVNFfVwgKFxmcmFjezF9e25fMX0rXGZyYWN7MX17bl8yfStcZnJhY3sxfXtuXzN9K1xmcmFjezF9e25fNH0pfSA9IDAuMzk4MjM5NiQuClNvIGEgOTVcJSBjb25maWRlbmNlIGludGVydmFsIGZvciAkTCQgaXMgJFxoYXR7TH0gXHBtIHRfe1xmcmFje1xnYW1tYX17Mn19KGQpXCBcdGV4dHtTRX0oXGhhdHtMfSkgPSBbLTAuMjM3MzY1LCAwLjA2NzI0NTldJAoKPGJyPgoKIyMjIyMgMS5kLiBUZXN0ICRIXzA6IEwgPSAwJCBhZ2FpbnN0ICRIX2E6IEwgXG5lcSAwJCB1c2luZyAkXGdhbW1hID0gMC4wNSQuCmBgYHtyfQphYnMoTGhhdCkgPiB0TCpMc2UKYGBgCkZyb20gYWJvdmUsIHdlIGNvdWxkIHNlZSB0aGF0ICR8XHRleHR7U0V9KFxoYXR7TH0pfCA8IHRfe1xmcmFje1xnYW1tYX17Mn19KGQpXCBcdGV4dHtTRX0oXGhhdHtMfSkkLCBzbyB3ZSBjb3VsZCBub3QgcmVqZWN0ICRIXzA6IEwgPSAwJC4KCjxicj4KCiMjIyMjIDIuYS4gT2J0YWluIGVzdGltYXRlcyBvZiAkXG11LFwgXGFscGhhXzEsXCBcYWxwaGFfMixcIFxhbHBoYV8zJCBhbmQgJFxhbHBoYV80JC4KV2UgY291bGQgZ2V0IHRoZSBlc3RpbWF0aW9uIGJ5IGRvaW5nIHJlZ3Jlc3Npb24gdXNpbmcgClxiZWdpbntlcXVhdGlvbn0KRF9pPQpcYmVnaW57Y2FzZXN9CjEsJiBcdGV4dHtpZiBkaWV0IGlzIH1pXFwKLTEsJiBcdGV4dHtpZiBkaWV0IGlzIDR9XFwKMCwmIFx0ZXh0e290aGVyd2lzZX0gClxlbmR7Y2FzZXN9ClxlbmR7ZXF1YXRpb259CndoZXJlICRpPTEsMiwzJCB3aXRoICRZX3tpLGp9ID0gXG11XiogKyBcYWxwaGFfaSBEX2kgKyBcZXBzaWxvbl97aWp9JC4KYGBge3J9CmEgPSBmYWN0b3IoZGF0YVssMV0pCm1vZGVsMiA9IGxtKGRhdGFbLDJdfmEsIGNvbnRyYXN0cyA9IGxpc3QoYT0iY29udHIuc3VtIikpCnN1bW1hcnkobW9kZWwyKQpgYGAKU28gJFxoYXR7XG11fSA9IDMuNzE3ODksXCBcaGF0e1xhbHBoYV8xfSA9IDAuMDI3ODMsXCBcaGF0e1xhbHBoYV8yfSA9IC0wLjExMjg5LFwgXGhhdHtcYWxwaGFfM30gPSAtMC4xMTk1NSxcIFxoYXR7XGFscGhhXzR9ID0gLVxoYXR7XGFscGhhXzF9IC0gXGhhdHtcYWxwaGFfMn0tIFxoYXR7XGFscGhhXzN9ID0gMC4yMDQ2MSQuCgo8YnI+CgojIyMjIyAyLmIuIFRlc3QgJEhfMDogXGFscGhhXzE9XGFscGhhXzI9XGFscGhhXzM9MCQgYWdhaW5zdCAkSF9hJDogTm90ICRIXzAkIGF0ICRcZ2FtbWE9MC4wNSQuIENvbXBhcmUgeW91ciBhbnN3ZXIgd2l0aCAxLmEuCkZvbGxvd2luZyB3ZSBzaG93IHRoZSBBTk9WQSB0YWJsZSBmb3IgcmVncmVzc2lvbiBtb2RlbCBpbiAyLmEuCldlIGNvdWxkIHNlZSB0aGF0IHRoZSBwLXZhbHVlIGlzIDAuMDExODUsIHdoaWNoIGlzIGxlc3MgdGhhbiAwLjA1LgpTbyAkSF8wOiBcYWxwaGFfMT1cYWxwaGFfMj1cYWxwaGFfMz0wJCBpcyByZWplY3RlZC4KYGBge3J9CmFub3ZhKG1vZGVsMikKYGBgCkNvbXBhcmluZyB0aGUgQU5PVkEgdGFibGUgd2l0aCB0aGUgb25lIGluIFByb2JsZW0gMSwgd2UgY291bGQgc2VlIHRoYXQgdGhlIHR3byB0YWJsZXMgYXJlIHRoZSBzYW1lLCB3aGljaCBzaG93cyB0aGF0IHRoZSB0d28gbnVsbCBoeXBvdGhlc2VzIGFyZSBlcXVpdmFsZW50OiAkSF8wOiBcbXVfMT1cbXVfMj1cbXVfMz1cbXVfNCQgYW5kICRIXzA6IFxhbHBoYV8xPVxhbHBoYV8yPVxhbHBoYV8zPTAkLgoKCjxicj4KCiMjIyMjIDMuYS4gQ29tcGxldGUgdGhlIHRhYmxlLgp8IFNvdXJjZSB8IGRmIHwgU1MgfCBNUyB8IEYgfAp8LS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS18LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLXwtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tfAp8IGZlZWQgfCAyIHwgMjMuNDMgfCAxMS43MiB8IDE3LjUwIHwKfCBlcnJvciB8IDcgfCA0LjY3IHwgMC42NyB8CnwgdG90YWwgfCA5IHwgMjguMTAgfCAKCjxicj4KCiMjIyMjIDMuYi4gVGVzdCB0aGUgbnVsbCBoeXBvdGhlc2lzIGlzIHRoYXQgYWxsIHRoZSBjaGlja2VuIGZlZWRzIGhhdmUgdGhlIHNhbWUgZWZmZWN0IG9uIHRoZSBsZW5ndGggb2YgdGhlIG1ham9yIGF4aXMgYWdhaW5zdCB0aGUgYWx0ZXJuYXRpdmUgaXMgdGhhdCB0aGUgZmVlZCBoYXMgc29tZSBjYXVzYWwgZWZmZWN0LiBVc2UgJFxhbHBoYSQgPSAwLjA1LgokRl97XGdhbW1hfShrLTEsIG4taykgPSBGX3swLjA1fSgyLCA3KSA9IDQuNzQkLgpGcm9tIHRoZSB0YWJsZSBhYm92ZSwgJEYgPiBGX3tcZ2FtbWF9KGstMSwgbi1rKSQuIApTbyAkSF8wJCBoeXBvdGhlc2lzIGNvdWxkIGJlIHJlamVjdGVkLgpUaGUgY2hpY2tlbiBmZWVkcyBkbyBoYXZlIHNvbWUgY2F1c2FsIGVmZmVjdCBvbiB0aGUgbGVuZ3RoIG9mIHRoZSBtYWpvciBheGlzLgpgYGB7cn0KcWYoLjk1LCBkZjE9MiwgZGYyPTcpCmBgYAoK</div>
 
 
 

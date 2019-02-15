@@ -2,45 +2,101 @@
 title: "HW2-ADA"
 output: html_notebook
 ---
-### Jing Qian (jq2282)
+##### Jing Qian (jq2282)
 
-### 1.a. Compute the analysis of variance table for the data.
+<br>
+
+##### 1.a. Compute the analysis of variance table for the data.
 ```{r}
 library(gdata)
 data = read.xls("~/Desktop/4291-AdvancedDA/HW/HW2/HW2(Diets).xlsx", header=TRUE)
 anova(lm(data[,2]~factor(data[,1])))
 ```
 
-```{r}
-data[,2]
-```
-
 From the ANOVA table, we could find that p-value = 0.01185, which is smaller than $\gamma = 0.05$.
-So we could reject $H_0$.
+So we could reject $H_0$, which means at least two diet means are significantly different.
 
-### 1.b. Compute a 95\% confidence interval for $\mu_1 - \mu_2$.
+<br>
+
+##### 1.b. Compute a 95\% confidence interval for $\mu_1 - \mu_2$.
 ```{r}
 t.test(data[,2][data[,1]==1], data[,2][data[,1]==2])
 ```
 
-The 95\% confidence interval for $\mu_1 - \mu_2$ could be done by running t-test of sample 1 and sample 2. From above, we could find the 95\% confidence interval for $\mu_1 - \mu_2$ is [-0.13, 0.41].
+The 95\% confidence interval for $\mu_1 - \mu_2$ could be estimated by running t-test of sample 1 and sample 2. From above, we could find the 95\% confidence interval for $\mu_1 - \mu_2$ is [-0.1325412,  0.4139698].
 
-### 1.c. Compute a 95\% confidence interval for $L = \frac{\mu_1+\mu_2}{2}-\frac{\mu_3+\mu_4}{2}$.
+<br>
+
+##### 1.c. Compute a 95\% confidence interval for $L = \frac{\mu_1+\mu_2}{2}-\frac{\mu_3+\mu_4}{2}$.
+```{r}
+Lhat = (mean(data[,2][data[,1]==1])+mean(data[,2][data[,1]==2])-mean(data[,2][data[,1]==3])-mean(data[,2][data[,1]==4]))*0.5
+n1 = sum(data[,1]==1)
+n2 = sum(data[,1]==2)
+n3 = sum(data[,1]==3)
+n4 = sum(data[,1]==4)
+n = n1+n2+n3+n4
+Lse = 0.5*sqrt(0.039096*(1/n1+1/n2+1/n3+1/n4))
+tL = qt(1-0.05/2, n-4)
+c(Lhat - tL*Lse, Lhat + tL*Lse)
+```
+
+For $L = \frac{\mu_1+\mu_2}{2}-\frac{\mu_3+\mu_4}{2}$, $c_1 = c_2 = 0.5,\ c_3 = c_4 = -0.5$.
+Then $\hat{L} = \sum\limits_{i=1}^4 c_i \overline{Y_{i\cdot}} = -0.08505952$,
+$\text{SE}(\hat{L}) = \sqrt{\sigma^2 \sum\limits_{i=1}^4 \frac{c_i^2}{n_i}} = 0.5\sqrt{\text{MSE}\ (\frac{1}{n_1}+\frac{1}{n_2}+\frac{1}{n_3}+\frac{1}{n_4})} = 0.3982396$.
+So a 95\% confidence interval for $L$ is $\hat{L} \pm t_{\frac{\gamma}{2}}(d)\ \text{SE}(\hat{L}) = [-0.237365, 0.0672459]$
+
+<br>
+
+##### 1.d. Test $H_0: L = 0$ against $H_a: L \neq 0$ using $\gamma = 0.05$.
+```{r}
+abs(Lhat) > tL*Lse
+```
+From above, we could see that $|\text{SE}(\hat{L})| < t_{\frac{\gamma}{2}}(d)\ \text{SE}(\hat{L})$, so we could not reject $H_0: L = 0$.
+
+<br>
+
+##### 2.a. Obtain estimates of $\mu,\ \alpha_1,\ \alpha_2,\ \alpha_3$ and $\alpha_4$.
+We could get the estimation by doing regression using 
+\begin{equation}
+D_i=
+\begin{cases}
+1,& \text{if diet is }i\\
+-1,& \text{if diet is 4}\\
+0,& \text{otherwise} 
+\end{cases}
+\end{equation}
+where $i=1,2,3$ with $Y_{i,j} = \mu^* + \alpha_i D_i + \epsilon_{ij}$.
+```{r}
+a = factor(data[,1])
+model2 = lm(data[,2]~a, contrasts = list(a="contr.sum"))
+summary(model2)
+```
+So $\hat{\mu} = 3.71789,\ \hat{\alpha_1} = 0.02783,\ \hat{\alpha_2} = -0.11289,\ \hat{\alpha_3} = -0.11955,\ \hat{\alpha_4} = -\hat{\alpha_1} - \hat{\alpha_2}- \hat{\alpha_3} = 0.20461$.
+
+<br>
+
+##### 2.b. Test $H_0: \alpha_1=\alpha_2=\alpha_3=0$ against $H_a$: Not $H_0$ at $\gamma=0.05$. Compare your answer with 1.a.
+Following we show the ANOVA table for regression model in 2.a.
+We could see that the p-value is 0.01185, which is less than 0.05.
+So $H_0: \alpha_1=\alpha_2=\alpha_3=0$ is rejected.
+```{r}
+anova(model2)
+```
+Comparing the ANOVA table with the one in Problem 1, we could see that the two tables are the same, which shows that the two null hypotheses are equivalent: $H_0: \mu_1=\mu_2=\mu_3=\mu_4$ and $H_0: \alpha_1=\alpha_2=\alpha_3=0$.
 
 
+<br>
 
-
-### 1.d. Test $H_0: L = 0$ against $H_a: L \neq 0$ using $\gamma = 0.05$.
-
-
-### 3.a. Complete the table.
+##### 3.a. Complete the table.
 | Source | df | SS | MS | F |
 |----------------|-----------------------------------------------------------------------|---------------------------------------------------------|-------------------------------------|-------------------------------------|
 | feed | 2 | 23.43 | 11.72 | 17.50 |
 | error | 7 | 4.67 | 0.67 |
 | total | 9 | 28.10 | 
 
-### 3.b. Test the null hypothesis is that all the chicken feeds have the same effect on the length of the major axis against the alternative is that the feed has some causal effect. Use $\alpha$ = 0.05.
+<br>
+
+##### 3.b. Test the null hypothesis is that all the chicken feeds have the same effect on the length of the major axis against the alternative is that the feed has some causal effect. Use $\alpha$ = 0.05.
 $F_{\gamma}(k-1, n-k) = F_{0.05}(2, 7) = 4.74$.
 From the table above, $F > F_{\gamma}(k-1, n-k)$. 
 So $H_0$ hypothesis could be rejected.
