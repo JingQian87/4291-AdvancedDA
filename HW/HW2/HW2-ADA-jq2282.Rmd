@@ -1,0 +1,51 @@
+---
+title: "HW2-ADA"
+output: html_notebook
+---
+### Jing Qian (jq2282)
+
+### 1.a. Compute the analysis of variance table for the data.
+```{r}
+library(gdata)
+data = read.xls("~/Desktop/4291-AdvancedDA/HW/HW2/HW2(Diets).xlsx", header=TRUE)
+anova(lm(data[,2]~factor(data[,1])))
+```
+
+```{r}
+data[,2]
+```
+
+From the ANOVA table, we could find that p-value = 0.01185, which is smaller than $\gamma = 0.05$.
+So we could reject $H_0$.
+
+### 1.b. Compute a 95\% confidence interval for $\mu_1 - \mu_2$.
+```{r}
+t.test(data[,2][data[,1]==1], data[,2][data[,1]==2])
+```
+
+The 95\% confidence interval for $\mu_1 - \mu_2$ could be done by running t-test of sample 1 and sample 2. From above, we could find the 95\% confidence interval for $\mu_1 - \mu_2$ is [-0.13, 0.41].
+
+### 1.c. Compute a 95\% confidence interval for $L = \frac{\mu_1+\mu_2}{2}-\frac{\mu_3+\mu_4}{2}$.
+
+
+
+
+### 1.d. Test $H_0: L = 0$ against $H_a: L \neq 0$ using $\gamma = 0.05$.
+
+
+### 3.a. Complete the table.
+| Source | df | SS | MS | F |
+|----------------|-----------------------------------------------------------------------|---------------------------------------------------------|-------------------------------------|-------------------------------------|
+| feed | 2 | 23.43 | 11.72 | 17.50 |
+| error | 7 | 4.67 | 0.67 |
+| total | 9 | 28.10 | 
+
+### 3.b. Test the null hypothesis is that all the chicken feeds have the same effect on the length of the major axis against the alternative is that the feed has some causal effect. Use $\alpha$ = 0.05.
+$F_{\gamma}(k-1, n-k) = F_{0.05}(2, 7) = 4.74$.
+From the table above, $F > F_{\gamma}(k-1, n-k)$. 
+So $H_0$ hypothesis could be rejected.
+The chicken feeds do have some causal effect on the length of the major axis.
+```{r}
+qf(.95, df1=2, df2=7)
+```
+
