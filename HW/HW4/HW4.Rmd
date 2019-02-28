@@ -1,8 +1,10 @@
 ---
 title: "HW4-ADA"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
 ---
-##### Jing Qian (jq2282)
+#                             Jing Qian (jq2282)
 
 <br>
 
@@ -12,12 +14,12 @@ From the description, we have $a=2,\ b=3,\ n=3$. So the table is as following:
 | Source | df | SS | MS | F |
 |----------------|-----------------------------------------------------------------------|---------------------------------------------------------|-------------------------------------|-------------------------------------|
 | Popper (A) | 1 | 4.5 | 4.5 | 32.374 |
-| Corn (B) | 2 | 15.75  | 7.785 | 56.007 |
+| Corn (B) | 2 | 15.75  | 7.875 | 56.655 |
 | Interaction (A*B) | 2 | 0.08 | 0.04 | 0.288 |
 | Error | 12 | 1.67 | 0.139 | 1 |
 | Total | 17 | 22.00 |
 
-##### 1.b. Test H0 : No interaction against H1 : there is an interaction, use α = 0.05.
+##### 1.b. Test H0 : No interaction against H1 : there is an interaction, use $\alpha$ = 0.05.
 If $F=\frac{MSAB}{MSE}>F_{\alpha}((a-1)(b-1), ab(n-1))$, we could reject $H_0$.
 ```{r}
 qf(1-0.05, df1=2, df2=12)
@@ -31,13 +33,13 @@ So we could not reject $H_0$ and there is no interaction.
 | Source | df | SS | MS | F |
 |----------------|-----------------------------------------------------------------------|---------------------------------------------------------|-------------------------------------|-------------------------------------|
 | Popper (A) | 1 | 4.5 | 4.5 | 36 |
-| Corn (B) | 2 | 15.75  | 7.785 | 62.28 |
+| Corn (B) | 2 | 15.75  | 7.875 | 63 |
 | Error | 14 | 1.75 | 0.125 | 1 |
 | Total | 17 | 22.00 |
 
 <br>
 
-##### 1.e. Test H0 : No popper effect against H1 : there is a popper effect. use α = 0.05.
+##### 1.e. Test H0 : No popper effect against H1 : there is a popper effect. use $\alpha$ = 0.05.
 Since there is no interaction between A and B, 
 if $F=\frac{MSA}{MSE}>F_{\alpha}(1, 14)$, we could reject $H_0$.
 From above, $F=36$ while $F_{0.05}(1,14) = 4.6,\ F>F_{0.05}(1, 14)$. 
@@ -45,24 +47,24 @@ So we could reject $H_0$ and conclude that there is a popper effect.
 
 <br>
 
-##### 1.f. Test H0 : No corn effect against H1 : there is a corn effect. use α = 0.05.
+##### 1.f. Test H0 : No corn effect against H1 : there is a corn effect. use $\alpha$ = 0.05.
 Since there is no interaction between A and B, 
 if $F=\frac{MSB}{MSE}>F_{\alpha}(2, 14)$, we could reject $H_0$.
-From above, $F=62.28$ while $F_{0.05}(2,14) = 3.74,\ F>F_{0.05}(2, 14)$. 
+From above, $F=63$ while $F_{0.05}(2,14) = 3.74,\ F>F_{0.05}(2, 14)$. 
 So we could reject $H_0$ and conclude that there is a corn effect.
 
 <br>
 
 ##### 2.a. Construct an interaction plot.
 ```{r}
-data<-read.csv('~/Desktop/4291-AdvancedDA/HW/HW4/HW4DATA.csv', header=TRUE)
+data<-read.csv('~/Desktop/AdvancedDA/HW/HW4/HW4DATA.csv', header=TRUE)
 interaction.plot(data$fertilizer,data$Wheat,data$response)
 ```
 From the interaction plot above, we could see that the four lines seem to be parallel which suggests that there is no interaction between fertilizer type and wheat type.
 
 <br>
 
-##### 2.b. Test H0 : No interaction against H1 : there is an interaction, use α = 0.05.
+##### 2.b. Test H0 : No interaction against H1 : there is an interaction, use $\alpha$ = 0.05.
 ```{r}
 summary(aov(data$response~data$fertilizer*data$Wheat))
 ```
@@ -71,7 +73,7 @@ So we could not reject $H_0$ and there is no interaction between fertilizer and 
 
 <br>
 
-##### 2.c. Fit a model without an interaction and test H0 : No fertilizer effect against H1 : there is a fertilizer effect. Use α = 0.05 if you reject H0, use Tukey’s method to do pairwise comparisons of the different fertilizer types.
+##### 2.c. Fit a model without an interaction and test H0 : No fertilizer effect against H1 : there is a fertilizer effect. Use $\alpha$ = 0.05 if you reject H0, use Tukey’s method to do pairwise comparisons of the different fertilizer types.
 ```{r}
 summary(aov(data$response~data$fertilizer+data$Wheat))
 ```
@@ -87,11 +89,16 @@ So there is fertilizer effect and fertilizer B leads to more yields than A.
 
 <br>
 
-##### 2.d. Test H0 : No wheat effect against H1 : there is a wheat effect. Use α = 0.05 if you reject H0, use Tukey’s method to do pairwise comparisons of the different wheat types.
+##### 2.d. Test H0 : No wheat effect against H1 : there is a wheat effect. Use $\alpha$ = 0.05 if you reject H0, use Tukey’s method to do pairwise comparisons of the different wheat types.
 From the ANOVA table in 2.c., we could find that Pr(>F) for wheat is 1.97e-11, which is smaller than $\alpha=0.05$.
 So we could reject $H_0$ and there is a wheat effect.
 ```{r}
 TukeyHSD(fit, "data$Wheat")
 ```
-Using Tukey’s method to do pairwise comparisons of the different wheat types, we could find that according to the effect of wheat, we have two groups {N, O, P} and {M}.
-Moreover, Wheat group {N, O, P} leads to more yields than wheat M.
+Using Tukey’s method to do pairwise comparisons of the different wheat types, we could find that M is a separate group which has lower yields than N, O and P.
+It is impossible to set up consistent groups for N, O and P: O and N are not significantly different; P and N are not significantly different; but P has lower yields than O.
+
+
+
+
+
