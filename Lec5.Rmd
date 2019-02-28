@@ -1,0 +1,69 @@
+---
+title: "Lec5"
+output: html_notebook
+---
+
+# 1. Slides: Two Way ANOVA
+```{r}
+#prepare data
+response<-c(47,43,62,68,41,39,46,40,67,71,42,46)
+A<-c(rep(c(rep("A1",2),rep("A2",2),rep("A3",2)),2))
+B<-c(rep("B1",6),rep("B2",6))
+boxplot(response~A*B)
+```
+A: 3 levels <br>
+B: 2 levels <br>
+a=3, b=2, n=2 <br>
+因为数据少，可以在x轴上把每种treatment组合展开显示。
+```{r}
+tapply(response, list(A), mean)
+tapply(response, list(A), mean)
+#tapply(x, index, function), index is factors from list
+```
+```{r}
+interaction.plot(A,B,response)
+```
+
+实线与虚线间的差别：比如A1点上，就是compare levels of B at A1.
+
+#### Step 1. Look at interaction first
+```{r}
+summary(aov(response~A*B))
+```
+From ANOVA table above, total # = abn = 12.
+df(A) = a-1 = 2, df(B) = b-1 = 1, df(AB) = (a-1)(b-1) = 2, df(Residuals) = ab(n-1) =  6.
+
+尽管A的p-value很小，但是**Focus on interaction first**.
+这里accept no interaction. 那么interaction的df被residuals吸收。
+No interaction，前面的曲线应该不交叉（平行的上下两个折线）。
+
+#### Step 2. Model without interaction
+```{r}
+summary(aov(response~A+B))
+```
+另一方面，由于B的影响可以忽略，B1和B2应该是重叠——一条折线。由于error(randomness)，导致现在的情况。
+
+#### Step 3. <font color=red>不确定是不是都减到一个factor</font>
+```{r}
+summary(aov(response~A))
+```
+
+#### Step 4. Pairwise comparisons
+```{r}
+fit<-aov(response~A)
+tk<-TukeyHSD(fit, "A")
+plot(tk)
+```
+```{r}
+tk
+```
+So two groups {A1, A3} and {A2}.
+We could see the group division from the plot too.
+For 95% family CI, only CI of (A3-A1) covers 0. So no difference between A1 and A3.
+CI for (A2-A1) positive, so A2 > A1; similarly, A3 < A2.
+
+Family CI: joint statements 同时成立，总共的confidence 是95%. 
+为了joint statement成立，必须要adjust单个的置信度。
+我们现在有三个方法：Bonf, Scheffe and Tukey.
+
+
