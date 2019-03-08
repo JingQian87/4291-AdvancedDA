@@ -1,25 +1,58 @@
 ---
 title: "HW5-ADA"
 output:
-  pdf_document: default
+  html_document:
+    df_print: paged
   html_notebook: default
+  pdf_document: default
 ---
 #                             Jing Qian (jq2282)
 
 <br>
 
 #### 1.a. Give the design matrix corresponding the the model $y_{ijk} = \mu+\alpha_i+\beta_j+(\alpha\beta)_{ij}+\epsilon_{ijk}$ where $\alpha_1+\alpha_2=0,\ \beta_1+\beta_2=0,\ (\alpha\beta)_{11}+(\alpha\beta)_{21}=0,\ (\alpha\beta)_{12}+(\alpha\beta)_{22}=0,\ (\alpha\beta)_{11}+(\alpha\beta)_{12}=0,\ (\alpha\beta)_{21}+(\alpha\beta)_{22}=0$.
-The design matrix is as following if we define $A_i=1$ when A is High and $A_i=-1$ when A is low; $B_j=1$ when B is New and and $B_j=-1$ when B is Old:
-```{r}
-Y<-c(0.83, 0.78, 0.75, 0.83, 0.86, 0.67, 0.73, 0.72, 0.81, 0.85, 0.87, 0.68, 0.73, 0.74)
-A<-c(rep('Low', 7), rep('High', 7))
-B<-c(rep(c(rep('New', 4), rep('Old', 3)), 2))
-data<-data.frame(Y, A, B)
-#print(data)
-```
-```{r}
-model.matrix(~A*B, contrasts=list(A=contr.sum, B=contr.sum))
-```
+Supposing $\alpha_1 = 1$ denotes that A is Low and $\beta_1=1$ denotes that B is New, we have $\alpha_2 = -\alpha_1,\ \beta_2 = -\beta_1,\ (\alpha\beta)_{12} = -(\alpha\beta)_{11},\ (\alpha\beta)_{21} = -(\alpha\beta)_{11},\ (\alpha\beta)_{22} = (\alpha\beta)_{11}$.
+So we have the design matrix as following:
+$$\left[\begin{array}
+{rrr}
+y_{111} \\
+y_{112} \\
+y_{113} \\
+y_{114} \\
+y_{121} \\
+y_{122} \\
+y_{123} \\
+y_{211} \\
+y_{212} \\
+y_{213} \\
+y_{214} \\
+y_{221} \\
+y_{222} \\
+y_{223}
+\end{array}\right] = \left[\begin{array}
+{rrrr}
+1 & 1 & 1 & 1 \\
+1 & 1 & 1 & 1 \\
+1 & 1 & 1 & 1 \\
+1 & 1 & 1 & 1 \\
+1 & 1 & -1 & -1 \\
+1 & 1 & -1 & -1 \\
+1 & 1 & -1 & -1 \\
+1 & -1 & 1 & -1 \\
+1 & -1 & 1 & -1 \\
+1 & -1 & 1 & -1 \\
+1 & -1 & 1 & -1 \\
+1 & -1 & -1 & 1 \\
+1 & -1 & -1 & 1 \\
+1 & -1 & -1 & 1 
+\end{array}\right]\left[\begin{array}
+{rrr}
+\mu \\
+\alpha_1 \\
+\beta_1 \\
+(\alpha\beta)_{11} 
+\end{array}\right] + \epsilon
+$$
 
 <br>
 
@@ -44,7 +77,7 @@ So we could not reject $H_0$ and there is no interaction between A and B.
 #### 1.d. It is decided to fit a model without an interaction. Test H0 : there is no A effect against Ha : there is an A effect. Use $\alpha$ = 0.05.
 ```{r}
 library(car)
-model<-lm(Y~A+B)
+model<-lm(Y~A+B,contrasts=list(A=contr.sum,B=contr.sum))
 Anova(model, type=3)
 ```
 From the above ANOVA table with type III SS, we could see that the p value of the test is 0.83110, which is larger than $\alpha$. So we accept H0 and there is no A effect.
