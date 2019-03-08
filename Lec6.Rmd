@@ -79,22 +79,59 @@ y<-c(10,12,11,3,4,5,6,7,8,8,7)
 a<-c(rep("a1",6),rep("a2",5))
 b<-c(rep("b1",4),rep("b2",2), rep("b1",2),rep("b2",3))
 data<-data.frame(y,a,b)
-print(data)
+#print(data)
 ```
 ```{r}
 summary(aov(y~a+b))
 ```
 ```{r}
-#summary(aov(y~b+a))
-aov(y~b+a)
-Anova(y~b+a)
+summary(aov(y~b+a))
+#aov(y~b+a)
+#Anova(y~b+a)
 ```
 ```{r}
-Anova(lm(y~a+b),type=3)
+Anova(lm(y~a*b),type=3)
 ```
 
-<span style="color:blue">aov与anova不同，aov默认是lm的，而Anova必须指定model. 另外，Anova可以有type III ss；而aov没有，只有1。</span>
+<span style="color:blue">aov与anova不同，aov默认是lm的，而Anova必须指定model.
+
+另外，Anova可以有type III ss；而aov没有，只有1。
+
+注意：Anova只有2或者3，默认是2
+</span>
 
 可以发现type3之后，B对应的SS没变，都是SSR(B|A)；A对应的变了，从SSR(A)->SSR(A|B).
+
+```{r}
+library(car)
+Anova(lm(y~a*b))
+```
+```{r}
+Anova(lm(y~b*a))
+```
+```{r}
+summary(aov(y~a*b))
+```
+```{r}
+summary(aov(y~b*a))
+```
+可以发现:
+
+1. Type II (Anova)的a\*b与b\*a一样。
+
+2. Type II (Anova)与Type I (aov)的 SSR(a\*b)一样，都是SSR(a\*b|a,b).
+
+3. 都是y~a\*b, Type II (Anova)的b与Type I (aov)的b一样，都是SSR(b|a)。
+
+4. 都是y~a\*b, Type II (Anova)的a与Type I (aov)的a不一样，前者是是SSR(a|b)，后者是SSR(a)。
+
+
+
+```{r}
+Anova(lm(y~a+b))
+```
+```{r}
+Anova(lm(y~a+b), type=3)
+```
 
 
