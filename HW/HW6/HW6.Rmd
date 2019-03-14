@@ -17,7 +17,6 @@ And the four fields are four blocks, labelled as 1, 2, 3, and 4.
 ```{r}
 yield<-c(5.1,5.3,5.3,5.2,4.8,5.3,5.4,6.0,5.7,4.8,4.8,4.5,5.3,4.7,5.5,5.0,4.4,4.9,4.7,4.3,4.7,4.4,4.7,4.1)
 rates<-factor(rep(c(25,50,75,100,125,150),4)) 
-rates2<-rep(c(25,50,75,100,125,150),4)
 field<-factor(c(rep(1,6),rep(2,6),rep(3,6),rep(4,6)))  
 ```
 
@@ -29,13 +28,8 @@ library(car)
 Anova(fit1)
 ```
 
-From the ANOVA table above, we could see that the p-value for the test is 0.016572, which is smaller than $\alpha=0.05$.
-So we could reject $H_0$, which means that the average yields are different for the 6 seeding rates.
-
-```{r}
-Anova(lm(yield~rates2+field))
-```
-
+From the ANOVA table above, we could see that the p-value for the test is 0.118366, which is larger than $\alpha=0.05$.
+So we could reject not $H_0$, which means that the average yields are not different for the 6 seeding rates.
 
 <br>
 
