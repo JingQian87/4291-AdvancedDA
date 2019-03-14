@@ -1,0 +1,38 @@
+---
+title: "Lec7 Randomized Blocked Design"
+output: html_notebook
+---
+
+## Randomized blocked design
+Block + Treatment => Two factors.
+```{r}
+library(car)
+Y<-c(10.1,11.4,9.9,12.1,12.2,12.9,12.3,13.4,11.9,12.7,11.4,12.9)
+trt<-rep(c("A","B","C","D"),3)
+blk<-c(rep("1",4),rep("2",4),rep("3",4))
+model<-lm(Y~trt+blk)
+Anova(model)
+```
+
+## Block + 2 factors
+
+## Latin Square Design
+
+```{r}
+row<-c(rep("N",4),rep("NC",4),rep("SC",4),rep("S",4))
+col<-rep(c("E","EC","WC","W"),4)
+trt<-c("C","A","B","D","A","B","D","C","B","D","C","A","D","C","A","B")
+yield<-c(26.7,19.7,29.0,29.8,23.1,21.7,24.9,29.0,29.3,20.1,29.0,27.3,25.1,17.4,28.7,35.1)
+data<-data.frame(row,col,trt,yield)
+data
+```
+
+```{r}
+library(car)
+fit<-lm(yield~trt+row+col)
+Anova(fit)
+```
+
+```{r}
+summary(aov(fit))
+```

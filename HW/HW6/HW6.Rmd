@@ -1,0 +1,105 @@
+---
+title: "HW6-ADA"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+  html_notebook: default
+---
+#                             Jing Qian (jq2282)
+
+<br>
+
+#### 1. Fit an appropriate model to this data and test H0 : the average yields are the same for the 6 seeding rates against the alternative Ha : There are not the same. Use $\alpha$ = 0.05.
+In this problem, since we only care the seeding rates, seeding rates could be set as the main factor with six levels. 
+So there are six treatments.
+And the four fields are four blocks, labelled as 1, 2, 3, and 4. 
+```{r}
+yield<-c(5.1,5.3,5.3,5.2,4.8,5.3,5.4,6.0,5.7,4.8,4.8,4.5,5.3,4.7,5.5,5.0,4.4,4.9,4.7,4.3,4.7,4.4,4.7,4.1)
+rates<-factor(rep(c(25,50,75,100,125,150),4)) 
+rates2<-rep(c(25,50,75,100,125,150),4)
+field<-factor(c(rep(1,6),rep(2,6),rep(3,6),rep(4,6)))  
+```
+
+Assuming there is no interaction between block and treatments, we could model the grain yield as the sum of treatment effect and block effect.
+Then we could do ANOVA with Type II SS and test $H_0$.
+```{r}
+fit1<-lm(yield~rates+field)
+library(car)
+Anova(fit1)
+```
+
+From the ANOVA table above, we could see that the p-value for the test is 0.016572, which is smaller than $\alpha=0.05$.
+So we could reject $H_0$, which means that the average yields are different for the 6 seeding rates.
+
+```{r}
+Anova(lm(yield~rates2+field))
+```
+
+
+<br>
+
+#### 2.a. Fit an appropriate model to this data and test H0: The mean cutting speeds are the same for the four tools. Ha: There is difference .Use $\alpha=0.05$.
+In this problem, since we only care the types of tools, we set tool types as the main factor with four levels. 
+So there are four treatments.
+The cutting materials, which is a nuance factor, are taken as blocks with five levels.
+```{r}
+y<-c(12,2,1,8,7,20,14,17,12,17,13,7,13,8,14,11,5,10,3,6)
+block<-factor(rep(c(1,2,3,4,5),4)) 
+trt<-factor(c(rep(1,5),rep(2,5),rep(3,5),rep(4,5)))  
+data2<-data.frame(y,trt,block)
+```
+
+Assuming there is no interaction between block and treatments, we could model the cutting speeds as the sum of treatment effect and block effect.
+Then we could do ANOVA with Type II SS and test $H_0$.
+```{r}
+fit2<-lm(y~trt+block)
+Anova(fit2)
+```
+
+From the ANOVA table above, we could see that the p-value for the test is 0.0002421, which is smaller than $\alpha=0.05$.
+So we could reject $H_0$, which means that the mean cutting speeds are different for the four tools.
+
+<br>
+
+#### 2.b. Use the Bonferroni method to determine where the differences are.
+
+```{r}
+pairwise.t.test(data2$y,data2$trt,pool.sd=TRUE,p.adjust.method="bonf")
+```
+
+
+From the table above, $H_0: \mu_1-\mu_2=0$ and $H_0:\mu_2-\mu_4=0$ have p-values that are smaller than 0.05.
+So tool 1 has different effect from tool 2 and tool 4 has different effect from tool 2.
+Other pairs could not differ.
+So we could put 1 and 4 into one group while tool 2 into another group.
+Tool 3 is not significantly different from group {2} or group{1,4} either.
+We may need more data to set up groups more completely.
+
+<br>
+
+#### 3. Fit an appropriate model to this data and test H0: there is no difference between the four diets against Ha: There is a difference.
+We use Latin Square Design to solve this problem.
+Other than the main effect -- four different diets, there are two blocking variables: 4 different cows and four periods.
+We could set different periods as rows and different cows as columns.
+```{r}
+period<-c(rep("1",4),rep("2",4),rep("3",4),rep("4",4))
+cow<-rep(c("1","2","3","4"),4)
+trt<-c("D4","D1","D3","D2","D1","D4","D2","D3","D3","D2","D1","D4","D2","D3","D4","D1")
+yield<-c(192,195,292,249,190,203,218,210,214,139,245,163,221,152,204,134)
+#data<-data.frame(period,cow,trt,yield)
+#data
+```
+
+Assuming there is no interaction between block and treatments, we could model the cutting speeds as the sum of treatment effect and block effect.
+Then we could do ANOVA with Type II SS and test $H_0$.
+```{r}
+library(car)
+fit3<-lm(yield~trt+period+cow)
+Anova(fit3)
+```
+
+From the ANOVA table above, we could see that the p-value for the test is 0.6736, which is quite large, much larger than the commonly used $\alpha=0.05$.
+So we could not reject $H_0$, which means that there is no difference between the four diets.
+
+ 
