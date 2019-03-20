@@ -81,8 +81,6 @@ period<-c(rep("1",4),rep("2",4),rep("3",4),rep("4",4))
 cow<-rep(c("1","2","3","4"),4)
 trt<-c("D4","D1","D3","D2","D1","D4","D2","D3","D3","D2","D1","D4","D2","D3","D4","D1")
 yield<-c(192,195,292,249,190,203,218,210,214,139,245,163,221,152,204,134)
-#data<-data.frame(period,cow,trt,yield)
-#data
 ```
 
 Assuming there is no interaction between block and treatments, we could model the cutting speeds as the sum of treatment effect and block effect.

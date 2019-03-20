@@ -1,0 +1,26 @@
+---
+title: "Lec8 Logistic Regression"
+output: html_notebook
+---
+
+## 试着跑了Example 1, 但是数据显示不全。所以跟slides结果会有不同。
+* Gender = 0 male, 1 female.
+* AP = 1 took AP calculus, 0 did not.
+* Admit = 1 admitted, 0 not admitted
+```{r}
+Gender = c(rep("0",18),rep("1",5))
+AP = c(rep("0",8),rep("1",10),rep("0",5))
+Admit = c(rep(0,7),1,rep(0,3),rep(1,7),rep(0,5))
+#Admit = c(rep("0",7),"1",rep("0",3),rep("1",7),rep("0",5))
+data1 = data.frame(Gender, AP, Admit)
+print(data1)
+```
+```{r}
+glm(Admit~Gender+AP, family=binomial("logit"))
+```
+<span style="color:red">注意，x可以是factor/numerical，但是y必须是numerical，只不过这里是binary</span>
+
+因此logit(P(admit=1|Gender,AP)) = -1.946 - 16.620 Gender + 2.793 AP
+
+
+
