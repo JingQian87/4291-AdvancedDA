@@ -1771,41 +1771,131 @@ $(document).ready(function () {
 <p>The description that a female, catholic and democrat supports laws legalizing abortion corresponds to logit(<span class="math inline">\(\hat{\pi_2}\)</span>) = 0.11 + 0.16(1) − 0.57(0) − 0.66(1) + 0.47(1) − 1.67(0) = 0.08. So the probability that a male, protestant and republican supports laws legalizing abortion is <span class="math inline">\(\hat{\pi_2} = \frac{e^{0.08}}{1+e^{0.08}} = 0.520\)</span>.</p>
 <p><br></p>
 </div>
-<div id="b.-interpret-b1-0.16-and-b2-0.57." class="section level4">
-<h4>1.b. Interpret b1 = 0.16 and b2 = −0.57.</h4>
+<div id="b.-interpret-b_1-0.16-and-b_2-0.57." class="section level4">
+<h4>1.b. Interpret <span class="math inline">\(b_1\)</span> = 0.16 and <span class="math inline">\(b_2\)</span> = −0.57.</h4>
+<p>Interpretation of <span class="math inline">\(b_1\)</span> = 0.16: If holding religion affiliation and political party fixed, the odds that a female supports laws legalizing abortion is estimated to be <span class="math inline">\(e^{0.16} = 1.174\)</span> times the odds that a male does.</p>
+<p>Interpretation of <span class="math inline">\(b_2 = -0.57\)</span>: If holding gender and political party fixed, the odds that a protestant supports laws legalizing abortion is estimated to be <span class="math inline">\(e^{-0.57} = 0.566\)</span> times the odds that a non-protestant does.</p>
+<p><span style="color:red">确认下b2?</span></p>
 <p><br></p>
 </div>
-<div id="c.-if-seb1-0.064-construct-a-95-confidence-interval-for-b1-and-interpret-your-result." class="section level4">
-<h4>1.c. If SE(b1) = 0.064 construct a 95% confidence interval for b1 and interpret your result.</h4>
+<div id="c.-if-seb_1-0.064-construct-a-95-confidence-interval-for-b_1-and-interpret-your-result." class="section level4">
+<h4>1.c. If SE(<span class="math inline">\(b_1\)</span>) = 0.064 construct a 95% confidence interval for <span class="math inline">\(b_1\)</span> and interpret your result.</h4>
+<p>The 95% confidence interval for <span class="math inline">\(b_1\)</span> is <span class="math inline">\(b_1 \pm 1.96\ \rm{SE}(b_1) = 0.16 \pm 1.96*0.064 = [0.035, 0.285]\)</span>.</p>
+<p>So the 95% confidence interval for <span class="math inline">\(e^{b_1}\)</span> is <span class="math inline">\([1.036, 1.330]\)</span>. We are 95% confident that if holding religion affiliation and political party fixed, the ratio between odds that a female supports laws legalizing abortion and odds that a male does is a number between 1.036 and 1.330.</p>
+<p>Since the 95% confidence interval for <span class="math inline">\(b_1\)</span> does not cover 0, we may infer that gender is significant to the individual’s attitude towards laws legalizing abortion.</p>
 <p><br></p>
 </div>
-<div id="d.-testh0-1-0-against-h1-1-0" class="section level4">
-<h4>1.d. TestH0 :β1 =0 against H1 :β1 ̸=0</h4>
+<div id="d.-test-h_0-beta_1-0-against-h_a-beta_1-neq-0." class="section level4">
+<h4>1.d. Test <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\beta_1\)</span> = 0 against <span class="math inline">\(H_a\)</span>: <span class="math inline">\(\beta_1 \neq 0\)</span>.</h4>
+<p>Here we use <span class="math inline">\(Z = \frac{b_1 - 0}{\rm{SE}(b_1)}\)</span> to test hypothesis. <span class="math inline">\(Z = \frac{0.16}{0.064} = 2.5\)</span>, which is larger than <span class="math inline">\(Z_{\alpha/2} = 1.96\)</span>. So we could reject <span class="math inline">\(H_0: \beta_1 = 0\)</span> with <span class="math inline">\(\alpha = 0.05\)</span>, which means that gender is a significant variable to whether an individual supports laws legalizing abortion.</p>
 <p><br></p>
 </div>
-<div id="e.-if-seb2-0.38-construct-a-95-confidence-interval-for-b2-and-interpret-your-result." class="section level4">
-<h4>1.e. If SE(b2) = 0.38 construct a 95% confidence interval for b2 and interpret your result.</h4>
+<div id="e.-if-seb_2-0.38-construct-a-95-confidence-interval-for-b_2-and-interpret-your-result." class="section level4">
+<h4>1.e. If SE(<span class="math inline">\(b_2\)</span>) = 0.38 construct a 95% confidence interval for <span class="math inline">\(b_2\)</span> and interpret your result.</h4>
+<p>The 95% confidence interval for <span class="math inline">\(b_2\)</span> is <span class="math inline">\(b_2 \pm 1.96\ \rm{SE}(b_2) = -0.57 \pm 1.96*0.38 = [-1.315, 0.175]\)</span>.</p>
+<p>So the 95% confidence interval for <span class="math inline">\(e^{b_2}\)</span> is <span class="math inline">\([0.268, 1.191]\)</span>. We are 95% confident that if holding gender and political party fixed, the ratio between odds that a protestant supports laws legalizing abortion and odds that a non-protestant does is a number between 0.268 and 1.191.</p>
+<p>Since the 95% confidence interval for <span class="math inline">\(b_2\)</span> covers 0, we may infer that whether an individual is protestant or not is not significant to his or her attitude towards laws legalizing abortion.</p>
+<p><span style="color:red">确认下b2?</span></p>
 <p><br></p>
 </div>
-<div id="f.-testh0-2-0againsth1-2-0" class="section level4">
-<h4>1.f. TestH0 :β2 =0againstH1 :β2 ̸=0</h4>
+<div id="f.-test-h_0-beta_2-0-against-h_a-beta_2-neq-0." class="section level4">
+<h4>1.f. Test <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\beta_2\)</span> = 0 against <span class="math inline">\(H_a\)</span>: <span class="math inline">\(\beta_2 \neq 0\)</span>.</h4>
+<p>Here we use <span class="math inline">\(Z = \frac{b_2 - 0}{\rm{SE}(b_2)}\)</span> to test hypothesis. <span class="math inline">\(Z = \frac{-0.57}{0.38} = -1.5\)</span>, whose absolute value is smaller than <span class="math inline">\(Z_{\alpha/2} = 1.96\)</span>. So we could not reject <span class="math inline">\(H_0: \beta_2 = 0\)</span> with <span class="math inline">\(\alpha = 0.05\)</span>, which means that whether an individual is a protestant or not is not significant to his or her attitude towards laws legalizing abortion.</p>
 <p><br></p>
 </div>
-<div id="a.-estimate-1-and-2-and-interpret-your-result." class="section level4">
-<h4>2.a. Estimate β1 and β2 and interpret your result.</h4>
+<div id="a.-estimate-beta_1-and-beta_2-and-interpret-your-result." class="section level4">
+<h4>2.a. Estimate <span class="math inline">\(\beta_1\)</span> and <span class="math inline">\(\beta_2\)</span> and interpret your result.</h4>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YTwtcmVhZC5jc3YoXCJ+L0Rlc2t0b3AvQWR2YW5jZWREQS9IVy9IVzcvYWRvbGVzY2VudC5jc3ZcIixoZWFkZXI9VFJVRSxzZXA9JywnKVxuYGBgIn0= -->
+<pre class="r"><code>data&lt;-read.csv(&quot;~/Desktop/AdvancedDA/HW/HW7/adolescent.csv&quot;,header=TRUE,sep=&#39;,&#39;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiaW5jb21wbGV0ZSBmaW5hbCBsaW5lIGZvdW5kIGJ5IHJlYWRUYWJsZUhlYWRlciBvbiAnfi9EZXNrdG9wL0FkdmFuY2VkREEvSFcvSFc3L2Fkb2xlc2NlbnQuY3N2J1xuIn0= -->
+<pre><code>incomplete final line found by readTableHeader on &#39;~/Desktop/AdvancedDA/HW/HW7/adolescent.csv&#39;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYXR0YWNoKGRhdGEpXG5gYGAifQ== -->
+<pre class="r"><code>attach(data)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSBkYXRhIChwb3MgPSAzKTpcblxuICAgIEdlbmRlciwgTm8sIFJhY2UsIFllc1xuIn0= -->
+<pre><code>The following objects are masked from data (pos = 3):
+
+    Gender, No, Race, Yes</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9naXQxPC1nbG0oY2JpbmQoWWVzLE5vKX5mYWN0b3IoR2VuZGVyKStmYWN0b3IoUmFjZSksZmFtaWx5PWJpbm9taWFsKVxubG9naXQxXG5gYGAifQ== -->
+<pre class="r"><code>logit1&lt;-glm(cbind(Yes,No)~factor(Gender)+factor(Race),family=binomial)
+logit1</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOiAgZ2xtKGZvcm11bGEgPSBjYmluZChZZXMsIE5vKSB+IGZhY3RvcihHZW5kZXIpICsgZmFjdG9yKFJhY2UpLCBcbiAgICBmYW1pbHkgPSBiaW5vbWlhbClcblxuQ29lZmZpY2llbnRzOlxuICAgICAgIChJbnRlcmNlcHQpICBmYWN0b3IoR2VuZGVyKU1hbGUgICBmYWN0b3IoUmFjZSlXaGl0ZSAgXG4gICAgICAgICAgIC0wLjQ1NTUgICAgICAgICAgICAgIDAuNjQ3OCAgICAgICAgICAgICAtMS4zMTM1ICBcblxuRGVncmVlcyBvZiBGcmVlZG9tOiAzIFRvdGFsIChpLmUuIE51bGwpOyAgMSBSZXNpZHVhbFxuTnVsbCBEZXZpYW5jZTpcdCAgICAzNy41MiBcblJlc2lkdWFsIERldmlhbmNlOiAwLjA1ODM1IFx0QUlDOiAyNS4xOVxuIn0= -->
+<pre><code>
+Call:  glm(formula = cbind(Yes, No) ~ factor(Gender) + factor(Race), 
+    family = binomial)
+
+Coefficients:
+       (Intercept)  factor(Gender)Male   factor(Race)White  
+           -0.4555              0.6478             -1.3135  
+
+Degrees of Freedom: 3 Total (i.e. Null);  1 Residual
+Null Deviance:      37.52 
+Residual Deviance: 0.05835  AIC: 25.19</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Here Gender = 1 if gender is male and Gender = 0 if gender is female. Race = 1 if race is white and Race = 0 if race is black. Then we get estimated coefficients: <span class="math inline">\(b_1 = 0.6478,\ b_2 = -1.3135\)</span>.</p>
+<p><span class="math inline">\(b_1 = 0.6478\)</span> means that if holding race fixed, the odds that a male adolescent has had intercourse is estimated to be <span class="math inline">\(e^{0.6478} = 1.911\)</span> times the odds that a female does.</p>
+<p><span class="math inline">\(b_2 = -1.3135\)</span> means that if holding gender fixed, the odds that a white adolescent has had intercourse is estimated to be <span class="math inline">\(e^{-1.3135} = 0.269\)</span> times the odds that a black does.</p>
 <p><br></p>
 </div>
-<div id="b.-construct-a-95-confidence-interval-to-describe-the-effect-of-gender-on-the-odds-of-intercourse-controlling-for-race-i.e.-con--struct-a-95-interval-for-e1-interpret-your-result" class="section level4">
-<h4>2.b. Construct a 95% confidence interval to describe the effect of gender on the odds of Intercourse controlling for race (i.e. con- struct a 95% interval for eβ1 ), Interpret your result</h4>
+<div id="b.-construct-a-95-confidence-interval-to-describe-the-effect-of-gender-on-the-odds-of-intercourse-controlling-for-race-i.e.-construct-a-95-interval-for-ebeta_1.-interpret-your-result." class="section level4">
+<h4>2.b. Construct a 95% confidence interval to describe the effect of gender on the odds of Intercourse controlling for race (i.e. construct a 95% interval for <span class="math inline">\(e^{\beta_1}\)</span>). Interpret your result.</h4>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShsb2dpdDEpXG5cbmBgYCJ9 -->
+<pre class="r"><code>summary(logit1)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxuZ2xtKGZvcm11bGEgPSBjYmluZChZZXMsIE5vKSB+IGZhY3RvcihHZW5kZXIpICsgZmFjdG9yKFJhY2UpLCBcbiAgICBmYW1pbHkgPSBiaW5vbWlhbClcblxuRGV2aWFuY2UgUmVzaWR1YWxzOiBcbiAgICAgICAxICAgICAgICAgMiAgICAgICAgIDMgICAgICAgICA0ICBcbi0wLjA4ODY3ICAgMC4xMDg0MCAgIDAuMTQxNDMgIC0wLjEzNjg3ICBcblxuQ29lZmZpY2llbnRzOlxuICAgICAgICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgeiB2YWx1ZSBQcig+fHp8KSAgICBcbihJbnRlcmNlcHQpICAgICAgICAgLTAuNDU1NSAgICAgMC4yMjIxICAtMi4wNTAgIDAuMDQwMzIgKiAgXG5mYWN0b3IoR2VuZGVyKU1hbGUgICAwLjY0NzggICAgIDAuMjI1MCAgIDIuODc5ICAwLjAwMzk5ICoqIFxuZmFjdG9yKFJhY2UpV2hpdGUgICAtMS4zMTM1ICAgICAwLjIzNzggIC01LjUyNCAzLjMyZS0wOCAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG4oRGlzcGVyc2lvbiBwYXJhbWV0ZXIgZm9yIGJpbm9taWFsIGZhbWlseSB0YWtlbiB0byBiZSAxKVxuXG4gICAgTnVsbCBkZXZpYW5jZTogMzcuNTE2OTg0ICBvbiAzICBkZWdyZWVzIG9mIGZyZWVkb21cblJlc2lkdWFsIGRldmlhbmNlOiAgMC4wNTgzNDkgIG9uIDEgIGRlZ3JlZXMgb2YgZnJlZWRvbVxuQUlDOiAyNS4xODZcblxuTnVtYmVyIG9mIEZpc2hlciBTY29yaW5nIGl0ZXJhdGlvbnM6IDNcbiJ9 -->
+<pre><code>
+Call:
+glm(formula = cbind(Yes, No) ~ factor(Gender) + factor(Race), 
+    family = binomial)
+
+Deviance Residuals: 
+       1         2         3         4  
+-0.08867   0.10840   0.14143  -0.13687  
+
+Coefficients:
+                   Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)         -0.4555     0.2221  -2.050  0.04032 *  
+factor(Gender)Male   0.6478     0.2250   2.879  0.00399 ** 
+factor(Race)White   -1.3135     0.2378  -5.524 3.32e-08 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 37.516984  on 3  degrees of freedom
+Residual deviance:  0.058349  on 1  degrees of freedom
+AIC: 25.186
+
+Number of Fisher Scoring iterations: 3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>From the result above, SE(<span class="math inline">\(b_1\)</span>) = 0.2250 for <span class="math inline">\(b_1 = 0.6478\)</span>. The 95% confidence interval for <span class="math inline">\(b_1\)</span> is: <span class="math inline">\(b_1 \pm 1.96\ \rm{SE}(b_1) = 0.6478 \pm 1.96*0.2250 = [0.207, 1.089]\)</span>.</p>
+<p>So the 95% interval for <span class="math inline">\(e^{b_1}\)</span> is <span class="math inline">\([1.230, 2.971]\)</span>. We are 95% confident that if holding race fixed, the ratio between odds that a male adolescent has had intercourse and odds that a female does is a number between 1.230 and 2.971.</p>
+<p>Since the 95% confidence interval for <span class="math inline">\(e^{b_1}\)</span> does not cover 1, we may infer that gender is significant to having sexual intercourse.</p>
 <p><br></p>
 </div>
-<div id="c.-testh0-1-0againstha-1-0.-use0.05." class="section level4">
-<h4>2.c. TestH0 :β1 =0againstHa :β1 ̸=0. Useα=0.05.</h4>
+<div id="c.-test-h_0-beta_1-0-against-h_a-beta_1-neq-0.-use-alpha-0.05." class="section level4">
+<h4>2.c. Test <span class="math inline">\(H_0\)</span>: <span class="math inline">\(\beta_1\)</span> = 0 against <span class="math inline">\(H_a\)</span>: <span class="math inline">\(\beta_1 \neq 0\)</span>. Use <span class="math inline">\(\alpha\)</span> = 0.05.</h4>
+<p>Here we use <span class="math inline">\(Z = \frac{b_1 - 0}{\rm{SE}(b_1)}\)</span> to test hypothesis. <span class="math inline">\(Z = \frac{0.6478}{0.2250} = 2.879\)</span>, which is larger than <span class="math inline">\(Z_{\alpha/2} = 1.96\)</span>. So we could reject <span class="math inline">\(H_0: \beta_1 = 0\)</span> with <span class="math inline">\(\alpha = 0.05\)</span>, which means that gender is a significant variable to whether an individual has had sexual intercourse.</p>
 <!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiSFc3LUFEQSIKb3V0cHV0OgogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQKICBodG1sX2RvY3VtZW50OgogICAgZGZfcHJpbnQ6IHBhZ2VkCiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0Ci0tLQojICAgICAgICAgICAgICAgICAgICAgICAgICAgICBKaW5nIFFpYW4gKGpxMjI4MikKCjxicj4KCiMjIyMgMS5hLiBFc3RpbWF0ZSB0aGUgcHJvYmFiaWxpdHkgdGhhdCBhIG1hbGUsIHByb3Rlc3RhbnQgYW5kIHJlcHVibGljYW4gc3VwcG9ydHMgbGF3cyBsZWdhbGl6aW5nIGFib3J0aW9uLiBFc3RpbWF0ZSB0aGUgcHJvYmFiaWxpdHkgdGhhdCBmZW1hbGUsIGNhdGhvbGljIGFuZCBkZW1vY3JhdCBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24uClRoZSBlc3RpbWF0ZWQgbG9naXQgbW9kZWwgaXMgbG9naXQoJFxoYXR7XHBpfSQpID0gMC4xMSArIDAuMTZHIOKIkiAwLjU3JFJfMSQg4oiSIDAuNjYkUl8yJCArIDAuNDckUF8xJCDiiJIgMS42NyRQXzIkLgpUaGVuIHRoZSBkZXNjcmlwdGlvbiB0aGF0IGEgbWFsZSwgcHJvdGVzdGFudCBhbmQgcmVwdWJsaWNhbiBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24gY29ycmVzcG9uZHMgdG8gbG9naXQoJFxoYXR7XHBpXzF9JCkgPSAwLjExICsgMC4xNigwKSDiiJIgMC41NygxKSDiiJIgMC42NigwKSArIDAuNDcoMCkg4oiSIDEuNjcoMSkgPSAtMi4xMy4gClNvIHRoZSBwcm9iYWJpbGl0eSB0aGF0IGEgbWFsZSwgcHJvdGVzdGFudCBhbmQgcmVwdWJsaWNhbiBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24gaXMgCiRcaGF0e1xwaV8xfSA9IFxmcmFje2Veey0yLjEzfX17MStlXnstMi4xM319ID0gMC4xMDYkLgoKVGhlIGRlc2NyaXB0aW9uIHRoYXQgYSBmZW1hbGUsIGNhdGhvbGljIGFuZCBkZW1vY3JhdCBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24gY29ycmVzcG9uZHMgdG8gbG9naXQoJFxoYXR7XHBpXzJ9JCkgPSAwLjExICsgMC4xNigxKSDiiJIgMC41NygwKSDiiJIgMC42NigxKSArIDAuNDcoMSkg4oiSIDEuNjcoMCkgPSAwLjA4LiAKU28gdGhlIHByb2JhYmlsaXR5IHRoYXQgYSBtYWxlLCBwcm90ZXN0YW50IGFuZCByZXB1YmxpY2FuIHN1cHBvcnRzIGxhd3MgbGVnYWxpemluZyBhYm9ydGlvbiBpcyAKJFxoYXR7XHBpXzJ9ID0gXGZyYWN7ZV57MC4wOH19ezErZV57MC4wOH19ID0gMC41MjAkLgoKPGJyPgoKIyMjIyAxLmIuIEludGVycHJldCBiMSA9IDAuMTYgYW5kIGIyID0g4oiSMC41Ny4KCjxicj4KCiMjIyMgMS5jLiBJZiBTRShiMSkgPSAwLjA2NCBjb25zdHJ1Y3QgYSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgYjEgYW5kIGludGVycHJldCB5b3VyIHJlc3VsdC4KCjxicj4KCiMjIyMgMS5kLiBUZXN0SDAgOs6yMSA9MCBhZ2FpbnN0IEgxIDrOsjEgzLg9MAoKPGJyPgoKIyMjIyAxLmUuIElmIFNFKGIyKSA9IDAuMzggY29uc3RydWN0IGEgOTUlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yIGIyIGFuZCBpbnRlcnByZXQgeW91ciByZXN1bHQuCgo8YnI+CgojIyMjIDEuZi4gVGVzdEgwIDrOsjIgPTBhZ2FpbnN0SDEgOs6yMiDMuD0wCgo8YnI+CgojIyMjIDIuYS4gRXN0aW1hdGUgzrIxIGFuZCDOsjIgYW5kIGludGVycHJldCB5b3VyIHJlc3VsdC4KCjxicj4KCiMjIyMgMi5iLiBDb25zdHJ1Y3QgYSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCB0byBkZXNjcmliZSB0aGUgZWZmZWN0IG9mIGdlbmRlciBvbiB0aGUgb2RkcyBvZiBJbnRlcmNvdXJzZSBjb250cm9sbGluZyBmb3IgcmFjZSAoaS5lLiBjb24tIHN0cnVjdCBhIDk1JSBpbnRlcnZhbCBmb3IgZc6yMSApLCBJbnRlcnByZXQgeW91ciByZXN1bHQKCjxicj4KCiMjIyMgMi5jLiBUZXN0SDAgOs6yMSA9MGFnYWluc3RIYSA6zrIxIMy4PTAuIFVzZc6xPTAuMDUuCgoKCgoKCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiSFc3LUFEQSIKb3V0cHV0OgogIHBkZl9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfZG9jdW1lbnQ6CiAgICBkZl9wcmludDogcGFnZWQKICBodG1sX25vdGVib29rOiBkZWZhdWx0Ci0tLQojICAgICAgICAgICAgICAgICAgICAgICAgICAgICBKaW5nIFFpYW4gKGpxMjI4MikKCjxicj4KCiMjIyMgMS5hLiBFc3RpbWF0ZSB0aGUgcHJvYmFiaWxpdHkgdGhhdCBhIG1hbGUsIHByb3Rlc3RhbnQgYW5kIHJlcHVibGljYW4gc3VwcG9ydHMgbGF3cyBsZWdhbGl6aW5nIGFib3J0aW9uLiBFc3RpbWF0ZSB0aGUgcHJvYmFiaWxpdHkgdGhhdCBmZW1hbGUsIGNhdGhvbGljIGFuZCBkZW1vY3JhdCBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24uClRoZSBlc3RpbWF0ZWQgbG9naXQgbW9kZWwgaXMgbG9naXQoJFxoYXR7XHBpfSQpID0gMC4xMSArIDAuMTZHIOKIkiAwLjU3JFJfMSQg4oiSIDAuNjYkUl8yJCArIDAuNDckUF8xJCDiiJIgMS42NyRQXzIkLgpUaGVuIHRoZSBkZXNjcmlwdGlvbiB0aGF0IGEgbWFsZSwgcHJvdGVzdGFudCBhbmQgcmVwdWJsaWNhbiBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24gY29ycmVzcG9uZHMgdG8gbG9naXQoJFxoYXR7XHBpXzF9JCkgPSAwLjExICsgMC4xNigwKSDiiJIgMC41NygxKSDiiJIgMC42NigwKSArIDAuNDcoMCkg4oiSIDEuNjcoMSkgPSAtMi4xMy4gClNvIHRoZSBwcm9iYWJpbGl0eSB0aGF0IGEgbWFsZSwgcHJvdGVzdGFudCBhbmQgcmVwdWJsaWNhbiBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24gaXMgCiRcaGF0e1xwaV8xfSA9IFxmcmFje2Veey0yLjEzfX17MStlXnstMi4xM319ID0gMC4xMDYkLgoKVGhlIGRlc2NyaXB0aW9uIHRoYXQgYSBmZW1hbGUsIGNhdGhvbGljIGFuZCBkZW1vY3JhdCBzdXBwb3J0cyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24gY29ycmVzcG9uZHMgdG8gbG9naXQoJFxoYXR7XHBpXzJ9JCkgPSAwLjExICsgMC4xNigxKSDiiJIgMC41NygwKSDiiJIgMC42NigxKSArIDAuNDcoMSkg4oiSIDEuNjcoMCkgPSAwLjA4LiAKU28gdGhlIHByb2JhYmlsaXR5IHRoYXQgYSBtYWxlLCBwcm90ZXN0YW50IGFuZCByZXB1YmxpY2FuIHN1cHBvcnRzIGxhd3MgbGVnYWxpemluZyBhYm9ydGlvbiBpcyAKJFxoYXR7XHBpXzJ9ID0gXGZyYWN7ZV57MC4wOH19ezErZV57MC4wOH19ID0gMC41MjAkLgoKPGJyPgoKIyMjIyAxLmIuIEludGVycHJldCAkYl8xJCA9IDAuMTYgYW5kICRiXzIkID0g4oiSMC41Ny4KSW50ZXJwcmV0YXRpb24gb2YgJGJfMSQgPSAwLjE2OgpJZiBob2xkaW5nIHJlbGlnaW9uIGFmZmlsaWF0aW9uIGFuZCBwb2xpdGljYWwgcGFydHkgZml4ZWQsIHRoZSBvZGRzIHRoYXQgYSBmZW1hbGUgc3VwcG9ydHMgbGF3cyBsZWdhbGl6aW5nIGFib3J0aW9uIGlzIGVzdGltYXRlZCB0byBiZSAkZV57MC4xNn0gPSAxLjE3NCQgdGltZXMgdGhlIG9kZHMgdGhhdCBhIG1hbGUgZG9lcy4KCkludGVycHJldGF0aW9uIG9mICRiXzIgPSAtMC41NyQ6CklmIGhvbGRpbmcgZ2VuZGVyIGFuZCBwb2xpdGljYWwgcGFydHkgZml4ZWQsIHRoZSBvZGRzIHRoYXQgYSBwcm90ZXN0YW50IHN1cHBvcnRzIGxhd3MgbGVnYWxpemluZyBhYm9ydGlvbiBpcyBlc3RpbWF0ZWQgdG8gYmUgJGVeey0wLjU3fSA9IDAuNTY2JCB0aW1lcyB0aGUgb2RkcyB0aGF0IGEgbm9uLXByb3Rlc3RhbnQgZG9lcy4KCjxzcGFuIHN0eWxlID0gImNvbG9yOnJlZCI+56Gu6K6k5LiLYjI/PC9zcGFuPgoKPGJyPgoKIyMjIyAxLmMuIElmIFNFKCRiXzEkKSA9IDAuMDY0IGNvbnN0cnVjdCBhIDk1JSBjb25maWRlbmNlIGludGVydmFsIGZvciAkYl8xJCBhbmQgaW50ZXJwcmV0IHlvdXIgcmVzdWx0LgpUaGUgOTUlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yICRiXzEkIGlzICRiXzEgXHBtIDEuOTZcIFxybXtTRX0oYl8xKSA9IDAuMTYgXHBtIDEuOTYqMC4wNjQgPSBbMC4wMzUsIDAuMjg1XSQuCgpTbyB0aGUgOTUlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yICRlXntiXzF9JCBpcyAkWzEuMDM2LCAxLjMzMF0kLgpXZSBhcmUgOTUlIGNvbmZpZGVudCB0aGF0IGlmIGhvbGRpbmcgcmVsaWdpb24gYWZmaWxpYXRpb24gYW5kIHBvbGl0aWNhbCBwYXJ0eSBmaXhlZCwgdGhlIHJhdGlvIGJldHdlZW4gb2RkcyB0aGF0IGEgZmVtYWxlIHN1cHBvcnRzIGxhd3MgbGVnYWxpemluZyBhYm9ydGlvbiBhbmQgb2RkcyB0aGF0IGEgbWFsZSBkb2VzIGlzIGEgbnVtYmVyIGJldHdlZW4gMS4wMzYgYW5kIDEuMzMwLgoKU2luY2UgdGhlIDk1JSBjb25maWRlbmNlIGludGVydmFsIGZvciAkYl8xJCBkb2VzIG5vdCBjb3ZlciAwLCB3ZSBtYXkgaW5mZXIgdGhhdCBnZW5kZXIgaXMgc2lnbmlmaWNhbnQgdG8gdGhlIGluZGl2aWR1YWwncyBhdHRpdHVkZSB0b3dhcmRzIGxhd3MgbGVnYWxpemluZyBhYm9ydGlvbi4KCjxicj4KCiMjIyMgMS5kLiBUZXN0ICRIXzAkOiAkXGJldGFfMSQgPSAwIGFnYWluc3QgJEhfYSQ6ICRcYmV0YV8xIFxuZXEgMCQuCkhlcmUgd2UgdXNlICRaID0gXGZyYWN7Yl8xIC0gMH17XHJte1NFfShiXzEpfSQgdG8gdGVzdCBoeXBvdGhlc2lzLgokWiA9IFxmcmFjezAuMTZ9ezAuMDY0fSA9IDIuNSQsIHdoaWNoIGlzIGxhcmdlciB0aGFuICRaX3tcYWxwaGEvMn0gPSAxLjk2JC4KU28gd2UgY291bGQgcmVqZWN0ICRIXzA6IFxiZXRhXzEgPSAwJCB3aXRoICRcYWxwaGEgPSAwLjA1JCwgd2hpY2ggbWVhbnMgdGhhdCBnZW5kZXIgaXMgYSBzaWduaWZpY2FudCB2YXJpYWJsZSB0byB3aGV0aGVyIGFuIGluZGl2aWR1YWwgc3VwcG9ydHMgbGF3cyBsZWdhbGl6aW5nIGFib3J0aW9uLgoKPGJyPgoKIyMjIyAxLmUuIElmIFNFKCRiXzIkKSA9IDAuMzggY29uc3RydWN0IGEgOTUlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yICRiXzIkIGFuZCBpbnRlcnByZXQgeW91ciByZXN1bHQuClRoZSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCBmb3IgJGJfMiQgaXMgJGJfMiBccG0gMS45NlwgXHJte1NFfShiXzIpID0gLTAuNTcgXHBtIDEuOTYqMC4zOCA9IFstMS4zMTUsIDAuMTc1XSQuCgpTbyB0aGUgOTUlIGNvbmZpZGVuY2UgaW50ZXJ2YWwgZm9yICRlXntiXzJ9JCBpcyAkWzAuMjY4LCAxLjE5MV0kLgpXZSBhcmUgOTUlIGNvbmZpZGVudCB0aGF0IGlmIGhvbGRpbmcgZ2VuZGVyIGFuZCBwb2xpdGljYWwgcGFydHkgZml4ZWQsIHRoZSByYXRpbyBiZXR3ZWVuIG9kZHMgdGhhdCBhIHByb3Rlc3RhbnQgc3VwcG9ydHMgbGF3cyBsZWdhbGl6aW5nIGFib3J0aW9uIGFuZCBvZGRzIHRoYXQgYSBub24tcHJvdGVzdGFudCBkb2VzIGlzIGEgbnVtYmVyIGJldHdlZW4gMC4yNjggYW5kIDEuMTkxLgoKU2luY2UgdGhlIDk1JSBjb25maWRlbmNlIGludGVydmFsIGZvciAkYl8yJCBjb3ZlcnMgMCwgd2UgbWF5IGluZmVyIHRoYXQgd2hldGhlciBhbiBpbmRpdmlkdWFsIGlzIHByb3Rlc3RhbnQgb3Igbm90IGlzIG5vdCBzaWduaWZpY2FudCB0byBoaXMgb3IgaGVyIGF0dGl0dWRlIHRvd2FyZHMgbGF3cyBsZWdhbGl6aW5nIGFib3J0aW9uLgoKPHNwYW4gc3R5bGUgPSAiY29sb3I6cmVkIj7noa7orqTkuItiMj88L3NwYW4+Cgo8YnI+CgojIyMjIDEuZi4gVGVzdCAkSF8wJDogJFxiZXRhXzIkID0gMCBhZ2FpbnN0ICRIX2EkOiAkXGJldGFfMiBcbmVxIDAkLgpIZXJlIHdlIHVzZSAkWiA9IFxmcmFje2JfMiAtIDB9e1xybXtTRX0oYl8yKX0kIHRvIHRlc3QgaHlwb3RoZXNpcy4KJFogPSBcZnJhY3stMC41N317MC4zOH0gPSAtMS41JCwgd2hvc2UgYWJzb2x1dGUgdmFsdWUgaXMgc21hbGxlciB0aGFuICRaX3tcYWxwaGEvMn0gPSAxLjk2JC4KU28gd2UgY291bGQgbm90IHJlamVjdCAkSF8wOiBcYmV0YV8yID0gMCQgd2l0aCAkXGFscGhhID0gMC4wNSQsIHdoaWNoIG1lYW5zIHRoYXQgd2hldGhlciBhbiBpbmRpdmlkdWFsIGlzIGEgcHJvdGVzdGFudCBvciBub3QgaXMgbm90IHNpZ25pZmljYW50IHRvIGhpcyBvciBoZXIgYXR0aXR1ZGUgdG93YXJkcyBsYXdzIGxlZ2FsaXppbmcgYWJvcnRpb24uCgo8YnI+CgojIyMjIDIuYS4gRXN0aW1hdGUgJFxiZXRhXzEkIGFuZCAkXGJldGFfMiQgYW5kIGludGVycHJldCB5b3VyIHJlc3VsdC4KYGBge3J9CmRhdGE8LXJlYWQuY3N2KCJ+L0Rlc2t0b3AvQWR2YW5jZWREQS9IVy9IVzcvYWRvbGVzY2VudC5jc3YiLGhlYWRlcj1UUlVFLHNlcD0nLCcpCmF0dGFjaChkYXRhKQpgYGAKYGBge3J9CmxvZ2l0MTwtZ2xtKGNiaW5kKFllcyxObyl+ZmFjdG9yKEdlbmRlcikrZmFjdG9yKFJhY2UpLGZhbWlseT1iaW5vbWlhbCkKbG9naXQxCmBgYApIZXJlIEdlbmRlciA9IDEgaWYgZ2VuZGVyIGlzIG1hbGUgYW5kIEdlbmRlciA9IDAgaWYgZ2VuZGVyIGlzIGZlbWFsZS4KUmFjZSA9IDEgaWYgcmFjZSBpcyB3aGl0ZSBhbmQgUmFjZSA9IDAgaWYgcmFjZSBpcyBibGFjay4KVGhlbiB3ZSBnZXQgZXN0aW1hdGVkIGNvZWZmaWNpZW50czogJGJfMSA9IDAuNjQ3OCxcIGJfMiA9IC0xLjMxMzUkLgoKJGJfMSA9IDAuNjQ3OCQgbWVhbnMgdGhhdCBpZiBob2xkaW5nIHJhY2UgZml4ZWQsIHRoZSBvZGRzIHRoYXQgYSBtYWxlIGFkb2xlc2NlbnQgaGFzIGhhZCBpbnRlcmNvdXJzZSBpcyBlc3RpbWF0ZWQgdG8gYmUgJGVeezAuNjQ3OH0gPSAxLjkxMSQgdGltZXMgdGhlIG9kZHMgdGhhdCBhIGZlbWFsZSBkb2VzLgoKJGJfMiA9IC0xLjMxMzUkIG1lYW5zIHRoYXQgaWYgaG9sZGluZyBnZW5kZXIgZml4ZWQsIHRoZSBvZGRzIHRoYXQgYSB3aGl0ZSBhZG9sZXNjZW50IGhhcyBoYWQgaW50ZXJjb3Vyc2UgaXMgZXN0aW1hdGVkIHRvIGJlICRlXnstMS4zMTM1fSA9IDAuMjY5JCB0aW1lcyB0aGUgb2RkcyB0aGF0IGEgYmxhY2sgZG9lcy4KCjxicj4KCiMjIyMgMi5iLiBDb25zdHJ1Y3QgYSA5NSUgY29uZmlkZW5jZSBpbnRlcnZhbCB0byBkZXNjcmliZSB0aGUgZWZmZWN0IG9mIGdlbmRlciBvbiB0aGUgb2RkcyBvZiBJbnRlcmNvdXJzZSBjb250cm9sbGluZyBmb3IgcmFjZSAoaS5lLiBjb25zdHJ1Y3QgYSA5NSUgaW50ZXJ2YWwgZm9yICRlXntcYmV0YV8xfSQpLiBJbnRlcnByZXQgeW91ciByZXN1bHQuCmBgYHtyfQpzdW1tYXJ5KGxvZ2l0MSkKYGBgCkZyb20gdGhlIHJlc3VsdCBhYm92ZSwgU0UoJGJfMSQpID0gMC4yMjUwIGZvciAkYl8xID0gMC42NDc4JC4KVGhlIDk1JSBjb25maWRlbmNlIGludGVydmFsIGZvciAkYl8xJCBpczogJGJfMSBccG0gMS45NlwgXHJte1NFfShiXzEpID0gMC42NDc4IFxwbSAxLjk2KjAuMjI1MCA9IFswLjIwNywgMS4wODldJC4KClNvIHRoZSA5NSUgaW50ZXJ2YWwgZm9yICRlXntiXzF9JCBpcyAkWzEuMjMwLCAyLjk3MV0kLgpXZSBhcmUgOTUlIGNvbmZpZGVudCB0aGF0IGlmIGhvbGRpbmcgcmFjZSBmaXhlZCwgdGhlIHJhdGlvIGJldHdlZW4gb2RkcyB0aGF0IGEgbWFsZSBhZG9sZXNjZW50IGhhcyBoYWQgaW50ZXJjb3Vyc2UgYW5kIG9kZHMgdGhhdCBhIGZlbWFsZSBkb2VzIGlzIGEgbnVtYmVyIGJldHdlZW4gMS4yMzAgYW5kIDIuOTcxLgoKU2luY2UgdGhlIDk1JSBjb25maWRlbmNlIGludGVydmFsIGZvciAkZV57Yl8xfSQgZG9lcyBub3QgY292ZXIgMSwgd2UgbWF5IGluZmVyIHRoYXQgZ2VuZGVyIGlzIHNpZ25pZmljYW50IHRvIGhhdmluZyBzZXh1YWwgaW50ZXJjb3Vyc2UuCgo8YnI+CgojIyMjIDIuYy4gVGVzdCAkSF8wJDogJFxiZXRhXzEkID0gMCBhZ2FpbnN0ICRIX2EkOiAkXGJldGFfMSBcbmVxIDAkLiBVc2UgJFxhbHBoYSQgPSAwLjA1LgpIZXJlIHdlIHVzZSAkWiA9IFxmcmFje2JfMSAtIDB9e1xybXtTRX0oYl8xKX0kIHRvIHRlc3QgaHlwb3RoZXNpcy4KJFogPSBcZnJhY3swLjY0Nzh9ezAuMjI1MH0gPSAyLjg3OSQsIHdoaWNoIGlzIGxhcmdlciB0aGFuICRaX3tcYWxwaGEvMn0gPSAxLjk2JC4KU28gd2UgY291bGQgcmVqZWN0ICRIXzA6IFxiZXRhXzEgPSAwJCB3aXRoICRcYWxwaGEgPSAwLjA1JCwgd2hpY2ggbWVhbnMgdGhhdCBnZW5kZXIgaXMgYSBzaWduaWZpY2FudCB2YXJpYWJsZSB0byB3aGV0aGVyIGFuIGluZGl2aWR1YWwgaGFzIGhhZCBzZXh1YWwgaW50ZXJjb3Vyc2UuCgoKCgoKCgoKCgo=</div>
 
 
 

@@ -1,0 +1,350 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={HW7-ADA},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{HW7-ADA}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\hypertarget{jing-qian-jq2282}{%
+\section{Jing Qian (jq2282)}\label{jing-qian-jq2282}}
+
+\hypertarget{a.-estimate-the-probability-that-a-male-protestant-and-republican-supports-laws-legalizing-abortion.-estimate-the-probability-that-female-catholic-and-democrat-supports-laws-legalizing-abortion.}{%
+\paragraph{1.a. Estimate the probability that a male, protestant and
+republican supports laws legalizing abortion. Estimate the probability
+that female, catholic and democrat supports laws legalizing
+abortion.}\label{a.-estimate-the-probability-that-a-male-protestant-and-republican-supports-laws-legalizing-abortion.-estimate-the-probability-that-female-catholic-and-democrat-supports-laws-legalizing-abortion.}}
+
+The estimated logit model is logit(\(\hat{\pi}\)) = 0.11 + 0.16G −
+0.57\(R_1\) − 0.66\(R_2\) + 0.47\(P_1\) − 1.67\(P_2\). Then the
+description that a male, protestant and republican supports laws
+legalizing abortion corresponds to logit(\(\hat{\pi_1}\)) = 0.11 +
+0.16(0) − 0.57(1) − 0.66(0) + 0.47(0) − 1.67(1) = -2.13. So the
+probability that a male, protestant and republican supports laws
+legalizing abortion is
+\(\hat{\pi_1} = \frac{e^{-2.13}}{1+e^{-2.13}} = 0.106\).
+
+The description that a female, catholic and democrat supports laws
+legalizing abortion corresponds to logit(\(\hat{\pi_2}\)) = 0.11 +
+0.16(1) − 0.57(0) − 0.66(1) + 0.47(1) − 1.67(0) = 0.08. So the
+probability that a male, protestant and republican supports laws
+legalizing abortion is
+\(\hat{\pi_2} = \frac{e^{0.08}}{1+e^{0.08}} = 0.520\).
+
+\hypertarget{b.-interpret-b_1-0.16-and-b_2-0.57.}{%
+\paragraph{\texorpdfstring{1.b. Interpret \(b_1\) = 0.16 and \(b_2\) =
+−0.57.}{1.b. Interpret b\_1 = 0.16 and b\_2 = −0.57.}}\label{b.-interpret-b_1-0.16-and-b_2-0.57.}}
+
+Interpretation of \(b_1\) = 0.16: If holding religion affiliation and
+political party fixed, the odds that a female supports laws legalizing
+abortion is estimated to be \(e^{0.16} = 1.174\) times the odds that a
+male does.
+
+Interpretation of \(b_2 = -0.57\): If holding gender and political party
+fixed, the odds that a protestant supports laws legalizing abortion is
+estimated to be \(e^{-0.57} = 0.566\) times the odds that a
+non-protestant does.
+
+{确认下b2?}
+
+\hypertarget{c.-if-seb_1-0.064-construct-a-95-confidence-interval-for-b_1-and-interpret-your-result.}{%
+\paragraph{\texorpdfstring{1.c. If SE(\(b_1\)) = 0.064 construct a 95\%
+confidence interval for \(b_1\) and interpret your
+result.}{1.c. If SE(b\_1) = 0.064 construct a 95\% confidence interval for b\_1 and interpret your result.}}\label{c.-if-seb_1-0.064-construct-a-95-confidence-interval-for-b_1-and-interpret-your-result.}}
+
+The 95\% confidence interval for \(b_1\) is
+\(b_1 \pm 1.96\ \rm{SE}(b_1) = 0.16 \pm 1.96*0.064 = [0.035, 0.285]\).
+
+So the 95\% confidence interval for \(e^{b_1}\) is \([1.036, 1.330]\).
+We are 95\% confident that if holding religion affiliation and political
+party fixed, the ratio between odds that a female supports laws
+legalizing abortion and odds that a male does is a number between 1.036
+and 1.330.
+
+Since the 95\% confidence interval for \(b_1\) does not cover 0, we may
+infer that gender is significant to the individual's attitude towards
+laws legalizing abortion.
+
+\hypertarget{d.-test-h_0-beta_1-0-against-h_a-beta_1-neq-0.}{%
+\paragraph{\texorpdfstring{1.d. Test \(H_0\): \(\beta_1\) = 0 against
+\(H_a\):
+\(\beta_1 \neq 0\).}{1.d. Test H\_0: \textbackslash{}beta\_1 = 0 against H\_a: \textbackslash{}beta\_1 \textbackslash{}neq 0.}}\label{d.-test-h_0-beta_1-0-against-h_a-beta_1-neq-0.}}
+
+Here we use \(Z = \frac{b_1 - 0}{\rm{SE}(b_1)}\) to test hypothesis.
+\(Z = \frac{0.16}{0.064} = 2.5\), which is larger than
+\(Z_{\alpha/2} = 1.96\). So we could reject \(H_0: \beta_1 = 0\) with
+\(\alpha = 0.05\), which means that gender is a significant variable to
+whether an individual supports laws legalizing abortion.
+
+\hypertarget{e.-if-seb_2-0.38-construct-a-95-confidence-interval-for-b_2-and-interpret-your-result.}{%
+\paragraph{\texorpdfstring{1.e. If SE(\(b_2\)) = 0.38 construct a 95\%
+confidence interval for \(b_2\) and interpret your
+result.}{1.e. If SE(b\_2) = 0.38 construct a 95\% confidence interval for b\_2 and interpret your result.}}\label{e.-if-seb_2-0.38-construct-a-95-confidence-interval-for-b_2-and-interpret-your-result.}}
+
+The 95\% confidence interval for \(b_2\) is
+\(b_2 \pm 1.96\ \rm{SE}(b_2) = -0.57 \pm 1.96*0.38 = [-1.315, 0.175]\).
+
+So the 95\% confidence interval for \(e^{b_2}\) is \([0.268, 1.191]\).
+We are 95\% confident that if holding gender and political party fixed,
+the ratio between odds that a protestant supports laws legalizing
+abortion and odds that a non-protestant does is a number between 0.268
+and 1.191.
+
+Since the 95\% confidence interval for \(b_2\) covers 0, we may infer
+that whether an individual is protestant or not is not significant to
+his or her attitude towards laws legalizing abortion.
+
+{确认下b2?}
+
+\hypertarget{f.-test-h_0-beta_2-0-against-h_a-beta_2-neq-0.}{%
+\paragraph{\texorpdfstring{1.f. Test \(H_0\): \(\beta_2\) = 0 against
+\(H_a\):
+\(\beta_2 \neq 0\).}{1.f. Test H\_0: \textbackslash{}beta\_2 = 0 against H\_a: \textbackslash{}beta\_2 \textbackslash{}neq 0.}}\label{f.-test-h_0-beta_2-0-against-h_a-beta_2-neq-0.}}
+
+Here we use \(Z = \frac{b_2 - 0}{\rm{SE}(b_2)}\) to test hypothesis.
+\(Z = \frac{-0.57}{0.38} = -1.5\), whose absolute value is smaller than
+\(Z_{\alpha/2} = 1.96\). So we could not reject \(H_0: \beta_2 = 0\)
+with \(\alpha = 0.05\), which means that whether an individual is a
+protestant or not is not significant to his or her attitude towards laws
+legalizing abortion.
+
+\hypertarget{a.-estimate-beta_1-and-beta_2-and-interpret-your-result.}{%
+\paragraph{\texorpdfstring{2.a. Estimate \(\beta_1\) and \(\beta_2\) and
+interpret your
+result.}{2.a. Estimate \textbackslash{}beta\_1 and \textbackslash{}beta\_2 and interpret your result.}}\label{a.-estimate-beta_1-and-beta_2-and-interpret-your-result.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data<-}\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Desktop/AdvancedDA/HW/HW7/adolescent.csv"}\NormalTok{,}\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{,}\DataTypeTok{sep=}\StringTok{','}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in read.table(file = file, header = header, sep = sep, quote =
+## quote, : incomplete final line found by readTableHeader on '~/Desktop/
+## AdvancedDA/HW/HW7/adolescent.csv'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{attach}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{logit1<-}\KeywordTok{glm}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(Yes,No)}\OperatorTok{~}\KeywordTok{factor}\NormalTok{(Gender)}\OperatorTok{+}\KeywordTok{factor}\NormalTok{(Race),}\DataTypeTok{family=}\NormalTok{binomial)}
+\NormalTok{logit1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = cbind(Yes, No) ~ factor(Gender) + factor(Race), 
+##     family = binomial)
+## 
+## Coefficients:
+##        (Intercept)  factor(Gender)Male   factor(Race)White  
+##            -0.4555              0.6478             -1.3135  
+## 
+## Degrees of Freedom: 3 Total (i.e. Null);  1 Residual
+## Null Deviance:       37.52 
+## Residual Deviance: 0.05835   AIC: 25.19
+\end{verbatim}
+
+Here Gender = 1 if gender is male and Gender = 0 if gender is female.
+Race = 1 if race is white and Race = 0 if race is black. Then we get
+estimated coefficients: \(b_1 = 0.6478,\ b_2 = -1.3135\).
+
+\(b_1 = 0.6478\) means that if holding race fixed, the odds that a male
+adolescent has had intercourse is estimated to be \(e^{0.6478} = 1.911\)
+times the odds that a female does.
+
+\(b_2 = -1.3135\) means that if holding gender fixed, the odds that a
+white adolescent has had intercourse is estimated to be
+\(e^{-1.3135} = 0.269\) times the odds that a black does.
+
+\hypertarget{b.-construct-a-95-confidence-interval-to-describe-the-effect-of-gender-on-the-odds-of-intercourse-controlling-for-race-i.e.-construct-a-95-interval-for-ebeta_1.-interpret-your-result.}{%
+\paragraph{\texorpdfstring{2.b. Construct a 95\% confidence interval to
+describe the effect of gender on the odds of Intercourse controlling for
+race (i.e.~construct a 95\% interval for \(e^{\beta_1}\)). Interpret
+your
+result.}{2.b. Construct a 95\% confidence interval to describe the effect of gender on the odds of Intercourse controlling for race (i.e.~construct a 95\% interval for e\^{}\{\textbackslash{}beta\_1\}). Interpret your result.}}\label{b.-construct-a-95-confidence-interval-to-describe-the-effect-of-gender-on-the-odds-of-intercourse-controlling-for-race-i.e.-construct-a-95-interval-for-ebeta_1.-interpret-your-result.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(logit1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## glm(formula = cbind(Yes, No) ~ factor(Gender) + factor(Race), 
+##     family = binomial)
+## 
+## Deviance Residuals: 
+##        1         2         3         4  
+## -0.08867   0.10840   0.14143  -0.13687  
+## 
+## Coefficients:
+##                    Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)         -0.4555     0.2221  -2.050  0.04032 *  
+## factor(Gender)Male   0.6478     0.2250   2.879  0.00399 ** 
+## factor(Race)White   -1.3135     0.2378  -5.524 3.32e-08 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 37.516984  on 3  degrees of freedom
+## Residual deviance:  0.058349  on 1  degrees of freedom
+## AIC: 25.186
+## 
+## Number of Fisher Scoring iterations: 3
+\end{verbatim}
+
+From the result above, SE(\(b_1\)) = 0.2250 for \(b_1 = 0.6478\). The
+95\% confidence interval for \(b_1\) is:
+\(b_1 \pm 1.96\ \rm{SE}(b_1) = 0.6478 \pm 1.96*0.2250 = [0.207, 1.089]\).
+
+So the 95\% interval for \(e^{b_1}\) is \([1.230, 2.971]\). We are 95\%
+confident that if holding race fixed, the ratio between odds that a male
+adolescent has had intercourse and odds that a female does is a number
+between 1.230 and 2.971.
+
+Since the 95\% confidence interval for \(e^{b_1}\) does not cover 1, we
+may infer that gender is significant to having sexual intercourse.
+
+\hypertarget{c.-test-h_0-beta_1-0-against-h_a-beta_1-neq-0.-use-alpha-0.05.}{%
+\paragraph{\texorpdfstring{2.c. Test \(H_0\): \(\beta_1\) = 0 against
+\(H_a\): \(\beta_1 \neq 0\). Use \(\alpha\) =
+0.05.}{2.c. Test H\_0: \textbackslash{}beta\_1 = 0 against H\_a: \textbackslash{}beta\_1 \textbackslash{}neq 0. Use \textbackslash{}alpha = 0.05.}}\label{c.-test-h_0-beta_1-0-against-h_a-beta_1-neq-0.-use-alpha-0.05.}}
+
+Here we use \(Z = \frac{b_1 - 0}{\rm{SE}(b_1)}\) to test hypothesis.
+\(Z = \frac{0.6478}{0.2250} = 2.879\), which is larger than
+\(Z_{\alpha/2} = 1.96\). So we could reject \(H_0: \beta_1 = 0\) with
+\(\alpha = 0.05\), which means that gender is a significant variable to
+whether an individual has had sexual intercourse.
+
+
+\end{document}

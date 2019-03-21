@@ -1,10 +1,10 @@
 ---
 title: "HW7-ADA"
 output:
-  html_notebook: default
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
+  html_notebook: default
 ---
 #                             Jing Qian (jq2282)
 
@@ -22,36 +22,90 @@ $\hat{\pi_2} = \frac{e^{0.08}}{1+e^{0.08}} = 0.520$.
 
 <br>
 
-#### 1.b. Interpret b1 = 0.16 and b2 = −0.57.
+#### 1.b. Interpret $b_1$ = 0.16 and $b_2$ = −0.57.
+Interpretation of $b_1$ = 0.16:
+If holding religion affiliation and political party fixed, the odds that a female supports laws legalizing abortion is estimated to be $e^{0.16} = 1.174$ times the odds that a male does.
+
+Interpretation of $b_2 = -0.57$:
+If holding gender and political party fixed, the odds that a protestant supports laws legalizing abortion is estimated to be $e^{-0.57} = 0.566$ times the odds that a non-protestant does.
+
+<span style = "color:red">确认下b2?</span>
 
 <br>
 
-#### 1.c. If SE(b1) = 0.064 construct a 95% confidence interval for b1 and interpret your result.
+#### 1.c. If SE($b_1$) = 0.064 construct a 95% confidence interval for $b_1$ and interpret your result.
+The 95% confidence interval for $b_1$ is $b_1 \pm 1.96\ \rm{SE}(b_1) = 0.16 \pm 1.96*0.064 = [0.035, 0.285]$.
+
+So the 95% confidence interval for $e^{b_1}$ is $[1.036, 1.330]$.
+We are 95% confident that if holding religion affiliation and political party fixed, the ratio between odds that a female supports laws legalizing abortion and odds that a male does is a number between 1.036 and 1.330.
+
+Since the 95% confidence interval for $b_1$ does not cover 0, we may infer that gender is significant to the individual's attitude towards laws legalizing abortion.
 
 <br>
 
-#### 1.d. TestH0 :β1 =0 against H1 :β1 ̸=0
+#### 1.d. Test $H_0$: $\beta_1$ = 0 against $H_a$: $\beta_1 \neq 0$.
+Here we use $Z = \frac{b_1 - 0}{\rm{SE}(b_1)}$ to test hypothesis.
+$Z = \frac{0.16}{0.064} = 2.5$, which is larger than $Z_{\alpha/2} = 1.96$.
+So we could reject $H_0: \beta_1 = 0$ with $\alpha = 0.05$, which means that gender is a significant variable to whether an individual supports laws legalizing abortion.
 
 <br>
 
-#### 1.e. If SE(b2) = 0.38 construct a 95% confidence interval for b2 and interpret your result.
+#### 1.e. If SE($b_2$) = 0.38 construct a 95% confidence interval for $b_2$ and interpret your result.
+The 95% confidence interval for $b_2$ is $b_2 \pm 1.96\ \rm{SE}(b_2) = -0.57 \pm 1.96*0.38 = [-1.315, 0.175]$.
+
+So the 95% confidence interval for $e^{b_2}$ is $[0.268, 1.191]$.
+We are 95% confident that if holding gender and political party fixed, the ratio between odds that a protestant supports laws legalizing abortion and odds that a non-protestant does is a number between 0.268 and 1.191.
+
+Since the 95% confidence interval for $b_2$ covers 0, we may infer that whether an individual is protestant or not is not significant to his or her attitude towards laws legalizing abortion.
+
+<span style = "color:red">确认下b2?</span>
 
 <br>
 
-#### 1.f. TestH0 :β2 =0againstH1 :β2 ̸=0
+#### 1.f. Test $H_0$: $\beta_2$ = 0 against $H_a$: $\beta_2 \neq 0$.
+Here we use $Z = \frac{b_2 - 0}{\rm{SE}(b_2)}$ to test hypothesis.
+$Z = \frac{-0.57}{0.38} = -1.5$, whose absolute value is smaller than $Z_{\alpha/2} = 1.96$.
+So we could not reject $H_0: \beta_2 = 0$ with $\alpha = 0.05$, which means that whether an individual is a protestant or not is not significant to his or her attitude towards laws legalizing abortion.
 
 <br>
 
-#### 2.a. Estimate β1 and β2 and interpret your result.
+#### 2.a. Estimate $\beta_1$ and $\beta_2$ and interpret your result.
+```{r}
+data<-read.csv("~/Desktop/AdvancedDA/HW/HW7/adolescent.csv",header=TRUE,sep=',')
+attach(data)
+```
+```{r}
+logit1<-glm(cbind(Yes,No)~factor(Gender)+factor(Race),family=binomial)
+logit1
+```
+Here Gender = 1 if gender is male and Gender = 0 if gender is female.
+Race = 1 if race is white and Race = 0 if race is black.
+Then we get estimated coefficients: $b_1 = 0.6478,\ b_2 = -1.3135$.
+
+$b_1 = 0.6478$ means that if holding race fixed, the odds that a male adolescent has had intercourse is estimated to be $e^{0.6478} = 1.911$ times the odds that a female does.
+
+$b_2 = -1.3135$ means that if holding gender fixed, the odds that a white adolescent has had intercourse is estimated to be $e^{-1.3135} = 0.269$ times the odds that a black does.
 
 <br>
 
-#### 2.b. Construct a 95% confidence interval to describe the effect of gender on the odds of Intercourse controlling for race (i.e. con- struct a 95% interval for eβ1 ), Interpret your result
+#### 2.b. Construct a 95% confidence interval to describe the effect of gender on the odds of Intercourse controlling for race (i.e. construct a 95% interval for $e^{\beta_1}$). Interpret your result.
+```{r}
+summary(logit1)
+```
+From the result above, SE($b_1$) = 0.2250 for $b_1 = 0.6478$.
+The 95% confidence interval for $b_1$ is: $b_1 \pm 1.96\ \rm{SE}(b_1) = 0.6478 \pm 1.96*0.2250 = [0.207, 1.089]$.
+
+So the 95% interval for $e^{b_1}$ is $[1.230, 2.971]$.
+We are 95% confident that if holding race fixed, the ratio between odds that a male adolescent has had intercourse and odds that a female does is a number between 1.230 and 2.971.
+
+Since the 95% confidence interval for $e^{b_1}$ does not cover 1, we may infer that gender is significant to having sexual intercourse.
 
 <br>
 
-#### 2.c. TestH0 :β1 =0againstHa :β1 ̸=0. Useα=0.05.
-
+#### 2.c. Test $H_0$: $\beta_1$ = 0 against $H_a$: $\beta_1 \neq 0$. Use $\alpha$ = 0.05.
+Here we use $Z = \frac{b_1 - 0}{\rm{SE}(b_1)}$ to test hypothesis.
+$Z = \frac{0.6478}{0.2250} = 2.879$, which is larger than $Z_{\alpha/2} = 1.96$.
+So we could reject $H_0: \beta_1 = 0$ with $\alpha = 0.05$, which means that gender is a significant variable to whether an individual has had sexual intercourse.
 
 
 
