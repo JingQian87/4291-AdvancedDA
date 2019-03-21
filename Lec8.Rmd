@@ -21,6 +21,57 @@ glm(Admit~Gender+AP, family=binomial("logit"))
 <span style="color:red">注意，x可以是factor/numerical，但是y必须是numerical，只不过这里是binary</span>
 
 因此logit(P(admit=1|Gender,AP)) = -1.946 - 16.620 Gender + 2.793 AP
+```{r}
+summary(glm(Admit~Gender+AP, family=binomial("logit")))
+```
+可以发现这里没有给出confidence interval.需要下面的语句：
+```{r}
+library(MASS)
+confint.default(glm(Admit~Gender+AP, family = binomial("logit")))
+```
 
+```{r}
+confint(glm(Admit~Gender+AP, family = binomial("logit")))
+```
+\* 这里自己给的数据不好，就出错了。
+
+可以发现这两个给出的CI不太一样，因为后者用的方法不一样。
+如果我们只是从定义来推，比如95% CI for $\beta_{\mathrm{AP}} = 2.793 \pm 1.96(1.272) = [0.300,5.286]$。
+那么95% CI for $e^{\beta_{\mathrm{AP}}} = [e^{0.300},e^{5.286}] = [1.350, 197.552]$。
+可以发现与**confint.default**那个给出来的一样，应该用这个。
+
+### 也可以是Probit Model
+```{r}
+glm(Admit~Gender+AP, family=binomial("probit"))
+```
+
+## Example 2
+```{r}
+race<-c("w","w","b","b")
+AZTuse<-c("yes","no","yes","no")
+yes<-c(14,32,11,12)
+no<-c(93,81,52,43)
+aids<-data.frame(race,AZTuse,yes,no)
+aids
+```
+
+```{r}
+logit1<-glm(cbind(yes,no)~factor(race)+factor(AZTuse),family=binomial)
+logit1
+```
+试了下，如果是cbind(no,yes)就是各种系数取反。
+
+```{r}
+OR=exp(coef(logit1))
+print(coef(logit1))
+print(OR)
+```
+
+```{r}
+summary(logit1)
+```
+```{r}
+confint.default(logit1)
+```
 
 

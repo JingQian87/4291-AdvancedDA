@@ -1808,9 +1808,207 @@ Residual Deviance: 18.25    AIC: 24.25</code></pre>
 <p><span style="color:red">注意，x可以是factor/numerical，但是y必须是numerical，只不过这里是binary</span></p>
 <p>因此logit(P(admit=1|Gender,AP)) = -1.946 - 16.620 Gender + 2.793 AP</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShnbG0oQWRtaXR+R2VuZGVyK0FQLCBmYW1pbHk9Ymlub21pYWwoXCJsb2dpdFwiKSkpXG5gYGAifQ== -->
+<pre class="r"><code>summary(glm(Admit~Gender+AP, family=binomial(&quot;logit&quot;)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxuZ2xtKGZvcm11bGEgPSBBZG1pdCB+IEdlbmRlciArIEFQLCBmYW1pbHkgPSBiaW5vbWlhbChcImxvZ2l0XCIpKVxuXG5EZXZpYW5jZSBSZXNpZHVhbHM6IFxuICAgICBNaW4gICAgICAgIDFRICAgIE1lZGlhbiAgICAgICAgM1EgICAgICAgTWF4ICBcbi0xLjU1MTc2ICAtMC41MTY3OCAgLTAuMDAwMTMgICAwLjg0NDYwICAgMi4wMzkzMyAgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgeiB2YWx1ZSBQcig+fHp8KSAgXG4oSW50ZXJjZXB0KSAgIC0xLjk0NiAgICAgIDEuMDY5ICAtMS44MjAgICAwLjA2ODcgLlxuR2VuZGVyMSAgICAgIC0xNi42MjAgICAyOTE3LjAxMyAgLTAuMDA2ICAgMC45OTU1ICBcbkFQMSAgICAgICAgICAgIDIuNzkzICAgICAgMS4yNzIgICAyLjE5NSAgIDAuMDI4MSAqXG4tLS1cblNpZ25pZi4gY29kZXM6ICAwIOKAmCoqKuKAmSAwLjAwMSDigJgqKuKAmSAwLjAxIOKAmCrigJkgMC4wNSDigJgu4oCZIDAuMSDigJgg4oCZIDFcblxuKERpc3BlcnNpb24gcGFyYW1ldGVyIGZvciBiaW5vbWlhbCBmYW1pbHkgdGFrZW4gdG8gYmUgMSlcblxuICAgIE51bGwgZGV2aWFuY2U6IDI5LjcyMCAgb24gMjIgIGRlZ3JlZXMgb2YgZnJlZWRvbVxuUmVzaWR1YWwgZGV2aWFuY2U6IDE4LjI0NiAgb24gMjAgIGRlZ3JlZXMgb2YgZnJlZWRvbVxuQUlDOiAyNC4yNDZcblxuTnVtYmVyIG9mIEZpc2hlciBTY29yaW5nIGl0ZXJhdGlvbnM6IDE3XG4ifQ== -->
+<pre><code>
+Call:
+glm(formula = Admit ~ Gender + AP, family = binomial(&quot;logit&quot;))
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.55176  -0.51678  -0.00013   0.84460   2.03933  
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)  
+(Intercept)   -1.946      1.069  -1.820   0.0687 .
+Gender1      -16.620   2917.013  -0.006   0.9955  
+AP1            2.793      1.272   2.195   0.0281 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 29.720  on 22  degrees of freedom
+Residual deviance: 18.246  on 20  degrees of freedom
+AIC: 24.246
+
+Number of Fisher Scoring iterations: 17</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>可以发现这里没有给出confidence interval.需要下面的语句：</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShNQVNTKVxuY29uZmludC5kZWZhdWx0KGdsbShBZG1pdH5HZW5kZXIrQVAsIGZhbWlseSA9IGJpbm9taWFsKFwibG9naXRcIikpKVxuYGBgIn0= -->
+<pre class="r"><code>library(MASS)
+confint.default(glm(Admit~Gender+AP, family = binomial(&quot;logit&quot;)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgICAgICAyLjUgJSAgICAgICA5Ny41ICVcbihJbnRlcmNlcHQpICAgIC00LjA0MTE5OTggICAgMC4xNDkzNzk1XG5HZW5kZXIxICAgICAtNTczMy44NjAzMDE0IDU3MDAuNjE5OTg0N1xuQVAxICAgICAgICAgICAgIDAuMjk5MzE0NSAgICA1LjI4NzEwMTVcbiJ9 -->
+<pre><code>                    2.5 %       97.5 %
+(Intercept)    -4.0411998    0.1493795
+Gender1     -5733.8603014 5700.6199847
+AP1             0.2993145    5.2871015</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29uZmludChnbG0oQWRtaXR+R2VuZGVyK0FQLCBmYW1pbHkgPSBiaW5vbWlhbChcImxvZ2l0XCIpKSlcbmBgYCJ9 -->
+<pre class="r"><code>confint(glm(Admit~Gender+AP, family = binomial(&quot;logit&quot;)))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiV2FpdGluZyBmb3IgcHJvZmlsaW5nIHRvIGJlIGRvbmUuLi5cbmdsbS5maXQ65ouf5ZCI5qmf546H566X5Ye65p2l5piv5pWw5YC86Zu25oiW5LiAZ2xtLmZpdDrmi5/lkIjmqZ/njofnrpflh7rmnaXmmK/mlbDlgLzpm7bmiJbkuIBnbG0uZml0OuaLn+WQiOapn+eOh+eul+WHuuadpeaYr+aVsOWAvOmbtuaIluS4gGdsbS5maXQ65ouf5ZCI5qmf546H566X5Ye65p2l5piv5pWw5YC86Zu25oiW5LiAZ2xtLmZpdDrmi5/lkIjmqZ/njofnrpflh7rmnaXmmK/mlbDlgLzpm7bmiJbkuIBnbG0uZml0OuaLn+WQiOapn+eOh+eul+WHuuadpeaYr+aVsOWAvOmbtuaIluS4gGdsbS5maXQ65ouf5ZCI5qmf546H566X5Ye65p2l5piv5pWw5YC86Zu25oiW5LiAZ2xtLmZpdDrmi5/lkIjmqZ/njofnrpflh7rmnaXmmK/mlbDlgLzpm7bmiJbkuIBnbG0uZml0OuaLn+WQiOapn+eOh+eul+WHuuadpeaYr+aVsOWAvOmbtuaIluS4gGdsbS5maXQ65ouf5ZCI5qmf546H566X5Ye65p2l5piv5pWw5YC86Zu25oiW5LiAZ2xtLmZpdDrmi5/lkIjmqZ/njofnrpflh7rmnaXmmK/mlbDlgLzpm7bmiJbkuIBnbG0uZml0OuaLn+WQiOapn+eOh+eul+WHuuadpeaYr+aVsOWAvOmbtuaIluS4gGdsbS5maXQ6566X5rOV5rKh5pyJ6IGa5ZCIZ2xtLmZpdDrmi5/lkIjmqZ/njofnrpflh7rmnaXmmK/mlbDlgLzpm7bmiJbkuIBnbG0uZml0OuaLn+WQiOapn+eOh+eul+WHuuadpeaYr+aVsOWAvOmbtuaIluS4gGdsbS5maXQ65ouf5ZCI5qmf546H566X5Ye65p2l5piv5pWw5YC86Zu25oiW5LiAZ2xtLmZpdDrmi5/lkIjmqZ/njofnrpflh7rmnaXmmK/mlbDlgLzpm7bmiJbkuIBnbG0uZml0OuaLn+WQiOapn+eOh+eul+WHuuadpeaYr+aVsOWAvOmbtuaIluS4gGdsbS5maXQ65ouf5ZCI5qmf546H566X5Ye65p2l5piv5pWw5YC86Zu25oiW5LiAZ2xtLmZpdDrmi5/lkIjmqZ/njofnrpflh7rmnaXmmK/mlbDlgLzpm7bmiJbkuIBcbiJ9 -->
+<pre><code>Waiting for profiling to be done...
+glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:算法没有聚合glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一glm.fit:拟合機率算出来是数值零或一</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgICAyLjUgJSAgICAgOTcuNSAlXG4oSW50ZXJjZXB0KSAtNC44NzQwNTExICAtMC4yMTk2OTlcbkdlbmRlcjEgICAgICAgICAgICAgTkEgNTg2Ljc5NTY3M1xuQVAxICAgICAgICAgIDAuNTkyMTIxNSAgIDUuOTYwMDU5XG4ifQ== -->
+<pre><code>                 2.5 %     97.5 %
+(Intercept) -4.8740511  -0.219699
+Gender1             NA 586.795673
+AP1          0.5921215   5.960059</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>* 这里自己给的数据不好，就出错了。</p>
+<p>可以发现这两个给出的CI不太一样，因为后者用的方法不一样。 如果我们只是从定义来推，比如95% CI for <span class="math inline">\(\beta_{\mathrm{AP}} = 2.793 \pm 1.96(1.272) = [0.300,5.286]\)</span>。 那么95% CI for <span class="math inline">\(e^{\beta_{\mathrm{AP}}} = [e^{0.300},e^{5.286}] = [1.350, 197.552]\)</span>。 可以发现与<strong>confint.default</strong>那个给出来的一样，应该用这个。</p>
+<div id="probit-model" class="section level3">
+<h3>也可以是Probit Model</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xtKEFkbWl0fkdlbmRlcitBUCwgZmFtaWx5PWJpbm9taWFsKFwicHJvYml0XCIpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>glm(Admit~Gender+AP, family=binomial(&quot;probit&quot;))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOiAgZ2xtKGZvcm11bGEgPSBBZG1pdCB+IEdlbmRlciArIEFQLCBmYW1pbHkgPSBiaW5vbWlhbChcInByb2JpdFwiKSlcblxuQ29lZmZpY2llbnRzOlxuKEludGVyY2VwdCkgICAgICBHZW5kZXIxICAgICAgICAgIEFQMSAgXG4gICAgIC0xLjE1MCAgICAgICAtNC42MDAgICAgICAgIDEuNjc1ICBcblxuRGVncmVlcyBvZiBGcmVlZG9tOiAyMiBUb3RhbCAoaS5lLiBOdWxsKTsgIDIwIFJlc2lkdWFsXG5OdWxsIERldmlhbmNlOlx0ICAgIDI5LjcyIFxuUmVzaWR1YWwgRGV2aWFuY2U6IDE4LjI1IFx0QUlDOiAyNC4yNVxuIn0= -->
+<pre><code>
+Call:  glm(formula = Admit ~ Gender + AP, family = binomial(&quot;probit&quot;))
+
+Coefficients:
+(Intercept)      Gender1          AP1  
+     -1.150       -4.600        1.675  
+
+Degrees of Freedom: 22 Total (i.e. Null);  20 Residual
+Null Deviance:      29.72 
+Residual Deviance: 18.25    AIC: 24.25</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+</div>
+<div id="example-2" class="section level2">
+<h2>Example 2</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmFjZTwtYyhcIndcIixcIndcIixcImJcIixcImJcIilcbkFaVHVzZTwtYyhcInllc1wiLFwibm9cIixcInllc1wiLFwibm9cIilcbnllczwtYygxNCwzMiwxMSwxMilcbm5vPC1jKDkzLDgxLDUyLDQzKVxuYWlkczwtZGF0YS5mcmFtZShyYWNlLEFaVHVzZSx5ZXMsbm8pXG5haWRzXG5gYGAifQ== -->
+<pre class="r"><code>race&lt;-c(&quot;w&quot;,&quot;w&quot;,&quot;b&quot;,&quot;b&quot;)
+AZTuse&lt;-c(&quot;yes&quot;,&quot;no&quot;,&quot;yes&quot;,&quot;no&quot;)
+yes&lt;-c(14,32,11,12)
+no&lt;-c(93,81,52,43)
+aids&lt;-data.frame(race,AZTuse,yes,no)
+aids</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibmNvbCI6NCwibnJvdyI6NH0sInJkZiI6Ikg0c0lBQUFBQUFBQUEzMVJ3VTdETUF4MTBoUzBTZ3drL2dGeFlEM3NDNG9FRjQ1b0VoTzNyTXVnSWlSVG1qSzQ4ZVVieVdLenRSSkVTcDlqUFQvNzFZOTM4Mmt4THdDQVE4WXk0RmtJQlE4ZkJnSkdFVDhCc3N1WURYaVdFRGhlbG02djRFU3JENlhiRUYzc1dTaXpvR0F6NE9lMWxpM1JmMFZXc3ZiV2hXZzdhTXNPR0dYNGJ0Q0lHNHRSOXFYYVJNcDIvOG5ET01wWE43QS9WWVY0aFhnTmRCTHZLUkdxR2VJRDh1Ni9rZFozWitTN0luY0NrOExKV3RFb3Q4K3pybFhITXgrTTlMVkd6bTVLMG92L2hHTkw4WWZOWWltOUxGY3VsQ1NyUGJsVHUvYU5OVUdNeC8zbWcyTG1Cb256enNUbXkwbjkycG0zeVRRMndJVUFEc1J3VVVkeGJDbG9zSnhNSy9QU0dES2RhN2xRR2gvallITHZzVnk3eG5oeUVySnQ2YTJYeEN0cXF5bVQxcmo5QWNadkNhRE5BZ0FBIn0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["race"],"name":[1],"type":["fctr"],"align":["left"]},{"label":["AZTuse"],"name":[2],"type":["fctr"],"align":["left"]},{"label":["yes"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["no"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"w","2":"yes","3":"14","4":"93"},{"1":"w","2":"no","3":"32","4":"81"},{"1":"b","2":"yes","3":"11","4":"52"},{"1":"b","2":"no","3":"12","4":"43"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9naXQxPC1nbG0oY2JpbmQoeWVzLG5vKX5mYWN0b3IocmFjZSkrZmFjdG9yKEFaVHVzZSksZmFtaWx5PWJpbm9taWFsKVxubG9naXQxXG5gYGAifQ== -->
+<pre class="r"><code>logit1&lt;-glm(cbind(yes,no)~factor(race)+factor(AZTuse),family=binomial)
+logit1</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOiAgZ2xtKGZvcm11bGEgPSBjYmluZCh5ZXMsIG5vKSB+IGZhY3RvcihyYWNlKSArIGZhY3RvcihBWlR1c2UpLCBcbiAgICBmYW1pbHkgPSBiaW5vbWlhbClcblxuQ29lZmZpY2llbnRzOlxuICAgICAgKEludGVyY2VwdCkgICAgICBmYWN0b3IocmFjZSl3ICBmYWN0b3IoQVpUdXNlKXllcyAgXG4gICAgICAgICAtMS4wNzM1NyAgICAgICAgICAgIDAuMDU1NDggICAgICAgICAgIC0wLjcxOTQ2ICBcblxuRGVncmVlcyBvZiBGcmVlZG9tOiAzIFRvdGFsIChpLmUuIE51bGwpOyAgMSBSZXNpZHVhbFxuTnVsbCBEZXZpYW5jZTpcdCAgICA4LjM1IFxuUmVzaWR1YWwgRGV2aWFuY2U6IDEuMzg0IFx0QUlDOiAyNC44NlxuIn0= -->
+<pre><code>
+Call:  glm(formula = cbind(yes, no) ~ factor(race) + factor(AZTuse), 
+    family = binomial)
+
+Coefficients:
+      (Intercept)      factor(race)w  factor(AZTuse)yes  
+         -1.07357            0.05548           -0.71946  
+
+Degrees of Freedom: 3 Total (i.e. Null);  1 Residual
+Null Deviance:      8.35 
+Residual Deviance: 1.384    AIC: 24.86</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>试了下，如果是cbind(no,yes)就是各种系数取反。</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuT1I9ZXhwKGNvZWYobG9naXQxKSlcbnByaW50KGNvZWYobG9naXQxKSlcbmBgYCJ9 -->
+<pre class="r"><code>OR=exp(coef(logit1))
+print(coef(logit1))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgKEludGVyY2VwdCkgICAgIGZhY3RvcihyYWNlKXcgZmFjdG9yKEFaVHVzZSl5ZXMgXG4gICAgICAtMS4wNzM1NzM2MyAgICAgICAgMC4wNTU0ODQ1MyAgICAgICAtMC43MTk0NTk5MSBcbiJ9 -->
+<pre><code>      (Intercept)     factor(race)w factor(AZTuse)yes 
+      -1.07357363        0.05548453       -0.71945991 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoT1IpXG5gYGAifQ== -->
+<pre class="r"><code>print(OR)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgKEludGVyY2VwdCkgICAgIGZhY3RvcihyYWNlKXcgZmFjdG9yKEFaVHVzZSl5ZXMgXG4gICAgICAgIDAuMzQxNzg0OSAgICAgICAgIDEuMDU3MDUyNyAgICAgICAgIDAuNDg3MDE1MiBcbiJ9 -->
+<pre><code>      (Intercept)     factor(race)w factor(AZTuse)yes 
+        0.3417849         1.0570527         0.4870152 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShsb2dpdDEpXG5cbmBgYCJ9 -->
+<pre class="r"><code>summary(logit1)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxuZ2xtKGZvcm11bGEgPSBjYmluZCh5ZXMsIG5vKSB+IGZhY3RvcihyYWNlKSArIGZhY3RvcihBWlR1c2UpLCBcbiAgICBmYW1pbHkgPSBiaW5vbWlhbClcblxuRGV2aWFuY2UgUmVzaWR1YWxzOiBcbiAgICAgIDEgICAgICAgIDIgICAgICAgIDMgICAgICAgIDQgIFxuLTAuNTU0NyAgIDAuNDI1MyAgIDAuNzAzNSAgLTAuNjMyNiAgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgeiB2YWx1ZSBQcig+fHp8KSAgICBcbihJbnRlcmNlcHQpICAgICAgIC0xLjA3MzU3ICAgIDAuMjYyOTQgIC00LjA4MyA0LjQ1ZS0wNSAqKipcbmZhY3RvcihyYWNlKXcgICAgICAwLjA1NTQ4ICAgIDAuMjg4NjEgICAwLjE5MiAgMC44NDc1NSAgICBcbmZhY3RvcihBWlR1c2UpeWVzIC0wLjcxOTQ2ICAgIDAuMjc4OTggIC0yLjU3OSAgMC4wMDk5MSAqKiBcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG4oRGlzcGVyc2lvbiBwYXJhbWV0ZXIgZm9yIGJpbm9taWFsIGZhbWlseSB0YWtlbiB0byBiZSAxKVxuXG4gICAgTnVsbCBkZXZpYW5jZTogOC4zNDk5ICBvbiAzICBkZWdyZWVzIG9mIGZyZWVkb21cblJlc2lkdWFsIGRldmlhbmNlOiAxLjM4MzUgIG9uIDEgIGRlZ3JlZXMgb2YgZnJlZWRvbVxuQUlDOiAyNC44NlxuXG5OdW1iZXIgb2YgRmlzaGVyIFNjb3JpbmcgaXRlcmF0aW9uczogNFxuIn0= -->
+<pre><code>
+Call:
+glm(formula = cbind(yes, no) ~ factor(race) + factor(AZTuse), 
+    family = binomial)
+
+Deviance Residuals: 
+      1        2        3        4  
+-0.5547   0.4253   0.7035  -0.6326  
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)       -1.07357    0.26294  -4.083 4.45e-05 ***
+factor(race)w      0.05548    0.28861   0.192  0.84755    
+factor(AZTuse)yes -0.71946    0.27898  -2.579  0.00991 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 8.3499  on 3  degrees of freedom
+Residual deviance: 1.3835  on 1  degrees of freedom
+AIC: 24.86
+
+Number of Fisher Scoring iterations: 4</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29uZmludC5kZWZhdWx0KGxvZ2l0MSlcblxuYGBgIn0= -->
+<pre class="r"><code>confint.default(logit1)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAgICAgICAgICAgICAgIDIuNSAlICAgICA5Ny41ICVcbihJbnRlcmNlcHQpICAgICAgIC0xLjU4ODkyOCAtMC41NTgyMTkzXG5mYWN0b3IocmFjZSl3ICAgICAtMC41MTAxODcgIDAuNjIxMTU2MFxuZmFjdG9yKEFaVHVzZSl5ZXMgLTEuMjY2MjQ5IC0wLjE3MjY3MDlcbiJ9 -->
+<pre><code>                      2.5 %     97.5 %
+(Intercept)       -1.588928 -0.5582193
+factor(race)w     -0.510187  0.6211560
+factor(AZTuse)yes -1.266249 -0.1726709</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjOCBMb2dpc3RpYyBSZWdyZXNzaW9uIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyDor5XnnYDot5HkuoZFeGFtcGxlIDEsIOS9huaYr+aVsOaNruaYvuekuuS4jeWFqOOAguaJgOS7pei3n3NsaWRlc+e7k+aenOS8muacieS4jeWQjOOAggoqIEdlbmRlciA9IDAgbWFsZSwgMSBmZW1hbGUuCiogQVAgPSAxIHRvb2sgQVAgY2FsY3VsdXMsIDAgZGlkIG5vdC4KKiBBZG1pdCA9IDEgYWRtaXR0ZWQsIDAgbm90IGFkbWl0dGVkCmBgYHtyfQpHZW5kZXIgPSBjKHJlcCgiMCIsMTgpLHJlcCgiMSIsNSkpCkFQID0gYyhyZXAoIjAiLDgpLHJlcCgiMSIsMTApLHJlcCgiMCIsNSkpCkFkbWl0ID0gYyhyZXAoMCw3KSwxLHJlcCgwLDMpLHJlcCgxLDcpLHJlcCgwLDUpKQojQWRtaXQgPSBjKHJlcCgiMCIsNyksIjEiLHJlcCgiMCIsMykscmVwKCIxIiw3KSxyZXAoIjAiLDUpKQpkYXRhMSA9IGRhdGEuZnJhbWUoR2VuZGVyLCBBUCwgQWRtaXQpCnByaW50KGRhdGExKQpgYGAKYGBge3J9CmdsbShBZG1pdH5HZW5kZXIrQVAsIGZhbWlseT1iaW5vbWlhbCgibG9naXQiKSkKYGBgCjxzcGFuIHN0eWxlPSJjb2xvcjpyZWQiPuazqOaEj++8jHjlj6/ku6XmmK9mYWN0b3IvbnVtZXJpY2Fs77yM5L2G5piveeW/hemhu+aYr251bWVyaWNhbO+8jOWPquS4jei/h+i/memHjOaYr2JpbmFyeTwvc3Bhbj4KCuWboOatpGxvZ2l0KFAoYWRtaXQ9MXxHZW5kZXIsQVApKSA9IC0xLjk0NiAtIDE2LjYyMCBHZW5kZXIgKyAyLjc5MyBBUAoKCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjOCBMb2dpc3RpYyBSZWdyZXNzaW9uIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgojIyDor5XnnYDot5HkuoZFeGFtcGxlIDEsIOS9huaYr+aVsOaNruaYvuekuuS4jeWFqOOAguaJgOS7pei3n3NsaWRlc+e7k+aenOS8muacieS4jeWQjOOAggoqIEdlbmRlciA9IDAgbWFsZSwgMSBmZW1hbGUuCiogQVAgPSAxIHRvb2sgQVAgY2FsY3VsdXMsIDAgZGlkIG5vdC4KKiBBZG1pdCA9IDEgYWRtaXR0ZWQsIDAgbm90IGFkbWl0dGVkCmBgYHtyfQpHZW5kZXIgPSBjKHJlcCgiMCIsMTgpLHJlcCgiMSIsNSkpCkFQID0gYyhyZXAoIjAiLDgpLHJlcCgiMSIsMTApLHJlcCgiMCIsNSkpCkFkbWl0ID0gYyhyZXAoMCw3KSwxLHJlcCgwLDMpLHJlcCgxLDcpLHJlcCgwLDUpKQojQWRtaXQgPSBjKHJlcCgiMCIsNyksIjEiLHJlcCgiMCIsMykscmVwKCIxIiw3KSxyZXAoIjAiLDUpKQpkYXRhMSA9IGRhdGEuZnJhbWUoR2VuZGVyLCBBUCwgQWRtaXQpCnByaW50KGRhdGExKQpgYGAKYGBge3J9CmdsbShBZG1pdH5HZW5kZXIrQVAsIGZhbWlseT1iaW5vbWlhbCgibG9naXQiKSkKYGBgCjxzcGFuIHN0eWxlPSJjb2xvcjpyZWQiPuazqOaEj++8jHjlj6/ku6XmmK9mYWN0b3IvbnVtZXJpY2Fs77yM5L2G5piveeW/hemhu+aYr251bWVyaWNhbO+8jOWPquS4jei/h+i/memHjOaYr2JpbmFyeTwvc3Bhbj4KCuWboOatpGxvZ2l0KFAoYWRtaXQ9MXxHZW5kZXIsQVApKSA9IC0xLjk0NiAtIDE2LjYyMCBHZW5kZXIgKyAyLjc5MyBBUApgYGB7cn0Kc3VtbWFyeShnbG0oQWRtaXR+R2VuZGVyK0FQLCBmYW1pbHk9Ymlub21pYWwoImxvZ2l0IikpKQpgYGAK5Y+v5Lul5Y+R546w6L+Z6YeM5rKh5pyJ57uZ5Ye6Y29uZmlkZW5jZSBpbnRlcnZhbC7pnIDopoHkuIvpnaLnmoTor63lj6XvvJoKYGBge3J9CmxpYnJhcnkoTUFTUykKY29uZmludC5kZWZhdWx0KGdsbShBZG1pdH5HZW5kZXIrQVAsIGZhbWlseSA9IGJpbm9taWFsKCJsb2dpdCIpKSkKYGBgCgpgYGB7cn0KY29uZmludChnbG0oQWRtaXR+R2VuZGVyK0FQLCBmYW1pbHkgPSBiaW5vbWlhbCgibG9naXQiKSkpCmBgYApcKiDov5nph4zoh6rlt7Hnu5nnmoTmlbDmja7kuI3lpb3vvIzlsLHlh7rplJnkuobjgIIKCuWPr+S7peWPkeeOsOi/meS4pOS4que7meWHuueahENJ5LiN5aSq5LiA5qC377yM5Zug5Li65ZCO6ICF55So55qE5pa55rOV5LiN5LiA5qC344CCCuWmguaenOaIkeS7rOWPquaYr+S7juWumuS5ieadpeaOqO+8jOavlOWmgjk1JSBDSSBmb3IgJFxiZXRhX3tcbWF0aHJte0FQfX0gPSAyLjc5MyBccG0gMS45NigxLjI3MikgPSBbMC4zMDAsNS4yODZdJOOAggrpgqPkuYg5NSUgQ0kgZm9yICRlXntcYmV0YV97XG1hdGhybXtBUH19fSA9IFtlXnswLjMwMH0sZV57NS4yODZ9XSA9IFsxLjM1MCwgMTk3LjU1Ml0k44CCCuWPr+S7peWPkeeOsOS4jioqY29uZmludC5kZWZhdWx0KirpgqPkuKrnu5nlh7rmnaXnmoTkuIDmoLfvvIzlupTor6XnlKjov5nkuKrjgIIKCiMjIyDkuZ/lj6/ku6XmmK9Qcm9iaXQgTW9kZWwKYGBge3J9CmdsbShBZG1pdH5HZW5kZXIrQVAsIGZhbWlseT1iaW5vbWlhbCgicHJvYml0IikpCmBgYAoKIyMgRXhhbXBsZSAyCmBgYHtyfQpyYWNlPC1jKCJ3IiwidyIsImIiLCJiIikKQVpUdXNlPC1jKCJ5ZXMiLCJubyIsInllcyIsIm5vIikKeWVzPC1jKDE0LDMyLDExLDEyKQpubzwtYyg5Myw4MSw1Miw0MykKYWlkczwtZGF0YS5mcmFtZShyYWNlLEFaVHVzZSx5ZXMsbm8pCmFpZHMKYGBgCgpgYGB7cn0KbG9naXQxPC1nbG0oY2JpbmQoeWVzLG5vKX5mYWN0b3IocmFjZSkrZmFjdG9yKEFaVHVzZSksZmFtaWx5PWJpbm9taWFsKQpsb2dpdDEKYGBgCuivleS6huS4i++8jOWmguaenOaYr2NiaW5kKG5vLHllcynlsLHmmK/lkITnp43ns7vmlbDlj5blj43jgIIKCmBgYHtyfQpPUj1leHAoY29lZihsb2dpdDEpKQpwcmludChjb2VmKGxvZ2l0MSkpCnByaW50KE9SKQpgYGAKCmBgYHtyfQpzdW1tYXJ5KGxvZ2l0MSkKYGBgCmBgYHtyfQpjb25maW50LmRlZmF1bHQobG9naXQxKQpgYGAKCgo=</div>
 
 
 
