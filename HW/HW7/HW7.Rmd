@@ -1,0 +1,64 @@
+---
+title: "HW7-ADA"
+output:
+  html_notebook: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+#                             Jing Qian (jq2282)
+
+<br>
+
+#### 1.a. Estimate the probability that a male, protestant and republican supports laws legalizing abortion. Estimate the probability that female, catholic and democrat supports laws legalizing abortion.
+The estimated logit model is logit($\hat{\pi}$) = 0.11 + 0.16G − 0.57$R_1$ − 0.66$R_2$ + 0.47$P_1$ − 1.67$P_2$.
+Then the description that a male, protestant and republican supports laws legalizing abortion corresponds to logit($\hat{\pi_1}$) = 0.11 + 0.16(0) − 0.57(1) − 0.66(0) + 0.47(0) − 1.67(1) = -2.13. 
+So the probability that a male, protestant and republican supports laws legalizing abortion is 
+$\hat{\pi_1} = \frac{e^{-2.13}}{1+e^{-2.13}} = 0.106$.
+
+The description that a female, catholic and democrat supports laws legalizing abortion corresponds to logit($\hat{\pi_2}$) = 0.11 + 0.16(1) − 0.57(0) − 0.66(1) + 0.47(1) − 1.67(0) = 0.08. 
+So the probability that a male, protestant and republican supports laws legalizing abortion is 
+$\hat{\pi_2} = \frac{e^{0.08}}{1+e^{0.08}} = 0.520$.
+
+<br>
+
+#### 1.b. Interpret b1 = 0.16 and b2 = −0.57.
+
+<br>
+
+#### 1.c. If SE(b1) = 0.064 construct a 95% confidence interval for b1 and interpret your result.
+
+<br>
+
+#### 1.d. TestH0 :β1 =0 against H1 :β1 ̸=0
+
+<br>
+
+#### 1.e. If SE(b2) = 0.38 construct a 95% confidence interval for b2 and interpret your result.
+
+<br>
+
+#### 1.f. TestH0 :β2 =0againstH1 :β2 ̸=0
+
+<br>
+
+#### 2.a. Estimate β1 and β2 and interpret your result.
+
+<br>
+
+#### 2.b. Construct a 95% confidence interval to describe the effect of gender on the odds of Intercourse controlling for race (i.e. con- struct a 95% interval for eβ1 ), Interpret your result
+
+<br>
+
+#### 2.c. TestH0 :β1 =0againstHa :β1 ̸=0. Useα=0.05.
+
+
+
+
+
+
+
+
+
+
+
