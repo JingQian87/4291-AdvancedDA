@@ -83,5 +83,18 @@ tk<-TukeyHSD(aov(Y~LEV+FERT),"FERT")
 plot(tk)
 ```
 
+```{r}
+tk2<-TukeyHSD(aov(Y~FERT+LEV),"LEV")
+tk2
+#plot(tk2)
+```
 
+```{r}
+tk2<-TukeyHSD(aov(Y~LEV+FERT),"LEV")
+plot(tk2)
+```
+
+```{r}
+
+```
 

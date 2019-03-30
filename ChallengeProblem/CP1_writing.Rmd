@@ -1,0 +1,59 @@
+---
+title: "Challenge Problem 1"
+author: "Jing Qian (jq2282)"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+## 1. Summary
+The goal of this study is to find the dependence of crop yield on two factors: fertilizer type and level of fertilizer application. 
+The results show that there is no interaction between fertilizer type and level of fertilizer application and the best combination to get the highest yield is to apply type 1 fertilizer with 200 pounds/acre.
+
+## 2. Data Exploration
+The yield is affected by two factors: fertilizer type and level of fertilizer application. Fertilizer type has three levels, which correspond to brands 1, 2, and 3. The level of fertilizer application has five levels: 1, 2, 3, 4, and 5, which correspond to 0, 100, 200, 300 and 400 pounds/acre.
+The design of this study is an unbalanced CR design with 19 samples in total. There are one or more samples in each of the 15 profiles.
+
+From the following interaction plot, we could get a rough idea of the effects of the two factors on the yield.
+The brand 3 fertilizer has the lowest yield among three brands, at all application level. As to the level of application, for all three brands, no fertilizer leads to the lowest yield and the largest amount of application level, which is 400 pounds/acre leads to the second lowest yield. To get more detailed conclusion, we need to analyze the data deeply.
+
+
+![Interaction plot](/Users/mac/Desktop/AdvancedDA/ChallengeProblem/InteractionPlot.png){width=350px}
+
+## 3. Analysis
+Here we perform two steps of analysis: 
+1) using ANOVA to check whether each factor and their interaction has significant contribution to the yields;
+2) doing pairwise comparisons for each significant factor.
+Then we could know which combination of fertilizer type and application level would lead to the highest yield.
+
+From the type II ANOVA table below, we could see that both fertilizer type and application level are significant to the yields.
+However, there is no interaction between these two factors.
+So we could model the yield as the sum of effects of fertilizer type and application level, without cross terms.
+
+\begin{table}[h!] \centering
+\caption{Type II ANOVA table}
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+\textbf{}  & \textbf{Sum of Square} & \textbf{Degree of Freedom} & \textbf{F value} & \textbf{Pr(>F)} \\ \hline
+FERT       & 24.349                 & 2                          & 12.0244 & 0.02034 *           \\ \hline
+LEV        & 50.994                 & 4                          & 12.5912 & 0.01544 *           \\ \hline
+FERT : LEV & 6.873                  & 8                          & 0.8485  & 0.61079             \\ \hline
+Residuals  & 4.050                  & 4                          &&                              \\ \hline
+\end{tabular}
+\end{table}
+
+Then we do Tukey pairwise comparisons for both fertilizer type and application level.
+
+From the test result of fertilizer type, we find that the three brands could be set up to two groups: {1,2} and {3}. Brand 3 has lower yield than brand 1 and 2. Brand 1 has slightly higher yield estimation than brand 2, but the difference is not significant.
+
+From the test result of application level, we could not set up groups for the five levels, which needs more data to do. However, the results show that level 2, 3, 4 have higher yields than level 1. Level 5 is not significantly different from level 1. Level 3 has higher yield than 5. Although the differences between level 2, 3 and 4 are not significant, the estimated yield of level 3 is larger than those of level 2 and 4.
+
+So for a high yield, we should choose brands between brand 1 and 2, and choose application level among level 2, 3 and 4. 
+The best combination from this data is brand 1 and application level 3.
+
+## 4. Conclusion
+In this study with 19 samples, we investigate the effects of fertilizer type (3 levels) and application level (5 levels) on the crop yield.
+Using ANOVA, we find that both factors have significant contribution to the yield, but no interactions.
+The result of Tukey pairwise comparisons show that brand 1 and 2 have higher yield than brand 3. Application level 100, 200 and 300 pounds/acre have higher yield than 0 and 500 pounds/acre.
+The best combination to get the highest yield is to apply type 1 fertilizer with 200 pounds/acre.
+To get more convincing support for this combination, we need more data.
