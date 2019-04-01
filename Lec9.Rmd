@@ -1,56 +1,10 @@
 ---
-title: "Lec8 Logistic Regression"
+title: "Lec9 Logistic Regression"
 output: html_notebook
 ---
+## Example 2-> AIDS
 
-## 试着跑了Example 1, 但是数据显示不全。所以跟slides结果会有不同。
-* Gender = 0 male, 1 female.
-* AP = 1 took AP calculus, 0 did not.
-* Admit = 1 admitted, 0 not admitted
-```{r}
-Gender = c(rep("0",18),rep("1",5))
-AP = c(rep("0",8),rep("1",10),rep("0",5))
-Admit = c(rep(0,7),1,rep(0,3),rep(1,7),rep(0,5))
-#Admit = c(rep("0",7),"1",rep("0",3),rep("1",7),rep("0",5))
-data1 = data.frame(Gender, AP, Admit)
-print(data1)
-```
-```{r}
-fit<-glm(Admit~Gender+AP, family=binomial("logit"))
-```
-```{r}
-vcov(fit)
-```
-
-
-<span style="color:red">注意，x可以是factor/numerical，但是y必须是numerical，只不过这里是binary</span>
-
-因此logit(P(admit=1|Gender,AP)) = -1.946 - 16.620 Gender + 2.793 AP
-```{r}
-summary(glm(Admit~Gender+AP, family=binomial("logit")))
-```
-可以发现这里没有给出confidence interval.需要下面的语句：
-```{r}
-library(MASS)
-confint.default(glm(Admit~Gender+AP, family = binomial("logit")))
-```
-
-```{r}
-confint(glm(Admit~Gender+AP, family = binomial("logit")))
-```
-\* 这里自己给的数据不好，就出错了。
-
-可以发现这两个给出的CI不太一样，因为后者用的方法不一样。
-如果我们只是从定义来推，比如95% CI for $\beta_{\mathrm{AP}} = 2.793 \pm 1.96(1.272) = [0.300,5.286]$。
-那么95% CI for $e^{\beta_{\mathrm{AP}}} = [e^{0.300},e^{5.286}] = [1.350, 197.552]$。
-可以发现与**confint.default**那个给出来的一样，应该用这个。
-
-### 也可以是Probit Model
-```{r}
-glm(Admit~Gender+AP, family=binomial("probit"))
-```
-
-## Example 2
+### 1. Get Data
 ```{r}
 race<-c("w","w","b","b")
 AZTuse<-c("yes","no","yes","no")
@@ -60,23 +14,37 @@ aids<-data.frame(race,AZTuse,yes,no)
 aids
 ```
 
+### 2. Test H0: $\beta_1 = \beta_2 = \cdots = \beta_p = 0$
 ```{r}
 logit1<-glm(cbind(yes,no)~factor(race)+factor(AZTuse),family=binomial)
 logit1
 ```
-试了下，如果是cbind(no,yes)就是各种系数取反。
+The residual deviance is 1.384 with one degree of freedom (4 profiles, 3 parameters).
+THe p-value is:
+```{r}
+pchisq(1.384, df=1, lower.tail = FALSE)
+```
+* pchisq中的lower.tail表明是求P[X>x]，右边. TRUE是P[X<= x]，左边。
 
-```{r}
-OR=exp(coef(logit1))
-print(coef(logit1))
-print(OR)
-```
+不过这里比较不是直接拿residual deviance.
 
+H0: $\beta_1 = \beta_2 = \cdots = \beta_p = 0$。
+那么test H0, 是Null Deviance - Residual Devaince = 8.35-1.384 = 6.966.
+而对应的chi square是：
 ```{r}
-summary(logit1)
+qchisq(0.95, 2)
 ```
+Null Deviance对应的df是4-1 = 3. Residual Deviance是4-3 = 1.
+所以二者差的df是2.
+那么Null Deviance - Residual Devaince > $\chi_2^2(0.95)$，所以reject H0.
+至少有一个$\beta_i$不是0.
+
+也可以通过p-value做：
 ```{r}
-confint.default(logit1)
+pchisq(6.966, df=2, lower.tail = FALSE)
 ```
+同样reject H0.
+
+### 3. Test H0: $\beta_1 = 0$
 
 
