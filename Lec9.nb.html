@@ -1852,11 +1852,136 @@ Residual Deviance: 1.384    AIC: 24.86</code></pre>
 </div>
 <div id="test-h0-beta_1-0" class="section level3">
 <h3>3. Test H0: <span class="math inline">\(\beta_1 = 0\)</span></h3>
+<p>H0: logit(P(x)) = <span class="math inline">\(\beta_0\)</span> + <span class="math inline">\(\beta_2\)</span> AZTuse <br> Ha: logit(P(x)) = <span class="math inline">\(\beta_0\)</span> + <span class="math inline">\(\beta_1\)</span>race + <span class="math inline">\(\beta_2\)</span> AZTuse</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9naXQxPC1nbG0oY2JpbmQoeWVzLG5vKX5mYWN0b3IocmFjZSkrZmFjdG9yKEFaVHVzZSksZmFtaWx5PWJpbm9taWFsKVxuc3VtbWFyeShsb2dpdDEpXG5gYGAifQ== -->
+<pre class="r"><code>logit1&lt;-glm(cbind(yes,no)~factor(race)+factor(AZTuse),family=binomial)
+summary(logit1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxuZ2xtKGZvcm11bGEgPSBjYmluZCh5ZXMsIG5vKSB+IGZhY3RvcihyYWNlKSArIGZhY3RvcihBWlR1c2UpLCBcbiAgICBmYW1pbHkgPSBiaW5vbWlhbClcblxuRGV2aWFuY2UgUmVzaWR1YWxzOiBcbiAgICAgIDEgICAgICAgIDIgICAgICAgIDMgICAgICAgIDQgIFxuLTAuNTU0NyAgIDAuNDI1MyAgIDAuNzAzNSAgLTAuNjMyNiAgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgeiB2YWx1ZSBQcig+fHp8KSAgICBcbihJbnRlcmNlcHQpICAgICAgIC0xLjA3MzU3ICAgIDAuMjYyOTQgIC00LjA4MyA0LjQ1ZS0wNSAqKipcbmZhY3RvcihyYWNlKXcgICAgICAwLjA1NTQ4ICAgIDAuMjg4NjEgICAwLjE5MiAgMC44NDc1NSAgICBcbmZhY3RvcihBWlR1c2UpeWVzIC0wLjcxOTQ2ICAgIDAuMjc4OTggIC0yLjU3OSAgMC4wMDk5MSAqKiBcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG4oRGlzcGVyc2lvbiBwYXJhbWV0ZXIgZm9yIGJpbm9taWFsIGZhbWlseSB0YWtlbiB0byBiZSAxKVxuXG4gICAgTnVsbCBkZXZpYW5jZTogOC4zNDk5ICBvbiAzICBkZWdyZWVzIG9mIGZyZWVkb21cblJlc2lkdWFsIGRldmlhbmNlOiAxLjM4MzUgIG9uIDEgIGRlZ3JlZXMgb2YgZnJlZWRvbVxuQUlDOiAyNC44NlxuXG5OdW1iZXIgb2YgRmlzaGVyIFNjb3JpbmcgaXRlcmF0aW9uczogNFxuIn0= -->
+<pre><code>
+Call:
+glm(formula = cbind(yes, no) ~ factor(race) + factor(AZTuse), 
+    family = binomial)
+
+Deviance Residuals: 
+      1        2        3        4  
+-0.5547   0.4253   0.7035  -0.6326  
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)       -1.07357    0.26294  -4.083 4.45e-05 ***
+factor(race)w      0.05548    0.28861   0.192  0.84755    
+factor(AZTuse)yes -0.71946    0.27898  -2.579  0.00991 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 8.3499  on 3  degrees of freedom
+Residual deviance: 1.3835  on 1  degrees of freedom
+AIC: 24.86
+
+Number of Fisher Scoring iterations: 4</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9naXQyPC1nbG0oY2JpbmQoeWVzLG5vKX5mYWN0b3IoQVpUdXNlKSxmYW1pbHk9Ymlub21pYWwpXG5zdW1tYXJ5KGxvZ2l0MilcbmBgYCJ9 -->
+<pre class="r"><code>logit2&lt;-glm(cbind(yes,no)~factor(AZTuse),family=binomial)
+summary(logit2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxuZ2xtKGZvcm11bGEgPSBjYmluZCh5ZXMsIG5vKSB+IGZhY3RvcihBWlR1c2UpLCBmYW1pbHkgPSBiaW5vbWlhbClcblxuRGV2aWFuY2UgUmVzaWR1YWxzOiBcbiAgICAgIDEgICAgICAgIDIgICAgICAgIDMgICAgICAgIDQgIFxuLTAuNDgxMyAgIDAuNTEwMiAgIDAuNjAyNiAgLTAuNzUyMSAgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgeiB2YWx1ZSBQcig+fHp8KSAgICBcbihJbnRlcmNlcHQpICAgICAgICAtMS4wMzYxICAgICAwLjE3NTUgIC01LjkwNCAzLjU0ZS0wOSAqKipcbmZhY3RvcihBWlR1c2UpeWVzICAtMC43MjE4ICAgICAwLjI3ODcgIC0yLjU5MCAgMC4wMDk2MSAqKiBcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG4oRGlzcGVyc2lvbiBwYXJhbWV0ZXIgZm9yIGJpbm9taWFsIGZhbWlseSB0YWtlbiB0byBiZSAxKVxuXG4gICAgTnVsbCBkZXZpYW5jZTogOC4zNDk5ICBvbiAzICBkZWdyZWVzIG9mIGZyZWVkb21cblJlc2lkdWFsIGRldmlhbmNlOiAxLjQyMDYgIG9uIDIgIGRlZ3JlZXMgb2YgZnJlZWRvbVxuQUlDOiAyMi44OTdcblxuTnVtYmVyIG9mIEZpc2hlciBTY29yaW5nIGl0ZXJhdGlvbnM6IDRcbiJ9 -->
+<pre><code>
+Call:
+glm(formula = cbind(yes, no) ~ factor(AZTuse), family = binomial)
+
+Deviance Residuals: 
+      1        2        3        4  
+-0.4813   0.5102   0.6026  -0.7521  
+
+Coefficients:
+                  Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)        -1.0361     0.1755  -5.904 3.54e-09 ***
+factor(AZTuse)yes  -0.7218     0.2787  -2.590  0.00961 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 8.3499  on 3  degrees of freedom
+Residual deviance: 1.4206  on 2  degrees of freedom
+AIC: 22.897
+
+Number of Fisher Scoring iterations: 4</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p><strong>anova(model1, model2)可以用于比较nested model</strong></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobG9naXQxLGxvZ2l0MilcbmBgYCJ9 -->
+<pre class="r"><code>anova(logit1,logit2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgRGV2aWFuY2UgVGFibGVcblxuTW9kZWwgMTogY2JpbmQoeWVzLCBubykgfiBmYWN0b3IocmFjZSkgKyBmYWN0b3IoQVpUdXNlKVxuTW9kZWwgMjogY2JpbmQoeWVzLCBubykgfiBmYWN0b3IoQVpUdXNlKVxuICBSZXNpZC4gRGYgUmVzaWQuIERldiBEZiAgRGV2aWFuY2VcbjEgICAgICAgICAxICAgICAxLjM4MzUgICAgICAgICAgICAgXG4yICAgICAgICAgMiAgICAgMS40MjA2IC0xIC0wLjAzNzA4NFxuIn0= -->
+<pre><code>Analysis of Deviance Table
+
+Model 1: cbind(yes, no) ~ factor(race) + factor(AZTuse)
+Model 2: cbind(yes, no) ~ factor(AZTuse)
+  Resid. Df Resid. Dev Df  Deviance
+1         1     1.3835             
+2         2     1.4206 -1 -0.037084</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYW5vdmEobG9naXQxLGxvZ2l0Mix0ZXN0PVwiQ2hpc3FcIilcblxuYGBgIn0= -->
+<pre class="r"><code>anova(logit1,logit2,test=&quot;Chisq&quot;)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiQW5hbHlzaXMgb2YgRGV2aWFuY2UgVGFibGVcblxuTW9kZWwgMTogY2JpbmQoeWVzLCBubykgfiBmYWN0b3IocmFjZSkgKyBmYWN0b3IoQVpUdXNlKVxuTW9kZWwgMjogY2JpbmQoeWVzLCBubykgfiBmYWN0b3IoQVpUdXNlKVxuICBSZXNpZC4gRGYgUmVzaWQuIERldiBEZiAgRGV2aWFuY2UgUHIoPkNoaSlcbjEgICAgICAgICAxICAgICAxLjM4MzUgICAgICAgICAgICAgICAgICAgICAgXG4yICAgICAgICAgMiAgICAgMS40MjA2IC0xIC0wLjAzNzA4NCAgIDAuODQ3M1xuIn0= -->
+<pre><code>Analysis of Deviance Table
+
+Model 1: cbind(yes, no) ~ factor(race) + factor(AZTuse)
+Model 2: cbind(yes, no) ~ factor(AZTuse)
+  Resid. Df Resid. Dev Df  Deviance Pr(&gt;Chi)
+1         1     1.3835                      
+2         2     1.4206 -1 -0.037084   0.8473</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9naXQxX2RldiA9IDEuMzgzNVxubG9naXQyX2RldiA9IDEuNDIwNlxucGNoaXNxKGxvZ2l0Ml9kZXYtbG9naXQxX2RldiwgMSwgbG93ZXIudGFpbCA9IEZBTFNFKVxuYGBgIn0= -->
+<pre class="r"><code>logit1_dev = 1.3835
+logit2_dev = 1.4206
+pchisq(logit2_dev-logit1_dev, 1, lower.tail = FALSE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDAuODQ3MjYxNlxuIn0= -->
+<pre><code>[1] 0.8472616</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>可发现H0对应的p-value是0.8473，所以不能reject H0.</p>
+<p>logit1与logit2等价模型，可以直接用AZTuse去fit model</p>
+</div>
+<div id="fit-model-with-only-aztuse" class="section level3">
+<h3>3. fit model with only AZTuse</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJlZGljdChsb2dpdDIsIHR5cGU9XCJyZXNwb25zZVwiKVxuXG5gYGAifQ== -->
+<pre class="r"><code>predict(logit2, type=&quot;response&quot;)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICAgICAxICAgICAgICAgMiAgICAgICAgIDMgICAgICAgICA0IFxuMC4xNDcwNTg4IDAuMjYxOTA0OCAwLjE0NzA1ODggMC4yNjE5MDQ4IFxuIn0= -->
+<pre><code>        1         2         3         4 
+0.1470588 0.2619048 0.1470588 0.2619048 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>这里的意思是给出了一些x值(1,2,3,4)对应的response, 比如<span class="math inline">\(0.1470588 = \frac{e^{-1.0361-0.7218(1)}}{1+e^{-1.0361-0.7218(1)}}\)</span>.</p>
 <!-- rnb-text-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjOSBMb2dpc3RpYyBSZWdyZXNzaW9uIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCiMjIEV4YW1wbGUgMi0+IEFJRFMKCiMjIyAxLiBHZXQgRGF0YQpgYGB7cn0KcmFjZTwtYygidyIsInciLCJiIiwiYiIpCkFaVHVzZTwtYygieWVzIiwibm8iLCJ5ZXMiLCJubyIpCnllczwtYygxNCwzMiwxMSwxMikKbm88LWMoOTMsODEsNTIsNDMpCmFpZHM8LWRhdGEuZnJhbWUocmFjZSxBWlR1c2UseWVzLG5vKQphaWRzCmBgYAoKIyMjIDIuIFRlc3QgSDA6ICRcYmV0YV8xID0gXGJldGFfMiA9IFxjZG90cyA9IFxiZXRhX3AgPSAwJApgYGB7cn0KbG9naXQxPC1nbG0oY2JpbmQoeWVzLG5vKX5mYWN0b3IocmFjZSkrZmFjdG9yKEFaVHVzZSksZmFtaWx5PWJpbm9taWFsKQpsb2dpdDEKYGBgClRoZSByZXNpZHVhbCBkZXZpYW5jZSBpcyAxLjM4NCB3aXRoIG9uZSBkZWdyZWUgb2YgZnJlZWRvbSAoNCBwcm9maWxlcywgMyBwYXJhbWV0ZXJzKS4KVEhlIHAtdmFsdWUgaXM6CmBgYHtyfQpwY2hpc3EoMS4zODQsIGRmPTEsIGxvd2VyLnRhaWwgPSBGQUxTRSkKYGBgCiogcGNoaXNx5Lit55qEbG93ZXIudGFpbOihqOaYjuaYr+axglBbWD54Xe+8jOWPs+i+uS4gVFJVReaYr1BbWDw9IHhd77yM5bem6L6544CCCgrkuI3ov4fov5nph4zmr5TovoPkuI3mmK/nm7TmjqXmi79yZXNpZHVhbCBkZXZpYW5jZS4KCkgwOiAkXGJldGFfMSA9IFxiZXRhXzIgPSBcY2RvdHMgPSBcYmV0YV9wID0gMCTjgIIK6YKj5LmIdGVzdCBIMCwg5pivTnVsbCBEZXZpYW5jZSAtIFJlc2lkdWFsIERldmFpbmNlID0gOC4zNS0xLjM4NCA9IDYuOTY2LgrogIzlr7nlupTnmoRjaGkgc3F1YXJl5piv77yaCmBgYHtyfQpxY2hpc3EoMC45NSwgMikKYGBgCk51bGwgRGV2aWFuY2Xlr7nlupTnmoRkZuaYrzQtMSA9IDMuIFJlc2lkdWFsIERldmlhbmNl5pivNC0zID0gMS4K5omA5Lul5LqM6ICF5beu55qEZGbmmK8yLgrpgqPkuYhOdWxsIERldmlhbmNlIC0gUmVzaWR1YWwgRGV2YWluY2UgPiAkXGNoaV8yXjIoMC45NSkk77yM5omA5LulcmVqZWN0IEgwLgroh7PlsJHmnInkuIDkuKokXGJldGFfaSTkuI3mmK8wLgoK5Lmf5Y+v5Lul6YCa6L+HcC12YWx1ZeWBmu+8mgpgYGB7cn0KcGNoaXNxKDYuOTY2LCBkZj0yLCBsb3dlci50YWlsID0gRkFMU0UpCmBgYArlkIzmoLdyZWplY3QgSDAuCgojIyMgMy4gVGVzdCBIMDogJFxiZXRhXzEgPSAwJAoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGVjOSBMb2dpc3RpYyBSZWdyZXNzaW9uIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCiMjIEV4YW1wbGUgMi0+IEFJRFMKCiMjIyAxLiBHZXQgRGF0YQpgYGB7cn0KcmFjZTwtYygidyIsInciLCJiIiwiYiIpCkFaVHVzZTwtYygieWVzIiwibm8iLCJ5ZXMiLCJubyIpCnllczwtYygxNCwzMiwxMSwxMikKbm88LWMoOTMsODEsNTIsNDMpCmFpZHM8LWRhdGEuZnJhbWUocmFjZSxBWlR1c2UseWVzLG5vKQphaWRzCmBgYAoKIyMjIDIuIFRlc3QgSDA6ICRcYmV0YV8xID0gXGJldGFfMiA9IFxjZG90cyA9IFxiZXRhX3AgPSAwJApgYGB7cn0KbG9naXQxPC1nbG0oY2JpbmQoeWVzLG5vKX5mYWN0b3IocmFjZSkrZmFjdG9yKEFaVHVzZSksZmFtaWx5PWJpbm9taWFsKQpsb2dpdDEKYGBgClRoZSByZXNpZHVhbCBkZXZpYW5jZSBpcyAxLjM4NCB3aXRoIG9uZSBkZWdyZWUgb2YgZnJlZWRvbSAoNCBwcm9maWxlcywgMyBwYXJhbWV0ZXJzKS4KVEhlIHAtdmFsdWUgaXM6CmBgYHtyfQpwY2hpc3EoMS4zODQsIGRmPTEsIGxvd2VyLnRhaWwgPSBGQUxTRSkKYGBgCiogcGNoaXNx5Lit55qEbG93ZXIudGFpbOihqOaYjuaYr+axglBbWD54Xe+8jOWPs+i+uS4gVFJVReaYr1BbWDw9IHhd77yM5bem6L6544CCCgrkuI3ov4fov5nph4zmr5TovoPkuI3mmK/nm7TmjqXmi79yZXNpZHVhbCBkZXZpYW5jZS4KCkgwOiAkXGJldGFfMSA9IFxiZXRhXzIgPSBcY2RvdHMgPSBcYmV0YV9wID0gMCTjgIIK6YKj5LmIdGVzdCBIMCwg5pivTnVsbCBEZXZpYW5jZSAtIFJlc2lkdWFsIERldmFpbmNlID0gOC4zNS0xLjM4NCA9IDYuOTY2LgrogIzlr7nlupTnmoRjaGkgc3F1YXJl5piv77yaCmBgYHtyfQpxY2hpc3EoMC45NSwgMikKYGBgCk51bGwgRGV2aWFuY2Xlr7nlupTnmoRkZuaYrzQtMSA9IDMuIFJlc2lkdWFsIERldmlhbmNl5pivNC0zID0gMS4K5omA5Lul5LqM6ICF5beu55qEZGbmmK8yLgrpgqPkuYhOdWxsIERldmlhbmNlIC0gUmVzaWR1YWwgRGV2YWluY2UgPiAkXGNoaV8yXjIoMC45NSkk77yM5omA5LulcmVqZWN0IEgwLgroh7PlsJHmnInkuIDkuKokXGJldGFfaSTkuI3mmK8wLgoK5Lmf5Y+v5Lul6YCa6L+HcC12YWx1ZeWBmu+8mgpgYGB7cn0KcGNoaXNxKDYuOTY2LCBkZj0yLCBsb3dlci50YWlsID0gRkFMU0UpCmBgYArlkIzmoLdyZWplY3QgSDAuCgojIyMgMy4gVGVzdCBIMDogJFxiZXRhXzEgPSAwJApIMDogbG9naXQoUCh4KSkgPSAkXGJldGFfMCQgKyAkXGJldGFfMiQgQVpUdXNlIDxicj4KSGE6IGxvZ2l0KFAoeCkpID0gJFxiZXRhXzAkICsgJFxiZXRhXzEkcmFjZSArICRcYmV0YV8yJCBBWlR1c2UKYGBge3J9CmxvZ2l0MTwtZ2xtKGNiaW5kKHllcyxubyl+ZmFjdG9yKHJhY2UpK2ZhY3RvcihBWlR1c2UpLGZhbWlseT1iaW5vbWlhbCkKc3VtbWFyeShsb2dpdDEpCmxvZ2l0MjwtZ2xtKGNiaW5kKHllcyxubyl+ZmFjdG9yKEFaVHVzZSksZmFtaWx5PWJpbm9taWFsKQpzdW1tYXJ5KGxvZ2l0MikKYGBgCioqYW5vdmEobW9kZWwxLCBtb2RlbDIp5Y+v5Lul55So5LqO5q+U6L6DbmVzdGVkIG1vZGVsKioKYGBge3J9CmFub3ZhKGxvZ2l0MSxsb2dpdDIpCmBgYApgYGB7cn0KYW5vdmEobG9naXQxLGxvZ2l0Mix0ZXN0PSJDaGlzcSIpCmBgYAoKYGBge3J9CmxvZ2l0MV9kZXYgPSAxLjM4MzUKbG9naXQyX2RldiA9IDEuNDIwNgpwY2hpc3EobG9naXQyX2Rldi1sb2dpdDFfZGV2LCAxLCBsb3dlci50YWlsID0gRkFMU0UpCmBgYArlj6/lj5HnjrBIMOWvueW6lOeahHAtdmFsdWXmmK8wLjg0NzPvvIzmiYDku6XkuI3og71yZWplY3QgSDAuCgpsb2dpdDHkuI5sb2dpdDLnrYnku7fmqKHlnovvvIzlj6/ku6Xnm7TmjqXnlKhBWlR1c2XljrtmaXQgbW9kZWwKCgojIyMgMy4gZml0IG1vZGVsIHdpdGggb25seSBBWlR1c2UKYGBge3J9CmxvZ2l0MjwtZ2xtKGNiaW5kKHllcyxubyl+ZmFjdG9yKEFaVHVzZSksZmFtaWx5PWJpbm9taWFsKQpwcmVkaWN0KGxvZ2l0MiwgdHlwZT0icmVzcG9uc2UiKQpgYGAK6L+Z6YeM55qE5oSP5oCd5piv57uZ5Ye65LqG5LiA5LqbeOWAvCgxLDIsMyw0KeWvueW6lOeahHJlc3BvbnNlLCDmr5TlpoIkMC4xNDcwNTg4ID0gXGZyYWN7ZV57LTEuMDM2MS0wLjcyMTgoMSl9fXsxK2Veey0xLjAzNjEtMC43MjE4KDEpfX0kLgoKCgo=</div>
 
 
 

@@ -46,5 +46,38 @@ pchisq(6.966, df=2, lower.tail = FALSE)
 同样reject H0.
 
 ### 3. Test H0: $\beta_1 = 0$
+H0: logit(P(x)) = $\beta_0$ + $\beta_2$ AZTuse <br>
+Ha: logit(P(x)) = $\beta_0$ + $\beta_1$race + $\beta_2$ AZTuse
+```{r}
+logit1<-glm(cbind(yes,no)~factor(race)+factor(AZTuse),family=binomial)
+summary(logit1)
+logit2<-glm(cbind(yes,no)~factor(AZTuse),family=binomial)
+summary(logit2)
+```
+**anova(model1, model2)可以用于比较nested model**
+```{r}
+anova(logit1,logit2)
+```
+```{r}
+anova(logit1,logit2,test="Chisq")
+```
+
+```{r}
+logit1_dev = 1.3835
+logit2_dev = 1.4206
+pchisq(logit2_dev-logit1_dev, 1, lower.tail = FALSE)
+```
+可发现H0对应的p-value是0.8473，所以不能reject H0.
+
+logit1与logit2等价模型，可以直接用AZTuse去fit model
+
+
+### 3. fit model with only AZTuse
+```{r}
+logit2<-glm(cbind(yes,no)~factor(AZTuse),family=binomial)
+predict(logit2, type="response")
+```
+这里的意思是给出了一些x值(1,2,3,4)对应的response, 比如$0.1470588 = \frac{e^{-1.0361-0.7218(1)}}{1+e^{-1.0361-0.7218(1)}}$.
+
 
 
