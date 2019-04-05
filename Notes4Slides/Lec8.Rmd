@@ -15,6 +15,18 @@ Admit = c(rep(0,7),1,rep(0,3),rep(1,7),rep(0,5))
 data1 = data.frame(Gender, AP, Admit)
 print(data1)
 ```
+
+```{r}
+Gender = c("0","0","1","1")
+AP = c("0","1","0","1")
+yes<-c(1,7, 0, 0)
+no<-c(7,3, 5, 0)
+#Admit = c(rep("0",7),"1",rep("0",3),rep("1",7),rep("0",5))
+glm(cbind(yes,no)~factor(Gender)+factor(AP),family=binomial)
+```
+
+
+
 ```{r}
 glm(Admit~Gender+AP, family=binomial("logit"))
 ```
