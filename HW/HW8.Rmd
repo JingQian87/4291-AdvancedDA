@@ -1,0 +1,96 @@
+---
+title: "HW8-ADA"
+output:
+  html_notebook: default
+  html_document:
+    df_print: paged
+  pdf_document: default
+---
+#                             Jing Qian (jq2282)
+
+<br>
+
+#### 1.a. Find the density, $f_T(t)$ of $T$.
+$f_T(t) = -\frac{d}{d\ t}S(t) = \alpha^{\beta}\beta\ t^{\beta-1} e^{-(\alpha t)^{\beta}}$.
+
+<br>
+
+#### 1.b. Find the hazard function $\lambda(t)$ of $T$.
+$\lambda (t) = \frac{f_T(t)}{S(t)} = \frac{\alpha^{\beta}\beta\ t^{\beta-1} e^{-(\alpha t)^{\beta}}}{e^{-(\alpha t)^{\beta}}} = \alpha^{\beta}\beta\ t^{\beta-1}$.
+
+<br>
+
+#### 1.c. Show that $\log(−\log(S(t))) = \beta \log(\alpha) + \beta \log(t)$. Based on this, describe a graphical method for checking whether or not the data is from a Weibull distribution.
+Since $S(t) = e^{-(\alpha t)^{\beta}}$, $−\log(S(t)) = (\alpha t)^{\beta}$.
+
+Then $\log(−\log(S(t))) = \log((\alpha t)^{\beta}) = \beta \log(\alpha t) = \beta(\log \alpha + \log t) = \beta \log(\alpha) + \beta \log(t)$.
+
+Based on the proved equation, we could use a log-log plot to check whether the data is from a Weibull distribution.
+Check whether the data fits a linear function $Y = m X + b$ in the log-log plot, in which $Y = \log(−\log(S(t)))$, $m = \beta$, $X = \log t$ and $b = \beta \log(\alpha)$.
+If the data shows linearity in the log-log plot, it is from a Weibull distribution.
+
+<br>
+
+#### 1.d. Use the graphical technique in the previous question to check if a Weibull distribution is appropriate for these data.
+```{r}
+data<-c(143, 164, 188, 188, 190, 192, 206, 209, 213, 216, 220, 227, 230, 234, 246, 265, 304)
+sE<-numeric(0)
+for (i in 1:length(data)){
+  sE[i] = 1-(i-0.5)/length(data)}
+y = -log(sE)
+plot(data, y, log="xy", xlab="data", ylab="-log(S)")
+reg=lm(log(y)~log(data))
+lines(data,exp(predict(reg)))
+```
+From the plot above, we could see that $-\log(\hat{S}(t))$ and $t$ shows linearity in the log-log plot. 
+As we proved in the previous question, linearity in the log-log plot shows that these data fit a Weibull distribution.
+
+<br>
+
+#### 1.e. Assume that the Weibull distribution is a good fit, use least squares approach to estimate its parameters.
+```{r}
+summary(reg)
+```
+As shown in the previous question, we use the least squares linear regression in the plot to show the linearity in the log-log plot.
+The estimated parameters for fitted $Y=mX+b$ are: $b$ = -37.233 and $m$ = 6.854.
+As we showed in 1.c, $m = \beta$ and $b = \beta \log(\alpha)$.
+So $\beta = m = 6.854$, $\alpha = e^{b/\beta} = 0.004$.
+
+<font color='color'>需要给出CI么</font>.
+
+<br>
+
+#### 2.a. Obtain and plot the Kaplan Meier estimates of $S_A$ and $S_B$, the corresponding survival functions.
+```{r}
+library(survival)
+xA<-c(1.25, 1.41, 4.98, 5.25, 5.38, 6.92, 8.89, 10.98, 11.18, 13.11, 13.21, 16.33, 19.77, 21.08, 21.84, 22.07, 31.38, 32.61, 37.18, 42.92)
+deltaA<-c(rep(1,14), 0, 1, rep(0,3),1)
+kmA<-survfit(Surv(xA,deltaA)~1, type="kaplan-meier")
+print(kmA$surv)
+xB<-c(1.05, 2.92, 3.61, 4.20, 4.49, 6.72, 7.31, 9.08, 9.11, 14.49, 16.85, 18.82, 26.59, 30.26, 41.34)
+deltaB<-c(rep(1,9), 0, 1, rep(0,4))
+kmB<-survfit(Surv(xB,deltaB)~1, type="kaplan-meier")
+print(kmB$surv)
+```
+
+```{r}
+plot(kmA$time, kmA$surv, type="s", col='blue',xlab="Time", ylab="Survival")
+lines(kmB$time, kmB$surv)
+legend(20, 0.9, legend=c("Group A", "Group B"), col=c("black", "blue"), lty=1:1, cex=0.8)
+```
+From above, we could see that Kaplan Meier estimates for $S_A$ at different time steps are: (0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60, 0.55, 0.50, 0.45, 0.40, 0.35, 0.30, 0.30, 0.24, 0.24, 0.24, 0.24, 0.00).
+Kaplan Meier estimates for $S_B$ at different time steps are: (0.9333333, 0.8666667, 0.8, 0.7333333, 0.6666667, 0.6, 0.5333333, 0.4666667, 0.4, 0.4, 0.32, 0.32, 0.32, 0.32, 0.32).
+
+#### 2.b. Estimate $S_A$(10) and $S_B$(10) using a 95% confidence interval.
+```{r}
+summary(kmA)
+```
+From the output above, we could see that the 95% confidence interval for $S_A(10) = [0.323, 0.775]$. 
+
+```{r}
+summary(kmB)
+```
+From the output above, we could see that the 95% confidence interval for $S_B(10) = [0.215, 0.743]$. 
+
+<font color='red'>这里的问题是如果按照讲义上的定义，$S_B(10)$是不考虑censored events, 那么就是第11个SB；而按老师的定义，考虑censored，就是第10个。在第一题中输出的$S_B$和$S_A$是老师给的那个。。。</font>
+

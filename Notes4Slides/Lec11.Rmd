@@ -1,0 +1,23 @@
+---
+title: "Lec11 Survival Analysis"
+output: html_notebook
+---
+## Example of Kaplan-Meier estimator
+```{r}
+library(survival)
+time<-c(3,2,0,1,5,3,5)
+delta<-c(1,1,1,1,0,1,1)
+km<-survfit(Surv(time,delta)~1, type="kaplan-meier")
+km$surv
+```
+
+```{r}
+print(Surv(time,delta))
+print(km$n.event)
+print(km$n.risk)
+```
+
+```{r}
+plot(km$time, km$surv, type="s", xlab="Time", ylab="Survival")
+```
+
