@@ -78,19 +78,19 @@ plot(kmA$time, kmA$surv, type="s", col='blue',xlab="Time", ylab="Survival")
 lines(kmB$time, kmB$surv)
 legend(20, 0.9, legend=c("Group A", "Group B"), col=c("black", "blue"), lty=1:1, cex=0.8)
 ```
-From above, we could see that Kaplan Meier estimates for $S_A$ at different time steps are: (0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60, 0.55, 0.50, 0.45, 0.40, 0.35, 0.30, 0.30, 0.24, 0.24, 0.24, 0.24, 0.00).
-Kaplan Meier estimates for $S_B$ at different time steps are: (0.9333333, 0.8666667, 0.8, 0.7333333, 0.6666667, 0.6, 0.5333333, 0.4666667, 0.4, 0.4, 0.32, 0.32, 0.32, 0.32, 0.32).
+From above, we could see that Kaplan Meier estimates for $S_A$ at given time are: (0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60, 0.55, 0.50, 0.45, 0.40, 0.35, 0.30, 0.30, 0.24, 0.24, 0.24, 0.24, 0.00).
+Kaplan Meier estimates for $S_B$ at given time are: (0.9333333, 0.8666667, 0.8, 0.7333333, 0.6666667, 0.6, 0.5333333, 0.4666667, 0.4, 0.4, 0.32, 0.32, 0.32, 0.32, 0.32).
 
 #### 2.b. Estimate $S_A$(10) and $S_B$(10) using a 95% confidence interval.
 ```{r}
 summary(kmA)
 ```
-From the output above, we could see that the 95% confidence interval for $S_A(10) = [0.323, 0.775]$. 
+From the output above, we could see that the 95% confidence interval for $S_A(10) = [0.471, 0.897]$. 
 
 ```{r}
 summary(kmB)
 ```
 From the output above, we could see that the 95% confidence interval for $S_B(10) = [0.215, 0.743]$. 
 
-<font color='red'>这里的问题是如果按照讲义上的定义，$S_B(10)$是不考虑censored events, 那么就是第11个SB；而按老师的定义，考虑censored，就是第10个。在第一题中输出的$S_B$和$S_A$是老师给的那个。。。</font>
+
 
