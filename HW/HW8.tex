@@ -224,8 +224,6 @@ estimated parameters for fitted \(Y=mX+b\) are: \(b\) = -37.233 and
 \(b = \beta \log(\alpha)\). So \(\beta = m = 6.854\),
 \(\alpha = e^{b/\beta} = 0.004\).
 
-需要给出CI么.
-
 \hypertarget{a.-obtain-and-plot-the-kaplan-meier-estimates-of-s_a-and-s_b-the-corresponding-survival-functions.}{%
 \paragraph{\texorpdfstring{2.a. Obtain and plot the Kaplan Meier
 estimates of \(S_A\) and \(S_B\), the corresponding survival
@@ -263,19 +261,26 @@ functions.}{2.a. Obtain and plot the Kaplan Meier estimates of S\_A and S\_B, th
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(kmA}\OperatorTok{$}\NormalTok{time, kmA}\OperatorTok{$}\NormalTok{surv, }\DataTypeTok{type=}\StringTok{"s"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"Survival"}\NormalTok{)}
-\KeywordTok{lines}\NormalTok{(kmB}\OperatorTok{$}\NormalTok{time, kmB}\OperatorTok{$}\NormalTok{surv)}
-\KeywordTok{legend}\NormalTok{(}\DecValTok{20}\NormalTok{, }\FloatTok{0.9}\NormalTok{, }\DataTypeTok{legend=}\KeywordTok{c}\NormalTok{(}\StringTok{"Group A"}\NormalTok{, }\StringTok{"Group B"}\NormalTok{), }\DataTypeTok{col=}\KeywordTok{c}\NormalTok{(}\StringTok{"black"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\DataTypeTok{lty=}\DecValTok{1}\OperatorTok{:}\DecValTok{1}\NormalTok{, }\DataTypeTok{cex=}\FloatTok{0.8}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(kmA}\OperatorTok{$}\NormalTok{time, kmA}\OperatorTok{$}\NormalTok{surv, }\DataTypeTok{type=}\StringTok{"s"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"S_A"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{HW8_files/figure-latex/unnamed-chunk-4-1.pdf} From
-above, we could see that Kaplan Meier estimates for \(S_A\) at different
-time steps are: (0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60, 0.55,
+\includegraphics{HW8_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{plot}\NormalTok{(kmB}\OperatorTok{$}\NormalTok{time, kmB}\OperatorTok{$}\NormalTok{surv, }\DataTypeTok{type=}\StringTok{"s"}\NormalTok{, }\DataTypeTok{col=}\StringTok{'blue'}\NormalTok{,}\DataTypeTok{xlab=}\StringTok{"Time"}\NormalTok{, }\DataTypeTok{ylab=}\StringTok{"S_B"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{HW8_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+From above, we could see that Kaplan Meier estimates for \(S_A\) at
+given time are: (0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.65, 0.60, 0.55,
 0.50, 0.45, 0.40, 0.35, 0.30, 0.30, 0.24, 0.24, 0.24, 0.24, 0.00).
-Kaplan Meier estimates for \(S_B\) at different time steps are:
-(0.9333333, 0.8666667, 0.8, 0.7333333, 0.6666667, 0.6, 0.5333333,
-0.4666667, 0.4, 0.4, 0.32, 0.32, 0.32, 0.32, 0.32).
+Kaplan Meier estimates for \(S_B\) at given time are: (0.9333333,
+0.8666667, 0.8, 0.7333333, 0.6666667, 0.6, 0.5333333, 0.4666667, 0.4,
+0.4, 0.32, 0.32, 0.32, 0.32, 0.32).
 
 \hypertarget{b.-estimate-s_a10-and-s_b10-using-a-95-confidence-interval.}{%
 \paragraph{\texorpdfstring{2.b. Estimate \(S_A\)(10) and \(S_B\)(10)
