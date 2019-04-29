@@ -1,0 +1,13 @@
+---
+title: "firstView"
+output: html_document
+---
+
+```{r}
+data <- read_excel("Desktop/AdvancedDA/Project/NHANES Dataset Smoking.xlsx")
+```
+
+```{r}
+summary(data)
+```
+
