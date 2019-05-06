@@ -1,0 +1,10 @@
+---
+title: "Project Analysis_jq2282"
+output: html_notebook
+---
+```{r}
+library(readxl)
+data <- read_excel("~/Desktop/AdvancedDA/Project/NHANES Dataset Smoking.xlsx")
+View(data)
+```
+The National Health and Nutrition Survey (NHANES3.DAT) contains 17030 observations and 16 variables. 
