@@ -1768,6 +1768,9 @@ $(document).ready(function () {
 <pre class="r"><code>library(readxl)
 data &lt;- read_excel(&quot;~/Desktop/AdvancedDA/Project/NHANES Dataset Smoking.xlsx&quot;)</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoidW5rbm93biB0aW1lem9uZSAnem9uZS90ei8yMDE5YS4xLjAvem9uZWluZm8vQW1lcmljYS9OZXdfWW9yaydcbiJ9 -->
+<pre><code>unknown timezone &#39;zone/tz/2019a.1.0/zoneinfo/America/New_York&#39;</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-output-begin eyJkYXRhIjoiXG4tXG4vXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuIn0= -->
 <pre><code>
 -
@@ -1779,10 +1782,28 @@ data &lt;- read_excel(&quot;~/Desktop/AdvancedDA/Project/NHANES Dataset Smoking.
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>The National Health and Nutrition Survey (NHANES3.DAT) contains 17030 observations and 16 variables.</p>
+<p>The National Health and Nutrition Survey (NHANES3.DAT) contains 17030 observations and 16 variables. SDPPSU6: Pseudo-PSU: 1, 2. SDPSTRA6: Pseudo-stratum: 01-49 WTPFHX6: Statistical weight: 225.93-139744.9 HSAGEIR: Age: years HSSEX: Sex: 0=Female, 1=Male DMARACER: Race: 1=White, 2=Black, 3=Other. BMPWTLBS: Body Weight: pounds BMPHTIN: Standing Height: inches PEPMNK1R: Average Systolic BP: mm Hg PEPMNK5R: Average Diastolic BP: mm Hg HAR1: Has repondent smoked &gt; 100 cigarettes in life: 1=Yes, 2=No HAR3: Does respondent smoke cigarettes now: 1=Yes, 2=No SMOKE: Smoking: 1=if HAR1=2, 2=if HAR1=1&amp;HAR3=2, 3=if HAR1=1&amp;HAR3=1 TCP: Serum Cholesterol: mg/100 ml HBP: High Blood Pressure: 0 if PEPMNK1R &lt;=140, 1 if PEPMNK1R &gt; 140</p>
+<p><font color="red">Case和SEQN代表的意思是？</font></p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGF0YV95ZXMgPSBkYXRhW2RhdGEkSEJQPT0xLF1cbmRhdGFfbm8gPSBkYXRhW2RhdGEkSEJQPT0wLF1cbmNhdCgnI3JlY29yZHMgb2YgSEJQPTE6ICcsbnJvdyhkYXRhX3llcyksICcuICNyZWNvcmRzIG9mIEhCUD0wOiAnLCBucm93KGRhdGFfbm8pKVxuYGBgIn0= -->
+<pre class="r"><code>data_yes = data[data$HBP==1,]
+data_no = data[data$HBP==0,]
+cat(&#39;#records of HBP=1: &#39;,nrow(data_yes), &#39;. #records of HBP=0: &#39;, nrow(data_no))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiI3JlY29yZHMgb2YgSEJQPTE6ICAzNDk4IC4gI3JlY29yZHMgb2YgSEJQPTA6ICAxMzUzM1xuIn0= -->
+<pre><code>#records of HBP=1:  3498 . #records of HBP=0:  13533</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2V0LnNlZWQoMTAwKVxudHJhaW5feWVzID0gZGF0YV95ZXNbc2FtcGxlKG5yb3coZGF0YV95ZXMpLCAxMCwgcmVwbGFjZT1GQUxTRSksXVxuVmlldyh0cmFpbl95ZXMpXG5gYGAifQ== -->
+<pre class="r"><code>set.seed(100)
+train_yes = data_yes[sample(nrow(data_yes), 10, replace=FALSE),]
+View(train_yes)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamVjdCBBbmFseXNpc19qcTIyODIiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KYGBge3J9CmxpYnJhcnkocmVhZHhsKQpkYXRhIDwtIHJlYWRfZXhjZWwoIn4vRGVza3RvcC9BZHZhbmNlZERBL1Byb2plY3QvTkhBTkVTIERhdGFzZXQgU21va2luZy54bHN4IikKVmlldyhkYXRhKQpgYGAKVGhlIE5hdGlvbmFsIEhlYWx0aCBhbmQgTnV0cml0aW9uIFN1cnZleSAoTkhBTkVTMy5EQVQpIGNvbnRhaW5zIDE3MDMwIG9ic2VydmF0aW9ucyBhbmQgMTYgdmFyaWFibGVzLiAK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJvamVjdCBBbmFseXNpc19qcTIyODIiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KYGBge3J9CmxpYnJhcnkocmVhZHhsKQpkYXRhIDwtIHJlYWRfZXhjZWwoIn4vRGVza3RvcC9BZHZhbmNlZERBL1Byb2plY3QvTkhBTkVTIERhdGFzZXQgU21va2luZy54bHN4IikKVmlldyhkYXRhKQpgYGAKVGhlIE5hdGlvbmFsIEhlYWx0aCBhbmQgTnV0cml0aW9uIFN1cnZleSAoTkhBTkVTMy5EQVQpIGNvbnRhaW5zIDE3MDMwIG9ic2VydmF0aW9ucyBhbmQgMTYgdmFyaWFibGVzLiAKU0RQUFNVNjogUHNldWRvLVBTVTogMSwgMi4KU0RQU1RSQTY6IFBzZXVkby1zdHJhdHVtOiAwMS00OQpXVFBGSFg2OiBTdGF0aXN0aWNhbCB3ZWlnaHQ6IDIyNS45My0xMzk3NDQuOQpIU0FHRUlSOiBBZ2U6IHllYXJzCkhTU0VYOiBTZXg6IDA9RmVtYWxlLCAxPU1hbGUKRE1BUkFDRVI6IFJhY2U6IDE9V2hpdGUsIDI9QmxhY2ssIDM9T3RoZXIuCkJNUFdUTEJTOiBCb2R5IFdlaWdodDogcG91bmRzCkJNUEhUSU46IFN0YW5kaW5nIEhlaWdodDogaW5jaGVzClBFUE1OSzFSOiBBdmVyYWdlIFN5c3RvbGljIEJQOiBtbSBIZwpQRVBNTks1UjogQXZlcmFnZSBEaWFzdG9saWMgQlA6IG1tIEhnCkhBUjE6IEhhcyByZXBvbmRlbnQgc21va2VkID4gMTAwIGNpZ2FyZXR0ZXMgaW4gbGlmZTogMT1ZZXMsIDI9Tm8KSEFSMzogRG9lcyByZXNwb25kZW50IHNtb2tlIGNpZ2FyZXR0ZXMgbm93OiAxPVllcywgMj1ObwpTTU9LRTogU21va2luZzogMT1pZiBIQVIxPTIsIDI9aWYgSEFSMT0xJkhBUjM9MiwgMz1pZiBIQVIxPTEmSEFSMz0xClRDUDogU2VydW0gQ2hvbGVzdGVyb2w6IG1nLzEwMCBtbApIQlA6IEhpZ2ggQmxvb2QgUHJlc3N1cmU6IDAgaWYgUEVQTU5LMVIgPD0xNDAsIDEgaWYgUEVQTU5LMVIgPiAxNDAKCjxmb250IGNvbG9yPSdyZWQnPkNhc2XlkoxTRVFO5Luj6KGo55qE5oSP5oCd5piv77yfPC9mb250PgoKYGBge3J9CmRhdGFfeWVzID0gZGF0YVtkYXRhJEhCUD09MSxdCmRhdGFfbm8gPSBkYXRhW2RhdGEkSEJQPT0wLF0KY2F0KCcjcmVjb3JkcyBvZiBIQlA9MTogJyxucm93KGRhdGFfeWVzKSwgJy4gI3JlY29yZHMgb2YgSEJQPTA6ICcsIG5yb3coZGF0YV9ubykpCnNldC5zZWVkKDEwMCkKdHJhaW5feWVzID0gZGF0YV95ZXNbc2FtcGxlKG5yb3coZGF0YV95ZXMpLCAxMCwgcmVwbGFjZT1GQUxTRSksXQpWaWV3KHRyYWluX3llcykKYGBgCgoKCgo=</div>
 
 
 
