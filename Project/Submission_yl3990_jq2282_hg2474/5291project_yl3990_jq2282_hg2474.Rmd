@@ -1,0 +1,225 @@
+---
+title: '5291'
+name: 'Yingdi Li(yl3990), Jing Qian(jq2282), Han Gao(hg2474)'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Step1. Import data
+```{r}
+library(readxl)
+data<-read_xlsx("NHANES Dataset Smoking.xlsx")
+#View(data)
+colnames(data)
+```
+The National Health and Nutrition Survey (NHANES3.DAT) contains 17030 observations and 16 variables. 
+(delete)SDPPSU6: Pseudo-PSU: 1, 2.
+(delete)SDPSTRA6: Pseudo-stratum: 01-49
+(delete)WTPFHX6: Statistical weight: 225.93-139744.9
+HSAGEIR: Age: years
+HSSEX: Sex: 0=Female, 1=Male
+DMARACER: Race: 1=White, 2=Black, 3=Other.
+BMPWTLBS: Body Weight: pounds
+BMPHTIN: Standing Height: inches
+(delete)PEPMNK1R: Average Systolic BP: mm Hg
+PEPMNK5R: Average Diastolic BP: mm Hg
+(delete)HAR1: Has repondent smoked > 100 cigarettes in life: 1=Yes, 2=No
+(delete)HAR3: Does respondent smoke cigarettes now: 1=Yes, 2=No
+SMOKE: Smoking: 1=if HAR1=2, 2=if HAR1=1&HAR3=2, 3=if HAR1=1&HAR3=1
+TCP: Serum Cholesterol: mg/100 ml
+HBP: High Blood Pressure: 0 if PEPMNK1R <=140, 1 if PEPMNK1R > 140
+
+```{r}
+data<-data[-dim(data)[1],]
+data<-data[,-c(1,2,3,4,13,14)]
+data<-na.omit(data)
+#View(data)
+```
+
+```{r}
+#png("fig/SBP-DBP.png",width = 480, height = 400, units = "px")
+plot(data[data$HBP==0,]$PEPMNK1R, data[data$HBP==0,]$PEPMNK5R,col = "#92C5DE" ,xlim=c(60,250), ylim=c(10,150),xlab='Average Systolic BP (mm Hg)', ylab='Average Diastolic BP (mm Hg)', main='Diastolic BP vs. Systolic BP')
+points(data[data$HBP==1,]$PEPMNK1R, data[data$HBP==1,]$PEPMNK5R,col = "#FF9999", pch="x")
+abline(v=140, lwd=3, lty=2)
+legend(60,150,legend=c("HBP","No HBP"), col=c("#FF9999","#92C5DE"), pch=c("x","o"), ncol=1)
+#dev.off()
+```
+
+
+## EDA
+
+```{r}
+print(cor(data$PEPMNK1R, data$PEPMNK5R))
+```
+
+
+```{r}
+library(RColorBrewer)
+par(mfrow=c(2,2))
+barplot(table(data$HBP), main = "High Blood Pressure", names.arg = c("No","Yes"), col = "#92C5DE")
+barplot(table(data$HSSEX), main="Barplot of Sex", names.arg = c("Female","Male"),col = brewer.pal(n = 2, name = "RdBu"))
+barplot(table(data$DMARACER), main="Barplot of Race",names.arg = c("White","Black","Other"),col = brewer.pal(n = 3, name = "RdBu"))
+barplot(table(data$SMOKE), main="Barplot of Smoke", names.arg = gsub("\\s","\n",c("Never Smoked","Quit Smoking","Still Smoking")),col = brewer.pal(n = 3, name = "RdBu"))
+
+par(mfrow=c(2,2))
+boxplot(data$HSAGEIR, main="Boxplot of Age",col = brewer.pal(n = 2, name = "RdBu"))
+boxplot(data$BMPWTLBS, main="Boxplot of Weight",col = brewer.pal(n = 2, name = "RdBu"))
+boxplot(data$BMPHTIN, main="Boxplot of Height",col = brewer.pal(n = 2, name = "RdBu"))
+boxplot(data$TCP, main="Boxplot of TCP",col = brewer.pal(n = 2, name = "RdBu"))
+
+summary(data$HSAGEIR)
+summary(data$BMPWTLBS)
+summary(data$BMPHTIN)
+summary(data$TCP)
+
+```
+
+
+```{r}
+HBP<-data$HBP
+age<-data$HSAGEIR
+sex<-as.factor(data$HSSEX)
+race<-as.factor(data$DMARACER)
+smoke<-as.factor(data$SMOKE)
+weight<-data$BMPWTLBS
+height<-data$BMPHTIN
+chole<-data$TCP
+```
+
+## Model Selection
+
+### 1. Full model without interaction
+```{r}
+fit<-glm(HBP~age+sex+race+weight+height+smoke+chole,family=binomial("logit"))
+summary(fit)
+```
+
+### 2. Test whether race and smoke are significant
+
+```{r}
+fit1<-glm(HBP~age+sex+weight+height+chole,family=binomial("logit"))
+anova(fit1,fit)
+```
+
+```{r}
+qchisq(0.95,4)
+```
+
+**Reject the null and keep the full model.**
+
+#### Test whether smoke is significant
+
+```{r}
+fit1<-glm(HBP~age+sex+race+weight+height+chole,family=binomial("logit"))
+anova(fit1,fit)
+```
+
+```{r}
+qchisq(0.95,2)
+```
+
+**Reject the null and keep the full model (with smoke).**
+
+#### Test whether race is significant
+
+```{r}
+fit1<-glm(HBP~age+sex+weight+height+smoke+chole,family=binomial("logit"))
+anova(fit1,fit)
+```
+
+```{r}
+qchisq(0.95,2)
+```
+
+**Reject the null and keep the full model (with race).**
+
+
+### 3. Now consider the interaction term.
+```{r}
+fit<-glm(HBP~age+sex+race+weight+height+smoke+chole+sex*race+sex*smoke,family=binomial("logit"))
+summary(fit)
+```
+
+### test whether interactions between sex and smoke, race and smoke are significant
+```{r}
+fit0<-glm(HBP~age+sex+race+weight+height+smoke+chole,family=binomial("logit"))
+anova(fit0,fit)
+```
+```{r}
+qchisq(0.95,4)
+```
+**Reject null and keep full.**
+
+#### test whether interactions between race and sex is significant
+```{r}
+fit1<-glm(HBP~age+sex+race+weight+height+smoke+chole+sex*smoke,family=binomial("logit"))
+anova(fit1,fit)
+```
+
+```{r}
+qchisq(0.95,2)
+```
+
+**Don't reject the null and choose fit1 (without race \* sex).**
+
+### test whether interaction between sex and smoke is significant
+
+```{r}
+anova(fit0,fit1)
+```
+
+```{r}
+qchisq(0.95,2)
+```
+**Reject the null, so the interaction between sex and smoke is significant.**
+
+## 3. Model selected
+The interaction between sex and smoke is significant, then we treat it as one factor with sex levels.
+
+```{r}
+f1<-ifelse(data$HSSEX==0&data$SMOKE==1,1,0)
+f2<-ifelse(data$HSSEX==0&data$SMOKE==2,1,0)
+f3<-ifelse(data$HSSEX==0&data$SMOKE==3,1,0)
+m1<-ifelse(data$HSSEX==1&data$SMOKE==1,1,0)
+m2<-ifelse(data$HSSEX==1&data$SMOKE==2,1,0)
+m3<-ifelse(data$HSSEX==1&data$SMOKE==3,1,0)
+```
+
+
+```{r}
+fit<-glm(HBP~age+race+weight+height+chole+f2+f3+m1+m2+m3,family=binomial("logit"))
+summary(fit)
+```
+
+### test whether the factor (sex\*smoke) are significant
+
+```{r}
+fit1<-glm(HBP~age+race+weight+height+chole,family=binomial("logit"))
+anova(fit1,fit)
+```
+
+```{r}
+qchisq(0.95,5)
+```
+
+## Final model.
+```{r}
+summary(fit)
+```
+
+### Calculate estimated parameters.
+```{r}
+exp(fit$coefficients)
+```
+
+
+### Calculate the confidence interval
+```{r}
+exp(confint(fit))
+```
+
+
+

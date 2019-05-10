@@ -2,39 +2,104 @@
 title: "Project Analysis_jq2282"
 output: html_notebook
 ---
+
+# 1. Data Exploration
+## 1.1. Import data
 ```{r}
 library(readxl)
 data <- read_excel("~/Desktop/AdvancedDA/Project/NHANES Dataset Smoking.xlsx")
 View(data)
 ```
 The National Health and Nutrition Survey (NHANES3.DAT) contains 17030 observations and 16 variables. 
-SDPPSU6: Pseudo-PSU: 1, 2.
-SDPSTRA6: Pseudo-stratum: 01-49
-WTPFHX6: Statistical weight: 225.93-139744.9
+(delete)SDPPSU6: Pseudo-PSU: 1, 2.
+(delete)SDPSTRA6: Pseudo-stratum: 01-49
+(delete)WTPFHX6: Statistical weight: 225.93-139744.9
 HSAGEIR: Age: years
 HSSEX: Sex: 0=Female, 1=Male
 DMARACER: Race: 1=White, 2=Black, 3=Other.
 BMPWTLBS: Body Weight: pounds
 BMPHTIN: Standing Height: inches
-PEPMNK1R: Average Systolic BP: mm Hg
+(delete)PEPMNK1R: Average Systolic BP: mm Hg
 PEPMNK5R: Average Diastolic BP: mm Hg
-HAR1: Has repondent smoked > 100 cigarettes in life: 1=Yes, 2=No
-HAR3: Does respondent smoke cigarettes now: 1=Yes, 2=No
+(delete)HAR1: Has repondent smoked > 100 cigarettes in life: 1=Yes, 2=No
+(delete)HAR3: Does respondent smoke cigarettes now: 1=Yes, 2=No
 SMOKE: Smoking: 1=if HAR1=2, 2=if HAR1=1&HAR3=2, 3=if HAR1=1&HAR3=1
 TCP: Serum Cholesterol: mg/100 ml
 HBP: High Blood Pressure: 0 if PEPMNK1R <=140, 1 if PEPMNK1R > 140
 
-<font color='red'>Case和SEQN代表的意思是？</font>
+**删掉这些变量**
+* Case和SEQN是编号。
+* SDPPSU6，SDPSTRA6和WTPFHX6与统计过程有关，删掉。
+* PEPMNK1R决定了HBP，删掉。
+* SMOKE由HAR1&HAR3组合形成，所以删去后二者
 
 ```{r}
+# data <- na.omit(data)
+# barplot(table(data$HBP))
+data<-data[-dim(data)[1],]
+data<-data[,-c(1,2,3,11,13,14)]
+data<-na.omit(data)
+#View(data)
+```
+
+```{r}
+colnames(data)
+```
+
+## 1.2. Split data into training and testing
+```{r}
+# Create training and Test samples
+
 data_yes = data[data$HBP==1,]
 data_no = data[data$HBP==0,]
 cat('#records of HBP=1: ',nrow(data_yes), '. #records of HBP=0: ', nrow(data_no))
+size = nrow(data_yes)
 set.seed(100)
-train_yes = data_yes[sample(nrow(data_yes), 10, replace=FALSE),]
-View(train_yes)
+train_yes_id = sample(size, 0.9*size, replace=FALSE)
+train_no_id = sample(nrow(data_no), 0.9*size, replace=FALSE)
+train_yes = data_yes[train_yes_id,]
+train_no = data_no[train_no_id,]
+train_data = rbind(train_yes, train_no)
+print(table(train_data$HBP))
+
+test_yes = data_yes[-train_yes_id,]
+test_no = data_no[-train_no_id,]
+test_data = rbind(test_yes, test_no)
+
+table(test_data$HBP)
+```
+
+```{r}
+cor(train_data$PEPMNK1R, train_data$PEPMNK5R)
+```
+PEPMNK1R: Average Systolic BP: mm Hg
+PEPMNK5R
+
+```{r}
+summary(glm(train_data$HBP~factor(train_data$SMOKE)+train_data$PEPMNK5R,family=binomial("logit")))
 ```
 
 
+```{r}
+table(train_data$SMOKE)
+```
+
+
+## 1.3. Distribution plot
+```{r}
+library(RColorBrewer)
+par(mfrow=c(1,3))
+barplot(table(train_data$HSSEX), main="Barplot of Sex", names.arg = c("Female","Male"),col = brewer.pal(n = 2, name = "RdBu"))
+barplot(table(train_data$DMARACER), main="Barplot of Race",names.arg = c("White","Black","Other"),col = brewer.pal(n = 3, name = "RdBu"))
+barplot(table(train_data$SMOKE), main="Barplot of Smoke", names.arg = c("Never Smoked","Quit Smoking","Still Smoking"),col = brewer.pal(n = 3, name = "RdBu"))
+```
+
+```{r}
+par(mfrow=c(2,2))
+boxplot(train_data$HSAGEIR, main="Boxplot of Age",col = brewer.pal(n = 2, name = "RdBu"))
+boxplot(train_data$BMPWTLBS, main="Boxplot of Weight",col = brewer.pal(n = 2, name = "RdBu"))
+boxplot(train_data$BMPHTIN, main="Boxplot of Height",col = brewer.pal(n = 2, name = "RdBu"))
+boxplot(train_data$TCP, main="Boxplot of TCP",col = brewer.pal(n = 2, name = "RdBu"))
+```
 
 
